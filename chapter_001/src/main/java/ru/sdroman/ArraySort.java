@@ -19,13 +19,4 @@ public class ArraySort {
             System.out.print(arr + " ");
         }
     }
-
-    /*public static void main(String[] args) {
-        ArraySort sort = new ArraySort();
-        int[] arr = new int[]{3, 2, 5, 1, 4};
-        sort.showArray(arr); 
-        sort.arraySort(arr);
-        System.out.println();
-        sort.showArray(arr);
-    }*/
 }
