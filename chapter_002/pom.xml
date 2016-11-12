@@ -1,0 +1,13 @@
+ <project>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>ru.sdroman</groupId>
+    <artifactId>Chapter_002</artifactId>
+    <version>1.0</version>
+    <name>Chapter_002</name>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>Task_01</module>
+        <module>Task_02</module>
+    </modules>
+</project>
