@@ -1,24 +1,15 @@
- <project>
+<project>
     <modelVersion>4.0.0</modelVersion>
     <groupId>ru.sdroman</groupId>
-    <artifactId>Chapter_002</artifactId>
+    <artifactId>Tracker</artifactId>
     <version>1.0</version>
-    <name>Chapter_002</name>
-    <packaging>pom</packaging>
-
+    <name>Tracker</name>
+    <packaging>jar</packaging>
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
-    <modules>
-        <module>Task_01</module>
-        <module>Task_02</module>
-        <module>Task_03</module>
-        <module>Task_04</module>
-        <module>Task_05</module>
-    </modules>
 
     <dependencies>
         <dependency>
@@ -44,7 +35,7 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-    
+
     <build>
         <plugins>
             <plugin>
@@ -102,7 +93,26 @@
                     <compilerVersion>1.8</compilerVersion>
                 </configuration>
             </plugin>
+            <plugin>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>cobertura-maven-plugin</artifactId>
+                <version>2.7</version>
+                <configuration>
+                    <check>
+                    </check>
+                    <instrumentation>
+                        <excludes>
+                            <exclude>**/*</exclude>
+                        </excludes>
+                    </instrumentation>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
-
 </project>
