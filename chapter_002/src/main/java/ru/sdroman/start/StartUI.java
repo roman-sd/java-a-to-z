@@ -19,7 +19,7 @@ public class StartUI {
         testItem.setId(item2.getId());
         tracker.edit(testItem);
         for (Item item : tracker.getAll()) {
-            System.out.println(String.format("%s %s %s", item.getName(), item.getDescription(), item.getId()));
+            System.out.println(String.format("%s %s ", item.getName(), item.getDescription()));
         }
     }
 }
