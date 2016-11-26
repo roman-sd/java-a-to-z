@@ -1,6 +1,9 @@
 package ru.sdroman.start;
 
+import ru.sdroman.models.Comment;
 import ru.sdroman.models.Item;
+
+import java.text.SimpleDateFormat;
 import java.util.Random;
 
 /**
@@ -10,11 +13,11 @@ public class Tracker {
 
     /**
      * Default initial capacity.
-      */
+     */
     private static final int DEFAULT_CAPACITY = 10;
 
     /**
-     *Empty array used for items.
+     * Empty array used for items.
      */
     private Item[] items = new Item[DEFAULT_CAPACITY];
 
@@ -35,6 +38,7 @@ public class Tracker {
      * @return new item.
      */
     public Item add(Item item) {
+        item.setTimeCreation(new SimpleDateFormat("dd/MM/yyyy HH:mm"));
         item.setId(generateId());
         this.items[position++] = item;
         return item;
@@ -44,17 +48,14 @@ public class Tracker {
      * edit item into the array items.
      *
      * @param item Item, item to edit.
-     * @return true if success.
      */
-    public boolean edit(Item item) {
-        boolean result = false;
+    public void edit(Item item) {
         for (int index = 0; index < items.length; index++) {
             if (items[index] != null && items[index].getId().equals(item.getId())) {
+                item.addComments(items[index].getComments());
                 items[index] = item;
-                result = true;
             }
         }
-        return result;
     }
 
     /**
@@ -70,17 +71,14 @@ public class Tracker {
      * remove item into the array items.
      *
      * @param item Item, item to remove.
-     * @return true if success.
      */
-    public boolean remove(Item item) {
+    public void remove(Item item) {
         for (int index = 0; index < position; index++) {
             if (item.equals(items[index])) {
                 System.arraycopy(items, index + 1, items, index, position - index - 1);
                 items[--position] = null;
-                return true;
             }
         }
-        return false;
     }
 
     /**
@@ -128,5 +126,18 @@ public class Tracker {
             result[index] = this.items[index];
         }
         return result;
+    }
+
+    /**
+     * add comment to item.
+     *
+     * @param comment Comment
+     * @param id      String
+     * @return item
+     */
+    public Item addComment(Comment comment, String id) {
+        Item item = this.findById(id);
+        item.addComment(comment);
+        return item;
     }
 }

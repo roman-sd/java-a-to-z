@@ -14,6 +14,7 @@ public class ConsoleInput implements Input {
 
     /**
      * Asks the question and returns a answer.
+     *
      * @param question String
      * @return String answer
      */
