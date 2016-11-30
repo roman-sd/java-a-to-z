@@ -28,7 +28,7 @@ public class StartUITest {
     @Test
     public void whenSetTwoThenEdit() {
         Tracker tracker = new Tracker();
-        Item item = tracker.add(new Item("item", "desc"));
+        tracker.add(new Item("item", "desc"));
         Input input = new StubInput(new String[]{"2", "item", "newItem", "newDesc", "y"});
         new StartUI(input).init(tracker);
         assertThat(tracker.getAll()[0].getName(), is("newItem"));

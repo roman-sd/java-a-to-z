@@ -1,9 +1,11 @@
 package ru.sdroman.start;
 
 import org.junit.Test;
+import ru.sdroman.models.Comment;
+import ru.sdroman.models.Item;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
-import ru.sdroman.models.Item;
 
 /**
  * class for testing Tracker.
@@ -34,6 +36,15 @@ public class TrackerTest {
     }
 
     /**
+     * test ItemNotFoundException in findById().
+     */
+    @Test(expected = ItemNotFoundException.class)
+    public void whenFindByIdThenFindByIdException() {
+        Tracker tracker = new Tracker();
+        tracker.findById("exception");
+    }
+
+    /**
      * test findByName().
      */
     @Test
@@ -45,6 +56,16 @@ public class TrackerTest {
         String name = testItem.getName();
         assertThat(tracker.findByName(name), is(testItem));
     }
+
+    /**
+     * test ItemNotFoundException in findById().
+     */
+    @Test(expected = ItemNotFoundException.class)
+    public void whenFindByNameThenFindByNameException() {
+        Tracker tracker = new Tracker();
+        tracker.findByName("exception");
+    }
+
 
     /**
      * test edit().
@@ -60,6 +81,16 @@ public class TrackerTest {
         testItem.setId(id);
         tracker.edit(testItem);
         assertThat(tracker.findById(id), is(testItem));
+    }
+
+    /**
+     * test ItemNotFoundException in edit().
+     */
+    @Test(expected = ItemNotFoundException.class)
+    public final void whenEditThenEditItemException() {
+        Tracker tracker = new Tracker();
+        tracker.add(new Item("item", "desc001"));
+        tracker.edit(new Item("testItem", "desc001"));
     }
 
     /**
@@ -87,5 +118,35 @@ public class TrackerTest {
         Item[] items = new Item[]{item1, item2};
         tracker.remove(testItem);
         assertThat(tracker.getAll(), is(items));
+    }
+
+    /**
+     * test ItemNotFoundException in remove().
+     */
+    @Test(expected = ItemNotFoundException.class)
+    public void whenRemoveThenRemoveItemException() {
+        Tracker tracker = new Tracker();
+        tracker.remove(new Item("item", "desc"));
+    }
+
+    /**
+     * test addComment.
+     */
+    @Test
+    public void whenAddCommentThenAddComment() {
+        Tracker tracker = new Tracker();
+        Item item = tracker.add(new Item("item", "desc"));
+        Comment comment = new Comment("testComment");
+        item.addComment(comment);
+        assertThat(item.getComments()[0], is(comment));
+    }
+
+    /**
+     * test ItemNotFoundException in addComment().
+     */
+    @Test(expected = ItemNotFoundException.class)
+    public void whenAddCommentThenAddCommentException() {
+        Tracker tracker = new Tracker();
+        tracker.addComment(new Comment("testComment"), "testId");
     }
 }

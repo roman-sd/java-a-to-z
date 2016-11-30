@@ -11,20 +11,17 @@ import java.util.Date;
 public class MenuTracker {
 
     /**
+     * Default initial capacity.
+     */
+    private static final int DEFAULT_CAPACITY = 7;
+    /**
      * input.
      */
     private Input input;
-
     /**
      * Tracker.
      */
     private Tracker tracker;
-
-    /**
-     * Default initial capacity.
-     */
-    private static final int DEFAULT_CAPACITY = 7;
-
     /**
      * actions array.
      */
@@ -139,13 +136,19 @@ public class MenuTracker {
          *
          * @param input   Input
          * @param tracker Tracker
+         * @throws ItemNotFoundException Exception
          */
         @Override
         public void execute(Input input, Tracker tracker) {
-            Item oldItem = tracker.findByName(input.ask("name to edit : "));
-            Item newItem = new Item(input.ask("new name : "), input.ask("new description : "));
-            newItem.setId(oldItem.getId());
-            tracker.edit(newItem);
+            try {
+                Item oldItem = tracker.findByName(input.ask("name to edit : "));
+                Item newItem = new Item(input.ask("new name : "), input.ask("new description : "));
+                newItem.setId(oldItem.getId());
+                tracker.edit(newItem);
+            } catch (ItemNotFoundException inf) {
+                System.err.println(inf.toString());
+            }
+
         }
 
         /**
@@ -179,11 +182,16 @@ public class MenuTracker {
          *
          * @param input   Input
          * @param tracker Tracker
+         * @throws ItemNotFoundException Exception
          */
         @Override
         public void execute(Input input, Tracker tracker) {
-            Item removeItem = tracker.findByName(input.ask("name to remove : "));
-            tracker.remove(removeItem);
+            try {
+                Item removeItem = tracker.findByName(input.ask("name to remove : "));
+                tracker.remove(removeItem);
+            } catch (ItemNotFoundException inf) {
+                System.err.println(inf.toString());
+            }
         }
 
         /**
@@ -217,16 +225,21 @@ public class MenuTracker {
          *
          * @param input   Input
          * @param tracker Tracker
+         * @throws ItemNotFoundException Exception
          */
         @Override
         public void execute(Input input, Tracker tracker) {
-            Item nameItem = tracker.findByName(input.ask("name : "));
-            System.out.println(String.format("%s  %s   %s",
-                    nameItem.getName(), nameItem.getDescription(), nameItem.getTimeCreation().format(new Date())));
-            for (Comment comment : nameItem.getComments()) {
-                if (comment != null) {
-                    System.out.println(comment.getComment());
+            try {
+                Item nameItem = tracker.findByName(input.ask("name : "));
+                System.out.println(String.format("%s  %s   %s",
+                        nameItem.getName(), nameItem.getDescription(), nameItem.getTimeCreation().format(new Date())));
+                for (Comment comment : nameItem.getComments()) {
+                    if (comment != null) {
+                        System.out.println(comment.getComment());
+                    }
                 }
+            } catch (ItemNotFoundException inf) {
+                System.err.println(inf.toString());
             }
         }
 
@@ -261,16 +274,21 @@ public class MenuTracker {
          *
          * @param input   Input
          * @param tracker Tracker
+         * @throws ItemNotFoundException Exception
          */
         @Override
         public void execute(Input input, Tracker tracker) {
-            Item idItem = tracker.findById(input.ask("id : "));
-            System.out.println(String.format("%s   %s   %s",
-                    idItem.getName(), idItem.getDescription(), idItem.getTimeCreation().format(new Date())));
-            for (Comment comment : idItem.getComments()) {
-                if (comment != null) {
-                    System.out.println(comment.getComment());
+            try {
+                Item idItem = tracker.findById(input.ask("id : "));
+                System.out.println(String.format("%s   %s   %s",
+                        idItem.getName(), idItem.getDescription(), idItem.getTimeCreation().format(new Date())));
+                for (Comment comment : idItem.getComments()) {
+                    if (comment != null) {
+                        System.out.println(comment.getComment());
+                    }
                 }
+            } catch (ItemNotFoundException inf) {
+                System.err.println(inf.toString());
             }
         }
 
@@ -305,12 +323,17 @@ public class MenuTracker {
          *
          * @param input   Input
          * @param tracker Tracker
+         * @throws ItemNotFoundException Exception
          */
         @Override
         public void execute(Input input, Tracker tracker) {
-            Item item = tracker.findByName(input.ask("name: "));
-            Comment comment = new Comment(input.ask("comment: "));
-            tracker.addComment(comment, item.getId());
+            try {
+                Item item = tracker.findByName(input.ask("name: "));
+                Comment comment = new Comment(input.ask("comment: "));
+                tracker.addComment(comment, item.getId());
+            } catch (ItemNotFoundException inf) {
+                System.err.println(inf.toString());
+            }
         }
 
         /**
@@ -342,12 +365,12 @@ public class MenuTracker {
         /**
          * get all items.
          *
-         * @param input  Input
-         * @param tracke Tracker
+         * @param input   Input
+         * @param tracker Tracker
          */
         @Override
-        public void execute(Input input, Tracker tracke) {
-            for (Item item : tracke.getAll()) {
+        public void execute(Input input, Tracker tracker) {
+            for (Item item : tracker.getAll()) {
                 System.out.println(String.format("%s   %s   %s",
                         item.getName(), item.getDescription(), item.getTimeCreation().format(new Date())));
             }
