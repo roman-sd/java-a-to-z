@@ -14,21 +14,24 @@ public class MenuTracker {
      * Default initial capacity.
      */
     private static final int DEFAULT_CAPACITY = 7;
+
     /**
      * input.
      */
     private Input input;
+
     /**
      * Tracker.
      */
     private Tracker tracker;
+
     /**
      * actions array.
      */
     private UserAction[] actions = new UserAction[DEFAULT_CAPACITY];
 
     /**
-     *
+     * key.
      */
     private int key = 0;
 
@@ -48,13 +51,13 @@ public class MenuTracker {
      */
     public void fillActions() {
         int count = 0;
-        this.actions[count++] = new AddItem();
-        this.actions[count++] = new EditItem();
-        this.actions[count++] = new RemoveItem();
-        this.actions[count++] = new FindByName();
-        this.actions[count++] = new FindById();
-        this.actions[count++] = new AddCommentIntoItem();
-        this.actions[count] = new GetAllItems();
+        this.actions[count++] = new AddItem("Add the new item.");
+        this.actions[count++] = new EditItem("Edit item.");
+        this.actions[count++] = new RemoveItem("Remove item.");
+        this.actions[count++] = new FindByName("Find by name.");
+        this.actions[count++] = new FindById("Find by id.");
+        this.actions[count++] = new AddCommentIntoItem("Add comment.");
+        this.actions[count] = new GetAllItems("Get all Items.");
     }
 
     /**
@@ -81,7 +84,16 @@ public class MenuTracker {
     /**
      * Class AddItem.
      */
-    private class AddItem implements UserAction {
+    private class AddItem extends BaseAction {
+
+        /**
+         * Constructs new AddItem action.
+         *
+         * @param name String
+         */
+        AddItem(String name) {
+            super(name);
+        }
 
         /**
          * return 1 in menu.
@@ -104,22 +116,21 @@ public class MenuTracker {
             Item newItem = new Item(input.ask("Name: "), input.ask("Description: "));
             tracker.add(newItem);
         }
-
-        /**
-         * return menu info.
-         *
-         * @return String
-         */
-        @Override
-        public String info() {
-            return String.format("%s. %s", this.key(), "Add the new item.");
-        }
     }
 
     /**
      * class EditItem.
      */
-    private class EditItem implements UserAction {
+    private class EditItem extends BaseAction {
+
+        /**
+         * Constructs new EditItem action.
+         *
+         * @param name String
+         */
+        EditItem(String name) {
+            super(name);
+        }
 
         /**
          * return 2 in menu.
@@ -150,22 +161,21 @@ public class MenuTracker {
             }
 
         }
-
-        /**
-         * return menu info.
-         *
-         * @return String
-         */
-        @Override
-        public String info() {
-            return String.format("%s. %s", this.key(), "Edit item.");
-        }
     }
 
     /**
      * class RemoveItem.
      */
-    private class RemoveItem implements UserAction {
+    private class RemoveItem extends BaseAction {
+
+        /**
+         * Constructs new RemoveItem action.
+         *
+         * @param name String
+         */
+        RemoveItem(String name) {
+            super(name);
+        }
 
         /**
          * return 3 in menu.
@@ -193,22 +203,21 @@ public class MenuTracker {
                 System.err.println(inf.toString());
             }
         }
-
-        /**
-         * return menu info.
-         *
-         * @return String
-         */
-        @Override
-        public String info() {
-            return String.format("%s. %s", this.key(), "Remove item.");
-        }
     }
 
     /**
      * class FindByName.
      */
-    private class FindByName implements UserAction {
+    private class FindByName extends BaseAction {
+
+        /**
+         * Constructs new FindByName action.
+         *
+         * @param name String
+         */
+        FindByName(String name) {
+            super(name);
+        }
 
         /**
          * return 4 in menu.
@@ -242,22 +251,21 @@ public class MenuTracker {
                 System.err.println(inf.toString());
             }
         }
-
-        /**
-         * return menu info.
-         *
-         * @return String
-         */
-        @Override
-        public String info() {
-            return String.format("%s. %s", this.key(), "Find by name.");
-        }
     }
 
     /**
      * class FindById.
      */
-    private class FindById implements UserAction {
+    private class FindById extends BaseAction {
+
+        /**
+         * Constructs new FindById action.
+         *
+         * @param name String
+         */
+        FindById(String name) {
+            super(name);
+        }
 
         /**
          * return 5 in menu.
@@ -291,22 +299,21 @@ public class MenuTracker {
                 System.err.println(inf.toString());
             }
         }
-
-        /**
-         * return menu info.
-         *
-         * @return String
-         */
-        @Override
-        public String info() {
-            return String.format("%s. %s", this.key(), "Find by id.");
-        }
     }
 
     /**
      * class AddCommentIntoItem.
      */
-    private class AddCommentIntoItem implements UserAction {
+    private class AddCommentIntoItem extends BaseAction {
+
+        /**
+         * Constructs new AddCommentIntoItem action.
+         *
+         * @param name String
+         */
+        AddCommentIntoItem(String name) {
+            super(name);
+        }
 
         /**
          * return 6 in menu.
@@ -335,22 +342,21 @@ public class MenuTracker {
                 System.err.println(inf.toString());
             }
         }
-
-        /**
-         * return menu info.
-         *
-         * @return String
-         */
-        @Override
-        public String info() {
-            return String.format("%s. %s", this.key(), "Add comment ");
-        }
     }
 
     /**
      * class GetAllItem.
      */
-    private class GetAllItems implements UserAction {
+    private class GetAllItems extends BaseAction {
+
+        /**
+         * Constructs new GetAllItems action.
+         *
+         * @param name String
+         */
+        GetAllItems(String name) {
+            super(name);
+        }
 
         /**
          * return 7 in menu.
@@ -374,16 +380,6 @@ public class MenuTracker {
                 System.out.println(String.format("%s   %s   %s",
                         item.getName(), item.getDescription(), item.getTimeCreation().format(new Date())));
             }
-        }
-
-        /**
-         * return menu info.
-         *
-         * @return String
-         */
-        @Override
-        public String info() {
-            return String.format("%s. %s", this.key(), "Get all Items.");
         }
     }
 }

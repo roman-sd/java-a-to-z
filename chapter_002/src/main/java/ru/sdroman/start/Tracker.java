@@ -52,6 +52,7 @@ public class Tracker {
         for (int index = 0; index < items.length; index++) {
             if (items[index] != null && items[index].getId().equals(item.getId())) {
                 item.addComments(items[index].getComments());
+                item.setTimeCreation(items[index].getTimeCreation());
                 items[index] = item;
                 isEdit = true;
             }
