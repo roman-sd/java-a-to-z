@@ -41,7 +41,7 @@ public class Board {
      * @param dist   Cell
      * @return true
      * @throws ImpossibleMoveException exception
-     * @throws OccupiedWayException exception
+     * @throws OccupiedWayException    exception
      * @throws FigureNotFoundException exception
      */
     public boolean move(Cell source, Cell dist)
@@ -50,7 +50,7 @@ public class Board {
         boolean flag = false;
         Cell[] figureWay = null;
         for (Figure figure : figures) {
-            if (figure != null && figure.position == source) {
+            if (figure != null && figure.position.equals(source)) {
                 figureWay = figure.way(dist);
                 flag = true;
                 break;
@@ -63,12 +63,12 @@ public class Board {
         flag = false;
         for (Figure figure : figures) {
             for (Cell aFigureWay : figureWay) {
-                if (figure != null && figure.position.x == aFigureWay.x && figure.position.y == aFigureWay.y) {
+                if (figure != null && figure.position.equals(aFigureWay)) {
                     flag = true;
                     break;
                 }
             }
-            if (flag)  {
+            if (flag) {
                 break;
             }
         }
@@ -77,7 +77,7 @@ public class Board {
         }
 
         for (int i = 0; i < figures.length; i++) {
-            if (figures[i] != null && figures[i].position.x == source.x && figures[i].position.y == source.y) {
+            if (figures[i] != null && figures[i].position.equals(source)) {
                 figures[i] = figures[i].clone(dist);
             }
         }

@@ -8,7 +8,7 @@ public abstract class Figure {
     /**
      * position.
      */
-    public final Cell position;
+    protected final Cell position;
 
     /**
      * Constructs new Figure.

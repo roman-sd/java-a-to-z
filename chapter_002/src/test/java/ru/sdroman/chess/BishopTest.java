@@ -8,14 +8,16 @@ import static org.junit.Assert.assertThat;
 
 /**
  * class BishopTest.
+ *
  * @author sdroman
- * @since 08.12.2016
  * @version 1.0
+ * @since 08.12.2016
  */
 public class BishopTest {
 
     /**
      * Test way method in Bishop class.
+     *
      * @throws ImpossibleMoveException exception
      */
     @Test
@@ -34,16 +36,12 @@ public class BishopTest {
         final int cellThreeY = 5;
         Cell[] expected = new Cell[]{new Cell(cellOneX, cellOneY),
                 new Cell(cellTwoX, cellTwoY), new Cell(cellThreeX, cellThreeY)};
-        assertThat(expected[0].x, is(bishop.way(dist)[0].x));
-        assertThat(expected[0].y, is(bishop.way(dist)[0].y));
-        assertThat(expected[1].x, is(bishop.way(dist)[1].x));
-        assertThat(expected[1].y, is(bishop.way(dist)[1].y));
-        assertThat(expected[2].x, is(bishop.way(dist)[2].x));
-        assertThat(expected[2].y, is(bishop.way(dist)[2].y));
+        assertThat(expected, is(bishop.way(dist)));
     }
 
     /**
      * Test ImpossibleMoveException exception.
+     *
      * @throws ImpossibleMoveException exception
      */
     @Test(expected = ImpossibleMoveException.class)

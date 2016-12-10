@@ -18,7 +18,7 @@ public class BoardTest {
     /**
      * Test move().
      *
-     * @throws OccupiedWayException exception
+     * @throws OccupiedWayException    exception
      * @throws ImpossibleMoveException exception
      * @throws FigureNotFoundException exception
      */
@@ -41,7 +41,7 @@ public class BoardTest {
     /**
      * Test move().
      *
-     * @throws OccupiedWayException exception
+     * @throws OccupiedWayException    exception
      * @throws ImpossibleMoveException exception
      * @throws FigureNotFoundException exception
      */
@@ -67,7 +67,7 @@ public class BoardTest {
     /**
      * Test move().
      *
-     * @throws OccupiedWayException exception
+     * @throws OccupiedWayException    exception
      * @throws ImpossibleMoveException exception
      * @throws FigureNotFoundException exception
      */
@@ -88,7 +88,7 @@ public class BoardTest {
     /**
      * Test move().
      *
-     * @throws OccupiedWayException exception
+     * @throws OccupiedWayException    exception
      * @throws ImpossibleMoveException exception
      * @throws FigureNotFoundException exception
      */

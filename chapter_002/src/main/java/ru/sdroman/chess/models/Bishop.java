@@ -29,7 +29,7 @@ public class Bishop extends Figure {
      *
      * @param dist Cell
      * @return Cell[]
-     * @throws ImpossibleMoveException
+     * @throws ImpossibleMoveException exception
      */
     @Override
     public Cell[] way(Cell dist) throws ImpossibleMoveException {

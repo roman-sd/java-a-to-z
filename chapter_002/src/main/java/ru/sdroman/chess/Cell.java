@@ -28,4 +28,18 @@ public class Cell {
         this.x = x;
         this.y = y;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Cell)) {
+            return false;
+        }
+        Cell cell = (Cell) obj;
+        return cell.x == x && cell.y == y;
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
 }
