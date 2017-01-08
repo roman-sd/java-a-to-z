@@ -21,6 +21,6 @@ public class SortArrayTest {
         int[] arr1 = new int[]{1, 2, 3, 7, 10};
         int[] arr2 = new int[]{2, 4, 6, 8};
         int[] result = new int[]{1, 2, 2, 3, 4, 6, 7, 8, 10};
-        assertThat(result, is(SortArray.sort(arr1, arr2)));
+        assertThat(result, is(new SortArray().sort(arr1, arr2)));
     }
 }

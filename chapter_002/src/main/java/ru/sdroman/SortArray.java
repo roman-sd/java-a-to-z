@@ -7,7 +7,7 @@ package ru.sdroman;
  * @version 1.0
  * @since 14.12.2016
  */
-class SortArray {
+public class SortArray {
 
     /**
      * Returns merge sort.
@@ -16,7 +16,7 @@ class SortArray {
      * @param array2 int
      * @return int[] array
      */
-    static int[] sort(int[] array1, int[] array2) {
+    public int[] sort(int[] array1, int[] array2) {
         int length1 = array1.length;
         int length2 = array2.length;
         int[] resultArray = new int[length1 + length2];
