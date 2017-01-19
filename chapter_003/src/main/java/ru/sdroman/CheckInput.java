@@ -28,7 +28,7 @@ class CheckInput {
             }
             return result;
         } catch (InputMismatchException ime) {
-            System.err.println(ime + ".");
+            ime.printStackTrace();
             return false;
         }
     }
