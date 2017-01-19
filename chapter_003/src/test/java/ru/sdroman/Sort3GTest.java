@@ -29,25 +29,15 @@ public class Sort3GTest {
     @Test
     public void whenGiveFileThenSplitTwoFiles() throws IOException {
         String separator = System.getProperty("line.separator");
-        String expectedStrOne = "я"
-                + separator
-                + "не"
-                + separator
-                + "колбаса"
-                + separator
-                + "хипстер";
-        String expectedStrTwo = "я"
-                + separator
-                + "поросёнок"
-                + separator
-                + "нет"
-                + separator
-                + "мочалка";
+        String expectedStrOne = "я" + separator + "не" + separator + "колбаса" + separator + "хипстер";
+        String expectedStrTwo = "я" + separator + "поросёнок" + separator + "нет" + separator + "мочалка";
         File expectedTmpFirst = new File("src/test/java/ru/sdroman/resources/expectedFirstTmp.txt");
         File expectedTmpSecond = new File("src/test/java/ru/sdroman/resources/expectedSecondTmp.txt");
 
-        try (BufferedWriter bwOne = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(expectedTmpFirst), "UTF8"));
-             BufferedWriter bwTwo = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(expectedTmpSecond), "UTF8"))) {
+        try (BufferedWriter bwOne = new BufferedWriter(new OutputStreamWriter
+                (new FileOutputStream(expectedTmpFirst), "UTF8"));
+             BufferedWriter bwTwo = new BufferedWriter(new OutputStreamWriter
+                     (new FileOutputStream(expectedTmpSecond), "UTF8"))) {
             bwOne.write(expectedStrOne);
             bwTwo.write(expectedStrTwo);
         }
@@ -72,23 +62,11 @@ public class Sort3GTest {
     @Test
     public void whenGiveTwoFilesThenMerge() throws IOException {
         String separator = System.getProperty("line.separator");
-        String expectedStr = "я"
-                + separator
-                + "я"
-                + separator
-                + "не"
-                + separator
-                + "колбаса"
-                + separator
-                + "хипстер"
-                + separator
-                + "поросёнок"
-                + separator
-                + "нет"
-                + separator
-                + "мочалка";
+        String expectedStr = "я" + separator + "я" + separator + "не" + separator + "колбаса" + separator
+                + "хипстер" + separator + "поросёнок" + separator + "нет" + separator + "мочалка";
         File expectedFile = new File("src/test/java/ru/sdroman/resources/expectedFile.txt");
-        try (BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(expectedFile), "UTF8"))) {
+        try (BufferedWriter bw = new BufferedWriter(new OutputStreamWriter
+                (new FileOutputStream(expectedFile), "UTF8"))) {
             bw.write(expectedStr);
         }
 
@@ -117,7 +95,8 @@ public class Sort3GTest {
         String expectedStr = "я" + separator + "я" + separator + "не" + separator + "нет" + separator
                 + "мочалка" + separator + "колбаса" + separator + "хипстер" + separator + "поросёнок";
         File expectedFile = new File("src/test/java/ru/sdroman/resources/expectedFile.txt");
-        try (BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(expectedFile), "UTF8"))) {
+        try (BufferedWriter bw = new BufferedWriter(new OutputStreamWriter
+                (new FileOutputStream(expectedFile), "UTF8"))) {
             bw.write(expectedStr);
         }
         Sort3G sortFile = new Sort3G();
