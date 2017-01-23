@@ -36,4 +36,25 @@ public class Palindrome {
         StringBuilder strBuilder = new StringBuilder(str);
         return strBuilder.toString().equalsIgnoreCase(strBuilder.reverse().toString());
     }
+
+    /**
+     * array version.
+     * @param str String
+     * @return boolean
+     * @throws NotFiveLettersException exception
+     */
+    boolean isPalindromeArrayVersion(String str) throws NotFiveLettersException {
+        final int strLength = 5;
+        if (str.length() != strLength) {
+            throw new NotFiveLettersException("should be five letters");
+        }
+        int count = 0;
+        char[] line = str.toLowerCase().toCharArray();
+        for (int i = 0; i < line.length / 2; i++) {
+            if (line[i] == line[str.length() - i - 1]) {
+                count++;
+            }
+        }
+        return count == 2;
+    }
 }
