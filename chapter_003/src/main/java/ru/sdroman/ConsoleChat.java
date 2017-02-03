@@ -20,6 +20,22 @@ import java.util.Random;
 public class ConsoleChat {
 
     /**
+     * stop.
+     */
+    private final String stop = "стоп";
+
+    /**
+     * continue.
+     */
+    private final String proceed = "продолжить";
+
+    /**
+     * end.
+     */
+    private final String end = "закончить";
+
+
+    /**
      * Input.
      */
     private Input input;
@@ -119,18 +135,18 @@ public class ConsoleChat {
      */
     void chat() throws IOException {
         isEmptyLogFile();
-        String user = "user: ";
-        String bot = "bot: ";
+        final String user = "user: ";
+        final String bot = "bot: ";
         System.out.println("Chat");
         boolean isStop = false;
         System.out.print(user);
         String userStr = input.ask();
         writeLogFile(userStr, user);
-        while (!userStr.equalsIgnoreCase("закончить")) {
-            if (userStr.equalsIgnoreCase("стоп")) {
+        while (!end.equalsIgnoreCase(userStr)) {
+            if (stop.equalsIgnoreCase(userStr)) {
                 isStop = true;
             }
-            if (userStr.equalsIgnoreCase("продолжить")) {
+            if (proceed.equalsIgnoreCase(userStr)) {
                 isStop = false;
             }
 
