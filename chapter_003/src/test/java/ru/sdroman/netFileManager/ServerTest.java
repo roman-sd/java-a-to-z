@@ -10,28 +10,41 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PipedInputStream;
+import java.io.PipedOutputStream;
+import java.nio.file.Files;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 /**
  * Class ServerTest.
+ *
  * @author sdroman
  */
 public class ServerTest {
 
     /**
+     * Property file name.
+     */
+    private final String propertiesFile = "appForTest.properties";
+    /**
      * separator.
      */
     private String separator = System.getProperty("line.separator");
-
     /**
      * Temporary file for test.
      */
     private File file;
 
     /**
+     * Settings.
+     */
+    private Settings settings;
+
+    /**
      * SetUp.
+     *
      * @param command String
      * @throws IOException exception
      */
@@ -51,6 +64,7 @@ public class ServerTest {
 
     /**
      * Actual.
+     *
      * @param file File
      * @return String
      * @throws IOException exception
@@ -69,6 +83,7 @@ public class ServerTest {
 
     /**
      * Test dir command in MenuFileManager class.
+     *
      * @throws IOException exception
      */
     @Test
@@ -82,6 +97,7 @@ public class ServerTest {
 
     /**
      * Test cd command.
+     *
      * @throws IOException exception
      */
     @Test
@@ -95,6 +111,7 @@ public class ServerTest {
 
     /**
      * Test ls command.
+     *
      * @throws IOException exception
      */
     @Test
@@ -108,6 +125,7 @@ public class ServerTest {
 
     /**
      * Test help command.
+     *
      * @throws IOException exception
      */
     @Test
@@ -128,5 +146,64 @@ public class ServerTest {
         String actual = actualResult(file);
         assertThat(actual, is(expected));
         file.delete();
+    }
+
+    /**
+     * Test download command.
+     * @throws IOException exception
+     */
+    @Test
+    public void whenCommandDownloadThenDownloadFile() throws IOException {
+        settings = new Settings(propertiesFile);
+        PipedInputStream pis = new PipedInputStream();
+        PipedOutputStream pos = new PipedOutputStream(pis);
+
+        try (DataInputStream reader = new DataInputStream(pis);
+             DataOutputStream output = new DataOutputStream(pos)) {
+
+            MenuFileManager menu = new MenuFileManager(reader, output, propertiesFile);
+            menu.fillActions();
+            menu.select("download main\\resources\\app.properties");
+            Client client = new Client(propertiesFile);
+            client.downloadFile(reader);
+        }
+        pis.close();
+        pos.close();
+        File actualFile = new File(settings.getDownloadPath() + "app.properties");
+        File expectedFile = new File("src\\main\\resources\\app.properties");
+        byte[] actual = Files.readAllBytes(actualFile.toPath());
+        byte[] expected = Files.readAllBytes(expectedFile.toPath());
+        assertThat(actual, is(expected));
+        actualFile.delete();
+    }
+
+    /**
+     * Test upload command.
+     * @throws IOException exception
+     */
+    @Test
+    public void whenCommandUploadThenUploadFile() throws IOException {
+        settings = new Settings(propertiesFile);
+        String command = "upload e:\\testDownload\\testUploadFile.txt";
+        PipedInputStream pis = new PipedInputStream();
+        PipedOutputStream pos = new PipedOutputStream(pis);
+
+        try (DataInputStream reader = new DataInputStream(pis);
+             DataOutputStream output = new DataOutputStream(pos)) {
+
+            Client client = new Client(propertiesFile);
+            client.uploadFile(output, command);
+            MenuFileManager menu = new MenuFileManager(reader, output, propertiesFile);
+            menu.fillActions();
+            menu.select(command);
+        }
+        pis.close();
+        pos.close();
+        File actualFile = new File(settings.getHomePath() + "testUploadFile.txt");
+        File expectedFile = new File("e:\\testDownload\\testUploadFile.txt");
+        byte[] actual = Files.readAllBytes(actualFile.toPath());
+        byte[] expected = Files.readAllBytes(expectedFile.toPath());
+        assertThat(actual, is(expected));
+        actualFile.delete();
     }
 }

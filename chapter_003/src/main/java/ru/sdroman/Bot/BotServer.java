@@ -62,7 +62,8 @@ public class BotServer {
      * @throws IOException exception
      */
     public static void main(String[] args) throws IOException {
-        try (final Socket socket = new ServerSocket(8981).accept()) {
+        final int port = 8981;
+        try (final Socket socket = new ServerSocket(port).accept()) {
             new BotServer(socket).startServer();
         }
     }

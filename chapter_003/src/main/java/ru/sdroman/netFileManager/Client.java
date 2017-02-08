@@ -39,11 +39,24 @@ public class Client {
     private static final String UPLOAD = "upload";
 
     /**
+     * Property file name.
+     */
+    private String propertyFileName;
+
+    /**
+     * Constructs the new Client object.
+     * @param propertyFileName String
+     */
+    public Client(String propertyFileName) {
+        this.propertyFileName = propertyFileName;
+    }
+
+    /**
      * run client.
      * @throws IOException exception
      */
     public void clientRun() throws IOException {
-        Settings settings = new Settings("app.properties");
+        Settings settings = new Settings(propertyFileName);
         int port = settings.getPort();
         String address = settings.getAddress();
         InetAddress inetAddress = InetAddress.getByName(address);
@@ -90,7 +103,7 @@ public class Client {
             String fileName = dis.readUTF();
             byte[] buf = new byte[(int) fileSize];
 
-            String downloadPath = new Settings("app.properties").getDownloadPath();
+            String downloadPath = new Settings(propertyFileName).getDownloadPath();
             try (FileOutputStream fos = new FileOutputStream(downloadPath.concat(fileName));
                  BufferedOutputStream bis = new BufferedOutputStream(fos)) {
                 dis.readFully(buf, 0, buf.length);
@@ -131,7 +144,7 @@ public class Client {
      * @throws IOException exception
      */
     public static void main(String[] args) throws IOException {
-        Client client = new Client();
+        Client client = new Client("app.properties");
         client.clientRun();
     }
 }

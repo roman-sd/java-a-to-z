@@ -60,7 +60,8 @@ public class BotClient {
      * @throws IOException exception
      */
     public static void main(String[] args) throws IOException {
-        try (final Socket socket = new Socket(InetAddress.getByName("127.0.0.1"), 8981)) {
+        final int port = 8981;
+        try (final Socket socket = new Socket(InetAddress.getByName("127.0.0.1"), port)) {
             new BotClient(socket).clientRun();
         }
     }
