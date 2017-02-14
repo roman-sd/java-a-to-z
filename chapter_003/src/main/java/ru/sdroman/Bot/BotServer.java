@@ -17,6 +17,11 @@ import java.net.Socket;
 public class BotServer {
 
     /**
+     * exit.
+     */
+    private final String exit = "exit";
+
+    /**
      * Socket.
      */
     private final Socket socket;
@@ -47,7 +52,7 @@ public class BotServer {
                 out.println("Hello, dear friend, I'm a oracle.");
                 out.println();
             } else {
-                if (!"exit".equalsIgnoreCase(ask)) {
+                if (!exit.equalsIgnoreCase(ask)) {
                     out.println("I don't understand");
                     out.println();
                 }

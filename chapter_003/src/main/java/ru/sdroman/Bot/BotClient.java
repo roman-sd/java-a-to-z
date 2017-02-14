@@ -18,6 +18,11 @@ import java.util.Scanner;
 public class BotClient {
 
     /**
+     * exit.
+     */
+    private final String exit = "exit";
+
+    /**
      * Socket.
      */
     private Socket socket;
@@ -45,12 +50,12 @@ public class BotClient {
         do {
             line = console.nextLine();
             out.println(line);
-            if (!"exit".equalsIgnoreCase(line)) {
+            if (!exit.equalsIgnoreCase(line)) {
                 while (!(str = in.readLine()).isEmpty()) {
                     System.out.println(str);
                 }
             }
-        } while (!"exit".equalsIgnoreCase(line));
+        } while (!exit.equalsIgnoreCase(line));
     }
 
     /**

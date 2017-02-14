@@ -1,0 +1,14 @@
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>ru.sdroman</groupId>
+  <artifactId>find</artifactId>
+  <name>finder</name>
+  <version>2.0</version>
+  <packaging>jar</packaging>
+
+  <parent>
+    <artifactId>java-a-to-z</artifactId>
+    <groupId>ru.sdroman</groupId>
+    <version>1.0</version>
+  </parent>
+</project>
