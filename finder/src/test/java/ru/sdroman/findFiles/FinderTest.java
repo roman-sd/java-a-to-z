@@ -19,24 +19,14 @@ import static org.junit.Assert.assertThat;
 public class FinderTest {
 
     /**
-     * 3.
-     */
-    private static final int THIRD_KEY = 3;
-
-    /**
-     * 6.
-     */
-    private static final int SIXTH_KEY = 6;
-
-    /**
      * Finder object.
      */
     private Finder finder;
 
     /**
-     * Array of keys.
+     * Array of parameters.
      */
-    private String[] args;
+    private Param param;
 
     /**
      * SetUp.
@@ -47,9 +37,10 @@ public class FinderTest {
      */
     private void setUp(String keyName, String keyFind) throws IOException {
         String path = new File(".").getAbsolutePath();
-        args = new String[]{"-d", path, "-n", keyName, keyFind, "-o", "log.log"};
-        Pattern pattern = Pattern.compile(args[THIRD_KEY]);
-        finder = new Finder(pattern, args[SIXTH_KEY]);
+        String[] args = new String[]{"-d", path, "-n", keyName, keyFind, "-o", "log.log"};
+        this.param = new Param(args);
+        Pattern pattern = Pattern.compile(param.getName());
+        finder = new Finder(pattern, param.getLogFile());
     }
 
     /**
@@ -60,7 +51,7 @@ public class FinderTest {
     @Test
     public void whenFindByNameThenFind() throws IOException {
         setUp("pom.xml", "-f");
-        boolean actual = finder.isFound(args[1]);
+        boolean actual = finder.isFound(this.param.getDir());
         assertThat(actual, is(true));
     }
 
@@ -72,7 +63,7 @@ public class FinderTest {
     @Test
     public void whenFindByMaskThenFind() throws IOException {
         setUp(".*.xml", "-m");
-        boolean actual = finder.isFound(args[1]);
+        boolean actual = finder.isFound(this.param.getDir());
         assertThat(actual, is(true));
     }
 
@@ -84,7 +75,7 @@ public class FinderTest {
     @Test
     public void whenFindByRegexThenFind() throws IOException {
         setUp(".+om.+", "-r");
-        boolean actual = finder.isFound(args[1]);
+        boolean actual = finder.isFound(this.param.getDir());
         assertThat(actual, is(true));
     }
 
@@ -96,7 +87,7 @@ public class FinderTest {
     @Test
     public void whenNotFileThenReturnFileNotFound() throws IOException {
         setUp("ttttttttt.xxxxx", "-f");
-        boolean actual = finder.isFound(args[1]);
+        boolean actual = finder.isFound(this.param.getDir());
         assertThat(actual, is(false));
     }
 }

@@ -31,21 +31,18 @@ public class ValidateKey {
     public boolean valid() {
         boolean isValid = true;
         final int length = 7;
-        final int one = 0;
-        final int two = 2;
-        final int four = 4;
-        final int five = 5;
-        if (this.args.length != length || "-help".equalsIgnoreCase(this.args[0])) {
+        Param param = new Param(this.args);
+
+        if (param.getLength() != length || "-help".equalsIgnoreCase(param.getDirKey())) {
             help();
             isValid = false;
         } else {
-            if (!"-d".equalsIgnoreCase(this.args[0])
-                    || !"-d".equalsIgnoreCase(this.args[one])
-                    || !"-n".equalsIgnoreCase(this.args[two])
-                    || !"-o".equalsIgnoreCase(this.args[five])
-                    || (!"-m".equalsIgnoreCase(this.args[four])
-                    && !"-r".equalsIgnoreCase(this.args[four])
-                    && !"-f".equalsIgnoreCase(this.args[four]))) {
+            if (!"-d".equalsIgnoreCase(param.getDirKey())
+                    || !"-n".equalsIgnoreCase(param.getFileNameKey())
+                    || !"-o".equalsIgnoreCase(param.getLogKey())
+                    || (!"-m".equalsIgnoreCase(param.getFindKey())
+                    && !"-r".equalsIgnoreCase(param.getFindKey())
+                    && !"-f".equalsIgnoreCase(param.getFindKey()))) {
                 System.out.println("no valid key.");
                 isValid = false;
             }

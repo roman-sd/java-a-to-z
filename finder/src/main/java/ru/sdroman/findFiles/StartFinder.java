@@ -18,6 +18,7 @@ public class StartFinder {
      * @throws IOException exception
      */
     public static void main(String[] args) throws IOException {
+
         new Menu(args).find();
     }
 }

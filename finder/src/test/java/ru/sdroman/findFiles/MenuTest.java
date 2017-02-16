@@ -23,7 +23,7 @@ public class MenuTest {
      */
     @Test
     public void menuFailed() throws IOException {
-        String[] args = {"-d", "C:\\", "-n", "test.txt", "-g", "-o", "log.txt"};
+        String[] args = {"-d", "C:\\", "-n", "test.txt", "-A", "-o", "log.txt"};
         Menu menu = new Menu(args);
         boolean actual = menu.find();
         assertThat(actual, is(false));
