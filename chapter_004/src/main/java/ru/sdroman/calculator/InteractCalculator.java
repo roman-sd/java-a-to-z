@@ -61,7 +61,7 @@ public class InteractCalculator {
      * Runner.
      */
     public void action() {
-        String memory = "";
+        String memory = null;
         String result = "";
         do {
             do {
@@ -80,7 +80,7 @@ public class InteractCalculator {
                 }
 
                 try {
-                    this.calculator.selectOperation(operation, Integer.valueOf(first), Integer.valueOf(second));
+                    this.calculator.selectOperation(operation, Double.valueOf(first), Double.valueOf(second));
                     result = String.valueOf(this.calculator.getResult());
                 } catch (NumberFormatException nfe) {
                     this.output.print("error.");

@@ -4,7 +4,7 @@ package ru.sdroman.calculator;
  * Class StartUI.
  *
  * @author sdroman
- * @version 0.1
+ * @version 0.2
  * @since 02.17
  */
 public class StartUI {
@@ -15,7 +15,8 @@ public class StartUI {
      * @param args String
      */
     public static void main(String[] args) {
-        new InteractCalculator(new ConsoleInput(), new StubOutput(), new Calculator()).action();
+        Calculator calculator = new EngineerCalculator();
+        new Menu(new ConsoleInput(), new StubOutput(), calculator).run();
     }
 }
 

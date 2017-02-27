@@ -4,7 +4,7 @@ package ru.sdroman.calculator;
  * Class Calculator.
  *
  * @author sdroman
- * @version 0.1
+ * @version 0.2
  * @since 02.17
  */
 public class Calculator {
@@ -17,12 +17,12 @@ public class Calculator {
     /**
      * Array of actions.
      */
-    private Action[] actions = new Action[DEFAULT_CAPACITY];
+    protected Action[] actions = new Action[DEFAULT_CAPACITY];
 
     /**
      * Result.
      */
-    private int result;
+    private double result;
 
     /**
      * Constructs new Calculator object.
@@ -49,7 +49,7 @@ public class Calculator {
      * @param first     int
      * @param second    int
      */
-    public void selectOperation(String operation, int first, int second) {
+    public void selectOperation(String operation, double first, double second) {
         boolean done = false;
         for (Action action : actions) {
             if (operation.equals(action.operation())) {
@@ -65,9 +65,10 @@ public class Calculator {
 
     /**
      * Get result.
+     *
      * @return int
      */
-    public int getResult() {
+    public double getResult() {
         return this.result;
     }
 
@@ -89,12 +90,12 @@ public class Calculator {
         /**
          * Calculate.
          *
-         * @param first  int
-         * @param second int
+         * @param first  double
+         * @param second double
          * @return int
          */
         @Override
-        public int calculate(int first, int second) {
+        public double calculate(double first, double second) {
             return first + second;
         }
     }
@@ -117,12 +118,12 @@ public class Calculator {
         /**
          * Calculate.
          *
-         * @param first  int
-         * @param second int
+         * @param first  double
+         * @param second double
          * @return int
          */
         @Override
-        public int calculate(int first, int second) {
+        public double calculate(double first, double second) {
             if (second != 0) {
                 return first / second;
             } else {
@@ -149,12 +150,12 @@ public class Calculator {
         /**
          * Calculate.
          *
-         * @param first  int
-         * @param second int
+         * @param first  double
+         * @param second double
          * @return int
          */
         @Override
-        public int calculate(int first, int second) {
+        public double calculate(double first, double second) {
             return first * second;
         }
     }
@@ -182,7 +183,7 @@ public class Calculator {
          * @return int
          */
         @Override
-        public int calculate(int first, int second) {
+        public double calculate(double first, double second) {
             return first - second;
         }
     }

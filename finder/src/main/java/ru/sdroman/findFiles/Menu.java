@@ -38,9 +38,6 @@ public class Menu {
         Pattern pattern;
         ValidateKey validator = new ValidateKey(this.args);
 
-        //java -jar find.jar -d c:/ -n *.txt -m -o log.txt
-        //                    0  1   2   3    4  5    6
-
         if (validator.valid()) {
             if ("-f".equalsIgnoreCase(param.getFindKey())
                     || "-r".equalsIgnoreCase(param.getFindKey())) {

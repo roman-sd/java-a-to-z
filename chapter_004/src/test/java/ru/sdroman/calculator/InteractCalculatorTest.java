@@ -45,7 +45,7 @@ public class InteractCalculatorTest {
     @Test
     public void whenAddThenReturnResult() {
         setUp(Arrays.asList("1", "+", "2", "n", "y").iterator());
-        final int expected = 3;
+        final double expected = 3;
         interactCalc.action();
         assertThat(calculator.getResult(), is(expected));
     }
@@ -57,7 +57,7 @@ public class InteractCalculatorTest {
     @Test
     public void whenAddWithMemoryThenReturnResult() {
         setUp(Arrays.asList("5", "+", "3", "y", "m", "-", "1", "n", "y").iterator());
-        final int expected = 7;
+        final double expected = 7;
         interactCalc.action();
         assertThat(calculator.getResult(), is(expected));
     }
@@ -69,7 +69,7 @@ public class InteractCalculatorTest {
     @Test
     public void whenDivThenReturnResult() {
         setUp(Arrays.asList("8", "/", "4", "n", "y").iterator());
-        final int expected = 2;
+        final double expected = 2;
         interactCalc.action();
         assertThat(calculator.getResult(), is(expected));
     }
@@ -91,7 +91,7 @@ public class InteractCalculatorTest {
     @Test
     public void whenMultipleThenReturnResult() {
         setUp(Arrays.asList("2", "*", "4", "n", "y").iterator());
-        final int expected = 8;
+        final double expected = 8;
         interactCalc.action();
         assertThat(calculator.getResult(), is(expected));
     }
@@ -103,7 +103,7 @@ public class InteractCalculatorTest {
     @Test
     public void whenSubtractionThenReturnResult() {
         setUp(Arrays.asList("5", "-", "3", "n", "y").iterator());
-        final int expected = 2;
+        final double expected = 2;
         interactCalc.action();
         assertThat(calculator.getResult(), is(expected));
     }

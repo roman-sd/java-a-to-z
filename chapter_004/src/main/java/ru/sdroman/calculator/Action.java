@@ -19,9 +19,9 @@ public interface Action {
     /**
      * Calculate.
      *
-     * @param first  int
-     * @param second int
+     * @param first  double
+     * @param second double
      * @return int
      */
-    int calculate(int first, int second);
+    double calculate(double first, double second);
 }
