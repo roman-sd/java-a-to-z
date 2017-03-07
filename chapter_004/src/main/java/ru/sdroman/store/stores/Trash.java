@@ -1,6 +1,6 @@
 package ru.sdroman.store.stores;
 
-import ru.sdroman.store.ExpiryDate.FoodExpiryDate;
+import ru.sdroman.store.expiryDate.FoodExpiryDate;
 import ru.sdroman.store.foods.Food;
 
 /**

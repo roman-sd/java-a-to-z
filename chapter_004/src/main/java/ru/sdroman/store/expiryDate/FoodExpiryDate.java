@@ -1,4 +1,4 @@
-package ru.sdroman.store.ExpiryDate;
+package ru.sdroman.store.expiryDate;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
