@@ -76,33 +76,4 @@ public class UpgradeControlQuality extends ControlQuality {
             freezer.addFood(vegan);
         }
     }
-
-   /* public static void main(String[] args) throws StoreIsFullException {
-        UpgradeControlQuality control = new UpgradeControlQuality();
-
-        RecyclingFood apple = new RFruit("apple", "2017-02-01", "2017-04-28", true);
-        RecyclingFood banana = new RFruit("banana", "2017-02-01", "2017-02-28", false);
-        RecyclingFood tomato = new RVegetables("tomato", "2017-03-01", "2017-04-28", true);
-        RecyclingFood potato = new RVegetables("potato", "2017-03-01", "2017-04-28", false);
-        RecyclingFood pineapple = new RFruit("pineapple", "2017-02-01", "2017-02-28", true);
-        RVegetables vegetables = new RVegetables("vegan", "2017-03-01", "2017-05-01", true);
-
-        control.foodTransfer(apple);
-        control.foodTransfer(banana);
-        control.foodTransfer(pineapple);
-        control.foodTransfer(potato);
-        control.foodTransfer(tomato);
-        control.foodTransfer(vegetables);
-
-        Store[] stores = control.getStores();
-        Food[] foods;
-
-        for (Store st : stores) {
-            foods = st.getAllFoods();
-            System.out.println(st.getStoreName());
-            for (Food aFood : foods) {
-                System.out.println(aFood);
-            }
-        }
-    }*/
 }
