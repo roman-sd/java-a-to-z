@@ -3,20 +3,18 @@ package ru.sdroman.store.stores;
 import ru.sdroman.store.exceptions.StoreIsFullException;
 import ru.sdroman.store.foods.Food;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Abstract class Store.
  */
 public abstract class Store {
 
     /**
-     * Array of products.
+     * Products list.
      */
-    private Food[] foods;
-
-    /**
-     * Position in array.
-     */
-    private int position = 0;
+    private List<Food> foods;
 
     /**
      * Name.
@@ -37,7 +35,7 @@ public abstract class Store {
     public Store(String storeName, int foodLimit) {
         this.foodLimit = foodLimit;
         this.storeName = storeName;
-        this.foods = new Food[foodLimit];
+        this.foods = new ArrayList<>(foodLimit);
     }
 
     /**
@@ -47,19 +45,29 @@ public abstract class Store {
      * @throws StoreIsFullException exception
      */
     public void addFood(Food food) throws StoreIsFullException {
-        if (!isFull()) {
-            this.foods[position++] = food;
+        if (!this.isFull()) {
+            this.foods.add(food);
         } else {
             throw new StoreIsFullException(getStoreName() + " is full");
         }
     }
 
     /**
-     * Returns array of products.
+     * Remove food from store.
+     *
+     * @param food Food
+     * @return boolean
+     */
+    public boolean removeFood(Food food) {
+        return this.foods.remove(food);
+    }
+
+    /**
+     * Returns products list.
      *
      * @return Food[]
      */
-    public Food[] getAllFoods() {
+    public List<Food> getFoods() {
         return this.foods;
     }
 
@@ -78,15 +86,14 @@ public abstract class Store {
      * @return boolean
      */
     public boolean isFull() {
-        return this.position == foodLimit;
+        return this.foods.size() == this.foodLimit;
     }
 
     /**
      * Clear all products in the storage.
      */
     public void clear() {
-        this.foods = null;
-        System.out.println();
+        this.foods.clear();
     }
 
     /**

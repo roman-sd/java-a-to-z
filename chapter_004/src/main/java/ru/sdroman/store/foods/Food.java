@@ -111,6 +111,22 @@ public class Food {
     }
 
     /**
+     * Sets expiry date.
+     * @param expiryDate String
+     */
+    public void setExpiryDate(String expiryDate) {
+        this.expiryDate = expiryDate;
+    }
+
+    /**
+     * Sets create date.
+     * @param createDate String
+     */
+    public void setCreateDate(String createDate) {
+        this.createDate = createDate;
+    }
+
+    /**
      * toString.
      *
      * @return String

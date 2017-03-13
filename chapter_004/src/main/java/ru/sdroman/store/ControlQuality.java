@@ -7,6 +7,9 @@ import ru.sdroman.store.stores.Store;
 import ru.sdroman.store.stores.Trash;
 import ru.sdroman.store.stores.Warehouse;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Class ControlQuality.
  *
@@ -73,15 +76,19 @@ public class ControlQuality {
      * Transfers products to stores.
      *
      * @param food Food
+     * @return boolean
      * @throws StoreIsFullException exception
      */
-    public void foodTransfer(Food food) throws StoreIsFullException {
+    public boolean foodTransfer(Food food) throws StoreIsFullException {
+        boolean done = false;
         for (Store store : stores) {
             if (store != null && store.checkQuality(food)) {
                 store.addFood(food);
+                done = true;
                 break;
             }
         }
+        return done;
     }
 
     /**
@@ -91,5 +98,21 @@ public class ControlQuality {
      */
     public Store[] getStores() {
         return stores;
+    }
+
+    /**
+     * Resort.
+     * @throws StoreIsFullException exception
+     */
+    public void resort() throws StoreIsFullException {
+        Store[] stores = this.getStores();
+        List<Food> foodList = new ArrayList<>();
+        for (Store store : stores) {
+            foodList.addAll(store.getFoods());
+            store.clear();
+        }
+        for (Food food : foodList) {
+            foodTransfer(food);
+        }
     }
 }

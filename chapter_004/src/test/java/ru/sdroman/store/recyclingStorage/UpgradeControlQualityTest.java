@@ -25,7 +25,7 @@ public class UpgradeControlQualityTest {
     /**
      * UpgradeControlQuality.
      */
-    private UpgradeControlQuality control;
+    private UpdateControlQuality control;
 
     /**
      * Date create.
@@ -43,7 +43,7 @@ public class UpgradeControlQualityTest {
      */
     @Before
     public void setUp() throws StoreIsFullException {
-        control = new UpgradeControlQuality();
+        control = new UpdateControlQuality();
     }
 
     /**
@@ -68,7 +68,7 @@ public class UpgradeControlQualityTest {
         RecyclingFood fruit = new RecyclingFood("apple", createDate.toString(), expiryDate.toString(), true);
         control.foodTransfer(fruit);
         Store[] stores = control.getStores();
-        Food actualFood = stores[storePosition].getAllFoods()[0];
+        Food actualFood = stores[storePosition].getFoods().iterator().next();
         assertThat(actualFood, is(fruit));
     }
 
@@ -83,7 +83,7 @@ public class UpgradeControlQualityTest {
         Food food = new Fruit("apple", createDate.toString(), expiryDate.toString());
         control.foodTransfer(food);
         Store[] stores = control.getStores();
-        Food actualFood = stores[storePosition].getAllFoods()[0];
+        Food actualFood = stores[storePosition].getFoods().iterator().next();
         assertThat(actualFood, is(food));
     }
 
@@ -122,7 +122,7 @@ public class UpgradeControlQualityTest {
         RVegetables vegetables = new RVegetables("veg", createDate.toString(), expiryDate.toString(), true);
         control.foodTransfer(vegetables);
         Store[] stores = control.getStores();
-        assertThat(stores[freezerIndex].getAllFoods()[0], is(vegetables));
+        assertThat(stores[freezerIndex].getFoods().iterator().next(), is(vegetables));
     }
 
 }

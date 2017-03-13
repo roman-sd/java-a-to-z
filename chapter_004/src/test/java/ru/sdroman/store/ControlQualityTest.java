@@ -12,6 +12,8 @@ import ru.sdroman.store.stores.Trash;
 import ru.sdroman.store.stores.Warehouse;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -76,7 +78,7 @@ public class ControlQualityTest {
         controlQuality.addStore(store);
         controlQuality.foodTransfer(food);
         Store[] stores = controlQuality.getStores();
-        Food actualFood = stores[0].getAllFoods()[0];
+        Food actualFood = stores[0].getFoods().iterator().next();
         assertThat(actualFood, is(food));
     }
 
@@ -163,5 +165,25 @@ public class ControlQualityTest {
         Vegetables tomato = new Vegetables("tomato", createDate.toString(), expiryDate.toString());
         controlQuality.foodTransfer(apple);
         controlQuality.foodTransfer(tomato);
+    }
+
+    /**
+     * Test resort() method.
+     * @throws StoreIsFullException exception
+     */
+    @Test
+    public void whenResortThenResort() throws StoreIsFullException {
+        final int createDays = 15;
+        final int expiryDays = 15;
+        final int storeIndex = 2;
+        init(createDays, expiryDays);
+        Food apple = new Fruit("apple", createDate.toString(), expiryDate.toString());
+        controlQuality.fillDefaultStore();
+        controlQuality.foodTransfer(apple);
+        apple.setExpiryDate((LocalDate.now().minusDays(1)).toString());
+        controlQuality.resort();
+        List<Food> expected = new ArrayList<>();
+        expected.add(apple);
+        assertThat(controlQuality.getStores()[storeIndex].getFoods(), is(expected));
     }
 }

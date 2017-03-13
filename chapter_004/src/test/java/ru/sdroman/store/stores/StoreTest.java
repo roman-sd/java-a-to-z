@@ -74,7 +74,8 @@ public class StoreTest {
     @Test
     public void whenAddThenAddFood() throws StoreIsFullException {
         store.addFood(apple);
-        assertThat(store.getAllFoods()[0], is(apple));
+        Food food;
+        assertThat(store.getFoods().iterator().next(), is(apple));
     }
 
     /**

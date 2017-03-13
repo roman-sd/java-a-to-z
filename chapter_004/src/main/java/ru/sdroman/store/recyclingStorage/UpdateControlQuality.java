@@ -10,13 +10,13 @@ import ru.sdroman.store.recyclingStorage.storage.Storehouse;
 import ru.sdroman.store.stores.Store;
 
 /**
- * Class UpgradeControlQuality class.
+ * Class UpdateControlQuality class.
  *
  * @author sdroman
  * @version 0.1
  * @since 03.17
  */
-public class UpgradeControlQuality extends ControlQuality {
+public class UpdateControlQuality extends ControlQuality {
 
     /**
      * food limit.
@@ -36,7 +36,7 @@ public class UpgradeControlQuality extends ControlQuality {
     /**
      * Constructs new UpgradeControlStorage object.
      */
-    public UpgradeControlQuality() {
+    public UpdateControlQuality() {
         super();
         this.fillDefaultStore();
         this.addStore(new Storehouse("Storehouse", LIMIT));
@@ -69,11 +69,15 @@ public class UpgradeControlQuality extends ControlQuality {
      * FoodTransfer for vegetables.
      *
      * @param vegan RVegetables
+     * @return boolean
      * @throws StoreIsFullException exception
      */
-    public void foodTransfer(RVegetables vegan) throws StoreIsFullException {
+    public boolean foodTransfer(RVegetables vegan) throws StoreIsFullException {
+        boolean done = false;
         if (freezer.checkQuality(vegan)) {
+            done = true;
             freezer.addFood(vegan);
         }
+        return done;
     }
 }

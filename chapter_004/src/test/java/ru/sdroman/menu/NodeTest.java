@@ -70,6 +70,7 @@ public class NodeTest {
 
     /**
      * Test printNode() method.
+     * @exception IOException exception
      */
     @Test
     public void whenShowMenuThenPrintNodes() throws IOException {
