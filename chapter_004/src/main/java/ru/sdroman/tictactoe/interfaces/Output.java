@@ -1,4 +1,4 @@
-package ru.sdroman.tictactoe.Interfaces;
+package ru.sdroman.tictactoe.interfaces;
 
 /**
  * Interface Output.

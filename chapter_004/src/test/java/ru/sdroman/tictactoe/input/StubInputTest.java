@@ -1,7 +1,7 @@
 package ru.sdroman.tictactoe.input;
 
 import org.junit.Test;
-import ru.sdroman.tictactoe.Interfaces.Input;
+import ru.sdroman.tictactoe.interfaces.Input;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;

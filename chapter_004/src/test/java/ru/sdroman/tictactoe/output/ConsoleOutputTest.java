@@ -1,7 +1,7 @@
 package ru.sdroman.tictactoe.output;
 
 import org.junit.Test;
-import ru.sdroman.tictactoe.Interfaces.Output;
+import ru.sdroman.tictactoe.interfaces.Output;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;

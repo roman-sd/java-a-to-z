@@ -1,6 +1,6 @@
 package ru.sdroman.tictactoe.input;
 
-import ru.sdroman.tictactoe.Interfaces.Input;
+import ru.sdroman.tictactoe.interfaces.Input;
 
 import java.util.Scanner;
 

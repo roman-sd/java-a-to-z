@@ -1,8 +1,8 @@
 package ru.sdroman.tictactoe;
 
-import ru.sdroman.tictactoe.Interfaces.IRound;
-import ru.sdroman.tictactoe.Interfaces.Input;
-import ru.sdroman.tictactoe.Interfaces.Output;
+import ru.sdroman.tictactoe.interfaces.IRound;
+import ru.sdroman.tictactoe.interfaces.Input;
+import ru.sdroman.tictactoe.interfaces.Output;
 import ru.sdroman.tictactoe.exceptions.OccupiedCellException;
 import ru.sdroman.tictactoe.input.ValidateInput;
 

@@ -1,6 +1,6 @@
 package ru.sdroman.tictactoe.output;
 
-import ru.sdroman.tictactoe.Interfaces.Output;
+import ru.sdroman.tictactoe.interfaces.Output;
 
 /**
  * ConsoleOutput class.

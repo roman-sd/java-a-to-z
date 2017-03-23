@@ -1,6 +1,6 @@
 package ru.sdroman.tictactoe;
 
-import ru.sdroman.tictactoe.Interfaces.IField;
+import ru.sdroman.tictactoe.interfaces.IField;
 import ru.sdroman.tictactoe.exceptions.OccupiedCellException;
 
 /**
