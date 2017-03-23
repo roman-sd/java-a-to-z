@@ -68,6 +68,7 @@ public class SimpleGeneratorTest {
      */
     @Test(expected = KeyNotFoundException.class)
     public void whenTakeTextWithoutDataThenKeyNotFoundException() throws KeyNotFoundException, ExtraKeysException {
+        map.put("subject", "you");
         generator.generate(template, map);
     }
 

@@ -17,6 +17,11 @@ import java.util.regex.Pattern;
 public class SimpleGenerator implements Template {
 
     /**
+     * Pattern.
+     */
+    private final Pattern pattern = Pattern.compile("\\$\\{(\\w+)}");
+
+    /**
      * Replacing Template with keys.
      *
      * @param template String
@@ -28,13 +33,14 @@ public class SimpleGenerator implements Template {
     @Override
     public String generate(String template, Map<String, String> data) throws KeyNotFoundException, ExtraKeysException {
         StringBuffer buffer = new StringBuffer();
-        Matcher matcher = Pattern.compile("\\$\\{(\\w+)}").matcher(template);
+        Matcher matcher = pattern.matcher(template);
         int count = 0;
         while (matcher.find()) {
-            try {
-                matcher.appendReplacement(buffer, data.get(matcher.group(1)));
+            String value = data.get(matcher.group(1));
+            if (value != null) {
+                matcher.appendReplacement(buffer, value);
                 count++;
-            } catch (NullPointerException npe) {
+            } else {
                 throw new KeyNotFoundException("Keys not found.");
             }
         }
