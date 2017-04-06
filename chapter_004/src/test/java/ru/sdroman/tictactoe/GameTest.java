@@ -70,8 +70,8 @@ public class GameTest {
      */
     @Test
     public void whenRoundDrawThenCountDraw() throws OccupiedCellException {
-        String[] firstPlayerMoves = new String[]{"0 0", "1 1", "1 2", "2 0", "0 1", "0 0", "1 1", "2 2"};
-        String[] secondPlayerMoves = new String[]{"0 2", "2 2", "2 1", "1 0", "0 2", "2 0"};
+        String[] firstPlayerMoves = new String[]{"0 0", "1 1", "1 2", "2 0", "0 1"};
+        String[] secondPlayerMoves = new String[]{"0 2", "2 2", "2 1", "1 0"};
         setUp(firstPlayerMoves, secondPlayerMoves);
         assertThat(game.getScoreDraw(), is(1));
     }

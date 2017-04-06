@@ -130,7 +130,9 @@ public class Game {
                     scoreAI++;
                 } else {
                     scoreDraw++;
-                    count--;
+                    if (count > 0) {
+                        count--;
+                    }
                 }
             }
             count++;

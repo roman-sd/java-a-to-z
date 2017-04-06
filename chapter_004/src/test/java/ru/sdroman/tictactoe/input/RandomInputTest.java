@@ -6,15 +6,14 @@ import ru.sdroman.tictactoe.interfaces.Input;
 
 import static org.junit.Assert.assertTrue;
 
+
 /**
- * Test RandomInputClass.
- *
+ * Test RandomInput class.
  * @author sdroman
  * @version 0.1
  * @since 03.17
  */
 public class RandomInputTest {
-
     /**
      * Min.
      */
@@ -57,4 +56,5 @@ public class RandomInputTest {
         int actualY = validate.getY();
         assertTrue(MIN <= actualY && actualY <= MAX);
     }
+
 }

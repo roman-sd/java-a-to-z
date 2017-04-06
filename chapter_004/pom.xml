@@ -1,6 +1,6 @@
 <project>
     <modelVersion>4.0.0</modelVersion>
-    <groupId>ru.sdroman</groupId>
+    <!--<groupId>ru.sdroman</groupId>-->
     <artifactId>chapter_004</artifactId>
     <name>chapter_004</name>
     <version>2.0</version>

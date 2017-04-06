@@ -19,7 +19,7 @@ public class StubInputTest {
      * Test read() method.
      */
     @Test
-    public void read() {
+    public void readTest() {
         String firstItem = "0 0";
         String secondItem = "0 1";
         String[] testArray = {firstItem, secondItem};

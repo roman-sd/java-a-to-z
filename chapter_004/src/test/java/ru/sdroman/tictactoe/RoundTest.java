@@ -2,11 +2,11 @@ package ru.sdroman.tictactoe;
 
 import org.junit.Before;
 import org.junit.Test;
+import ru.sdroman.tictactoe.exceptions.OccupiedCellException;
+import ru.sdroman.tictactoe.input.StubInput;
 import ru.sdroman.tictactoe.interfaces.IRound;
 import ru.sdroman.tictactoe.interfaces.Input;
 import ru.sdroman.tictactoe.interfaces.Output;
-import ru.sdroman.tictactoe.exceptions.OccupiedCellException;
-import ru.sdroman.tictactoe.input.StubInput;
 import ru.sdroman.tictactoe.output.ConsoleOutput;
 
 import static org.hamcrest.core.Is.is;
@@ -14,6 +14,7 @@ import static org.junit.Assert.assertThat;
 
 /**
  * Test Round class.
+ *
  * @author sdroman
  * @version 0.1
  * @since 03.17
@@ -40,7 +41,8 @@ public class RoundTest {
 
     /**
      * Setup.
-     * @param firstPlayerMoves String[]
+     *
+     * @param firstPlayerMoves  String[]
      * @param secondPlayerMoves String[]
      */
     private void settings(String[] firstPlayerMoves, String[] secondPlayerMoves) {
@@ -53,6 +55,7 @@ public class RoundTest {
 
     /**
      * Test winner.
+     *
      * @throws OccupiedCellException exception
      */
     @Test
@@ -66,6 +69,7 @@ public class RoundTest {
 
     /**
      * Test winner.
+     *
      * @throws OccupiedCellException exception
      */
     @Test
@@ -79,6 +83,7 @@ public class RoundTest {
 
     /**
      * Test draw.
+     *
      * @throws OccupiedCellException exception
      */
     @Test
@@ -92,6 +97,7 @@ public class RoundTest {
 
     /**
      * Test first move.
+     *
      * @throws OccupiedCellException exception
      */
     @Test
