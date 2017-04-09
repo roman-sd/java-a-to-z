@@ -1,0 +1,11 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>chapter_005</artifactId>
+    <name>chapter_005</name>
+    <version>2.0</version>
+    <parent>
+        <artifactId>java-a-to-z</artifactId>
+        <groupId>ru.sdroman</groupId>
+        <version>1.0</version>
+    </parent>
+</project>
