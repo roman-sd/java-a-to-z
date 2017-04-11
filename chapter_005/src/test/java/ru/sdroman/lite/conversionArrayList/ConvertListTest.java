@@ -49,4 +49,15 @@ public class ConvertListTest {
         int[][] actual = convertList.toArray(list, rows);
         assertThat(actual, is(expected));
     }
+
+    /**
+     * Test convert method.
+     */
+    @Test
+    public void whenSetListInConvertThenReturnList() {
+        ConvertList convertList = new ConvertList();
+        final List<int[]> list = Arrays.asList(new int[]{1, 2, 3}, new int[]{4, 5}, new int[]{6, 7, 8, 9});
+        final List<Integer> expected = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9);
+        assertThat(convertList.convert(list), is(expected));
+    }
 }

@@ -22,15 +22,15 @@ public class ConvertList {
     public List<Integer> toList(int[][] array) {
         List<Integer> list = new ArrayList<>();
         for (int[] anArray : array) {
-            for (int j = 0; j < array[0].length; j++) {
-                list.add(anArray[j]);
+            for (int elem : anArray) {
+                list.add(elem);
             }
         }
         return list;
     }
 
     /**
-     * Convert List<> to array.
+     * Converts List<> to array.
      *
      * @param list List<Integer>
      * @param rows int
@@ -51,5 +51,22 @@ public class ConvertList {
             }
         }
         return array;
+    }
+
+    /**
+     * Converts List<int[]> to List<Integer>.
+     *
+     * @param list List<int[]>
+     * @return List<Integer>
+     */
+    public List<Integer> convert(List<int[]> list) {
+        List<Integer> convertList = new ArrayList<>();
+        Iterator<int[]> iterator = list.iterator();
+        while (iterator.hasNext()) {
+            for (int element : iterator.next()) {
+                convertList.add(element);
+            }
+        }
+        return convertList;
     }
 }

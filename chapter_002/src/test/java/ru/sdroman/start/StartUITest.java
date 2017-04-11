@@ -3,6 +3,10 @@ package ru.sdroman.start;
 import org.junit.Test;
 import ru.sdroman.models.Item;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -19,7 +23,7 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Input input = new StubInput(new String[]{"1", "item1", "desc1", "y"});
         new StartUI(input).init(tracker);
-        assertThat(tracker.getAll()[0].getName(), is("item1"));
+        assertThat(tracker.getAll().get(0).getName(), is("item1"));
     }
 
     /**
@@ -31,7 +35,7 @@ public class StartUITest {
         tracker.add(new Item("item", "desc"));
         Input input = new StubInput(new String[]{"2", "item", "newItem", "newDesc", "y"});
         new StartUI(input).init(tracker);
-        assertThat(tracker.getAll()[0].getName(), is("newItem"));
+        assertThat(tracker.getAll().get(0).getName(), is("newItem"));
     }
 
     /**
@@ -42,7 +46,7 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Input input = new StubInput(new String[]{"1", "item1", "desc1", "n", "3", "item1", "y"});
         new StartUI(input).init(tracker);
-        assertThat(tracker.getAll(), is(new Item[]{}));
+        assertThat(tracker.getAll(), is(new ArrayList<Item>()));
     }
 
     /**
@@ -91,7 +95,7 @@ public class StartUITest {
         Item item1 = tracker.add(new Item("item1", "desc1"));
         Item item2 = tracker.add(new Item("item2", "desc2"));
         Item item3 = tracker.add(new Item("item3", "desc3"));
-        Item[] items = new Item[]{item1, item2, item3};
+        List<Item> items = Arrays.asList(item1, item2, item3);
         Input input = new StubInput(new String[]{"7", "y"});
         new StartUI(input).init(tracker);
         assertThat(tracker.getAll(), is(items));

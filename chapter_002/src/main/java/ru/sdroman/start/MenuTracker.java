@@ -3,17 +3,14 @@ package ru.sdroman.start;
 import ru.sdroman.models.Comment;
 import ru.sdroman.models.Item;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * class MenuTracker.
  */
 public class MenuTracker {
-
-    /**
-     * Default initial capacity.
-     */
-    private static final int DEFAULT_CAPACITY = 7;
 
     /**
      * input.
@@ -26,14 +23,9 @@ public class MenuTracker {
     private Tracker tracker;
 
     /**
-     * actions array.
+     * action's arrayList.
      */
-    private UserAction[] actions = new UserAction[DEFAULT_CAPACITY];
-
-    /**
-     * key.
-     */
-    private int key = 0;
+    private List<UserAction> actionsList = new ArrayList<>();
 
     /**
      * create new MenuTracker object.
@@ -50,14 +42,13 @@ public class MenuTracker {
      * fill actions array.
      */
     public void fillActions() {
-        int count = 0;
-        this.actions[count++] = new AddItem("Add the new item.");
-        this.actions[count++] = new EditItem("Edit item.");
-        this.actions[count++] = new RemoveItem("Remove item.");
-        this.actions[count++] = new FindByName("Find by name.");
-        this.actions[count++] = new FindById("Find by id.");
-        this.actions[count++] = new AddCommentIntoItem("Add comment.");
-        this.actions[count] = new GetAllItems("Get all Items.");
+        this.actionsList.add(new AddItem("Add the new item."));
+        this.actionsList.add(new EditItem("Edit item."));
+        this.actionsList.add(new RemoveItem("Remove item."));
+        this.actionsList.add(new FindByName("Find by name."));
+        this.actionsList.add(new FindById("Find by id."));
+        this.actionsList.add(new AddCommentIntoItem("Add comment."));
+        this.actionsList.add(new GetAllItems("Get all Items."));
     }
 
     /**
@@ -66,19 +57,16 @@ public class MenuTracker {
      * @param key int
      */
     void select(int key) {
-        this.actions[key - 1].execute(this.input, this.tracker);
+        this.actionsList.get(key - 1).execute(this.input, this.tracker);
     }
 
     /**
      * show menu.
      */
     public void show() {
-        for (UserAction action : actions) {
-            if (action != null) {
-                System.out.println(action.info());
-            }
+        for (UserAction action : this.actionsList) {
+            System.out.println(action.key() + "." + action.info());
         }
-        key = 0;
     }
 
     /**
@@ -102,7 +90,7 @@ public class MenuTracker {
          */
         @Override
         public int key() {
-            return ++key;
+            return actionsList.indexOf(this) + 1;
         }
 
         /**
@@ -139,7 +127,7 @@ public class MenuTracker {
          */
         @Override
         public int key() {
-            return ++key;
+            return actionsList.indexOf(this) + 1;
         }
 
         /**
@@ -154,12 +142,10 @@ public class MenuTracker {
             try {
                 Item oldItem = tracker.findByName(input.ask("name to edit : "));
                 Item newItem = new Item(input.ask("new name : "), input.ask("new description : "));
-                newItem.setId(oldItem.getId());
-                tracker.edit(newItem);
+                tracker.edit(oldItem.getId(), newItem);
             } catch (ItemNotFoundException inf) {
                 System.err.println(inf.toString());
             }
-
         }
     }
 
@@ -184,7 +170,7 @@ public class MenuTracker {
          */
         @Override
         public int key() {
-            return ++key;
+            return actionsList.indexOf(this) + 1;
         }
 
         /**
@@ -226,7 +212,7 @@ public class MenuTracker {
          */
         @Override
         public int key() {
-            return ++key;
+            return actionsList.indexOf(this) + 1;
         }
 
         /**
@@ -274,7 +260,7 @@ public class MenuTracker {
          */
         @Override
         public int key() {
-            return ++key;
+            return actionsList.indexOf(this) + 1;
         }
 
         /**
@@ -322,7 +308,7 @@ public class MenuTracker {
          */
         @Override
         public int key() {
-            return ++key;
+            return actionsList.indexOf(this) + 1;
         }
 
         /**
@@ -365,7 +351,7 @@ public class MenuTracker {
          */
         @Override
         public int key() {
-            return ++key;
+            return actionsList.indexOf(this) + 1;
         }
 
         /**

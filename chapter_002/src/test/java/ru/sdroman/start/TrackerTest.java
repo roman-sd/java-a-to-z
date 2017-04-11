@@ -4,6 +4,9 @@ import org.junit.Test;
 import ru.sdroman.models.Comment;
 import ru.sdroman.models.Item;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -77,10 +80,8 @@ public class TrackerTest {
         Item item = tracker.add(new Item("Petrov", "desc002"));
         tracker.add(new Item("Sidorov", "desc003"));
         Item testItem = new Item("Bond", "007");
-        String id = item.getId();
-        testItem.setId(id);
-        tracker.edit(testItem);
-        assertThat(tracker.findById(id), is(testItem));
+        tracker.edit(item.getId(), testItem);
+        assertThat(tracker.getAll().get(1).getName(), is(testItem.getName()));
     }
 
     /**
@@ -90,7 +91,7 @@ public class TrackerTest {
     public final void whenEditThenEditItemException() {
         Tracker tracker = new Tracker();
         tracker.add(new Item("item", "desc001"));
-        tracker.edit(new Item("testItem", "desc001"));
+        tracker.edit("001", new Item("testItem", "desc001"));
     }
 
     /**
@@ -102,7 +103,7 @@ public class TrackerTest {
         Item item1 = tracker.add(new Item("Ivanov", "desc001"));
         Item item2 = tracker.add(new Item("Petrov", "desc002"));
         Item item3 = tracker.add(new Item("Sidorov", "desc003"));
-        Item[] items = new Item[]{item1, item2, item3};
+        List<Item> items = Arrays.asList(item1, item2, item3);
         assertThat(tracker.getAll(), is(items));
     }
 
@@ -115,7 +116,7 @@ public class TrackerTest {
         Item item1 = tracker.add(new Item("Ivanov", "desc001"));
         Item testItem = tracker.add(new Item("Petrov", "desc002"));
         Item item2 = tracker.add(new Item("Sidorov", "desc003"));
-        Item[] items = new Item[]{item1, item2};
+        List<Item> items = Arrays.asList(item1, item2);
         tracker.remove(testItem);
         assertThat(tracker.getAll(), is(items));
     }

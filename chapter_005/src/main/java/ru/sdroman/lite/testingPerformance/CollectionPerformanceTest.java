@@ -2,6 +2,7 @@ package ru.sdroman.lite.testingPerformance;
 
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.Random;
 
 /**
  * Class CollectionPerformanceTest.
@@ -22,9 +23,12 @@ public class CollectionPerformanceTest {
      */
     public long add(Collection<String> collection, String line, int amount) {
         StopWatch time = new StopWatch();
+        RandomString rs = new RandomString();
+        final int lineLength = 10;
+        Random rn = new Random();
         time.start();
         for (int i = 0; i < amount; i++) {
-            collection.add(line);
+            collection.add(rs.createString(rn.nextInt(lineLength)));
         }
         return time.getElapsedTime();
     }

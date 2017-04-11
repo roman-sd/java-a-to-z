@@ -4,29 +4,24 @@ import ru.sdroman.models.Comment;
 import ru.sdroman.models.Item;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
- * class Tracker implements storage of items.
+ * Class Tracker implements storage of items.
  */
 public class Tracker {
 
     /**
-     * Default initial capacity.
-     */
-    private static final int DEFAULT_CAPACITY = 10;
-    /**
      * random for generate id.
      */
     private static final Random RN = new Random();
+
     /**
-     * Empty array used for items.
+     * ArrayList used for items.
      */
-    private Item[] items = new Item[DEFAULT_CAPACITY];
-    /**
-     * item position in array.
-     */
-    private int position = 0;
+    private List<Item> items = new ArrayList<>();
 
     /**
      * add new item into the array items.
@@ -37,23 +32,25 @@ public class Tracker {
     public Item add(Item item) {
         item.setTimeCreation(new SimpleDateFormat("dd/MM/yyyy HH:mm"));
         item.setId(generateId());
-        this.items[position++] = item;
+        this.items.add(item);
         return item;
     }
 
     /**
      * edit item into the array items.
      *
+     * @param id   String
      * @param item Item, item to edit.
      * @throws ItemNotFoundException Exception
      */
-    public void edit(Item item) {
+    public void edit(String id, Item item) {
         boolean isEdit = false;
-        for (int index = 0; index < items.length; index++) {
-            if (items[index] != null && items[index].getId().equals(item.getId())) {
-                item.addComments(items[index].getComments());
-                item.setTimeCreation(items[index].getTimeCreation());
-                items[index] = item;
+        for (Item current : this.items) {
+            if (id.equals(current.getId())) {
+                current.setName(item.getName());
+                current.setDescription(item.getDescription());
+                //current.setId(item.getId());
+                current.addComments(item.getComments());
                 isEdit = true;
             }
         }
@@ -78,15 +75,7 @@ public class Tracker {
      * @throws ItemNotFoundException Exception
      */
     public void remove(Item item) {
-        boolean isRemove = false;
-        for (int index = 0; index < position; index++) {
-            if (item.equals(items[index])) {
-                System.arraycopy(items, index + 1, items, index, position - index - 1);
-                items[--position] = null;
-                isRemove = true;
-            }
-        }
-        if (!isRemove) {
+        if (!this.items.remove(item)) {
             throw new ItemNotFoundException("Item not found.");
         }
     }
@@ -99,8 +88,9 @@ public class Tracker {
      * @throws ItemNotFoundException Exception
      */
     public Item findByName(String name) throws ItemNotFoundException {
+
         Item result = null;
-        for (Item item : items) {
+        for (Item item : this.items) {
             if (item != null && item.getName().equals(name)) {
                 result = item;
             }
@@ -121,7 +111,7 @@ public class Tracker {
      */
     public Item findById(String id) throws ItemNotFoundException {
         Item result = null;
-        for (Item item : items) {
+        for (Item item : this.items) {
             if (item != null && item.getId().equals(id)) {
                 result = item;
             }
@@ -138,12 +128,8 @@ public class Tracker {
      *
      * @return array.
      */
-    public Item[] getAll() {
-        Item[] result = new Item[position];
-        for (int index = 0; index != this.position; index++) {
-            result[index] = this.items[index];
-        }
-        return result;
+    public List<Item> getAll() {
+        return this.items;
     }
 
     /**
@@ -156,7 +142,7 @@ public class Tracker {
      */
     public Item addComment(Comment comment, String id) {
         try {
-            Item item = this.findById(id);
+            Item item = findById(id);
             item.addComment(comment);
             return item;
         } catch (ItemNotFoundException inf) {

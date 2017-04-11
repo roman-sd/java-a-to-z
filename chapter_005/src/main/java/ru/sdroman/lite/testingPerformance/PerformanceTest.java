@@ -18,7 +18,7 @@ public class PerformanceTest {
     /**
      * Amount.
      */
-    private static final int AMOUNT = 10_000_000;
+    private static final int AMOUNT = 1_000_000;
 
     /**
      * CollectionPerformanceTest.
@@ -78,7 +78,7 @@ public class PerformanceTest {
     public void testRemove() {
         System.out.println("Test remove:");
         System.out.println(String.format("%s%s", "LinkedList : ", test.delete(linkedList, AMOUNT - 1)));
-        System.out.println(String.format("%s%s", "ArrayList :  ", "-"));
         System.out.println(String.format("%s%4s", "TreeSet : ", test.delete(treeSet, AMOUNT - 1)));
+        System.out.println(String.format("%s%s", "ArrayList :  ", "-"));
     }
 }
