@@ -45,7 +45,7 @@ public class CollectionPerformanceTest {
         Iterator<String> iterator = collection.iterator();
         int count = 0;
         time.start();
-        while (iterator.hasNext() || amount == count) {
+        while (iterator.hasNext() && amount > count) {
             iterator.next();
             iterator.remove();
             count++;

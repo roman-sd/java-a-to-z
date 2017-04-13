@@ -61,9 +61,8 @@ public class ConvertList {
      */
     public List<Integer> convert(List<int[]> list) {
         List<Integer> convertList = new ArrayList<>();
-        Iterator<int[]> iterator = list.iterator();
-        while (iterator.hasNext()) {
-            for (int element : iterator.next()) {
+        for (int[] aList : list) {
+            for (int element : aList) {
                 convertList.add(element);
             }
         }
