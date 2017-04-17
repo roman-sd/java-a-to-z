@@ -30,6 +30,33 @@ public class User {
     }
 
     /**
+     * equals.
+     * @param obj Object
+     * @return boolean
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+
+        User user = (User) obj;
+
+        if (name != null ? !name.equals(user.name) : user.name != null) return false;
+        return passport != null ? passport.equals(user.passport) : user.passport == null;
+    }
+
+    /**
+     * hashCode.
+     * @return int
+     */
+    @Override
+    public int hashCode() {
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (passport != null ? passport.hashCode() : 0);
+        return result;
+    }
+
+    /**
      * toString.
      *
      * @return String

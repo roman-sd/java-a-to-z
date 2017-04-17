@@ -11,6 +11,7 @@ public class Account {
     /**
      * Value.
      */
+
     private double value;
 
     /**
@@ -54,6 +55,36 @@ public class Account {
      */
     public String getRequisites() {
         return requisites;
+    }
+
+    /**
+     * equals.
+     * @param obj Object
+     * @return boolean
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+
+        Account account = (Account) obj;
+
+        if (Double.compare(account.value, value) != 0) return false;
+        return requisites != null ? requisites.equals(account.requisites) : account.requisites == null;
+    }
+
+    /**
+     * hashCode.
+     * @return int
+     */
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        temp = Double.doubleToLongBits(value);
+        result = (int) (temp ^ (temp >>> 32));
+        result = 31 * result + (requisites != null ? requisites.hashCode() : 0);
+        return result;
     }
 
     /**
