@@ -64,12 +64,18 @@ public class Account {
      */
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
 
         Account account = (Account) obj;
 
-        if (Double.compare(account.value, value) != 0) return false;
+        if (Double.compare(account.value, value) != 0) {
+            return false;
+        }
         return requisites != null ? requisites.equals(account.requisites) : account.requisites == null;
     }
 
@@ -79,11 +85,12 @@ public class Account {
      */
     @Override
     public int hashCode() {
+        final int p = 32;
         int result;
         long temp;
         temp = Double.doubleToLongBits(value);
-        result = (int) (temp ^ (temp >>> 32));
-        result = 31 * result + (requisites != null ? requisites.hashCode() : 0);
+        result = (int) (temp ^ (temp >>> p));
+        result = (p - 1) * result + (requisites != null ? requisites.hashCode() : 0);
         return result;
     }
 

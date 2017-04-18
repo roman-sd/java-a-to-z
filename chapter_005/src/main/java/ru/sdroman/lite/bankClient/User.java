@@ -36,12 +36,18 @@ public class User {
      */
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
 
         User user = (User) obj;
 
-        if (name != null ? !name.equals(user.name) : user.name != null) return false;
+        if (name != null ? !name.equals(user.name) : user.name != null) {
+            return false;
+        }
         return passport != null ? passport.equals(user.passport) : user.passport == null;
     }
 
@@ -51,8 +57,9 @@ public class User {
      */
     @Override
     public int hashCode() {
+        final int p = 31;
         int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + (passport != null ? passport.hashCode() : 0);
+        result = p * result + (passport != null ? passport.hashCode() : 0);
         return result;
     }
 
