@@ -69,5 +69,4 @@ public class PrimesIteratorTest {
         eIt.next();
         assertFalse(eIt.hasNext());
     }
-
 }

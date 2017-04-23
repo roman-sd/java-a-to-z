@@ -45,6 +45,9 @@ public class PrimesIterator implements Iterable {
              */
             @Override
             public boolean hasNext() {
+                if (index == -1) {
+                    nextIndex();
+                }
                 return index < elements.length;
             }
 
@@ -56,9 +59,6 @@ public class PrimesIterator implements Iterable {
             public Object next() {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
-                }
-                if (index == -1) {
-                    nextIndex();
                 }
                 int prev = elements[index];
                 nextIndex();

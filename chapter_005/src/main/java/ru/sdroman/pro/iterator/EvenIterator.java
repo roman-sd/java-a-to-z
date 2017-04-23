@@ -35,6 +35,7 @@ public class EvenIterator implements Iterable {
 
         Iterator it = new Iterator() {
 
+
             int index = -1;
 
             /**
@@ -43,6 +44,9 @@ public class EvenIterator implements Iterable {
              */
             @Override
             public boolean hasNext() {
+                if (index == -1) {
+                    nextIndex();
+                }
                 return index < elements.length;
             }
 
@@ -52,9 +56,6 @@ public class EvenIterator implements Iterable {
              */
             @Override
             public Object next() {
-                if (index == -1) {
-                    nextIndex();
-                }
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
