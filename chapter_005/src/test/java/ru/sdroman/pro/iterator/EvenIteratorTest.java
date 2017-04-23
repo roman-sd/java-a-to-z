@@ -25,10 +25,11 @@ public class EvenIteratorTest {
      */
     @Test
     public void whenNextCallThenIterateEvenNumbers() {
-        final int n = 5;
-        final List<Integer> expected = Arrays.asList(0, 2, 4);
+        final int[] array = new int[]{5, 4, 6, 8, 9, 1, 7};
+        final List<Integer> expected = Arrays.asList(4, 6, 8);
         final List<Integer> actual = new ArrayList<>();
-        Iterator eIt = new EvenIterator(n).iterator();
+
+        final Iterator eIt = new EvenIterator(array).iterator();
 
         while (eIt.hasNext()) {
             actual.add((Integer) eIt.next());
@@ -42,9 +43,8 @@ public class EvenIteratorTest {
      */
     @Test(expected = NoSuchElementException.class)
     public void whenNextCallThenThrowsNoSuchElementException() {
-        final int n = 2;
-        Iterator eIt = new EvenIterator(n).iterator();
-        eIt.next();
+        final int[] elements = new int[]{1, 4, 3};
+        final Iterator eIt = new EvenIterator(elements).iterator();
         eIt.next();
         eIt.next();
     }
@@ -54,8 +54,9 @@ public class EvenIteratorTest {
      */
     @Test
     public void whenHasNextCallThenReturnTrue() {
-        final int n = 2;
-        Iterator eIt = new EvenIterator(n).iterator();
+        final int[] elements = new int[]{2, 5, 8};
+        Iterator eIt = new EvenIterator(elements).iterator();
+        eIt.next();
         assertTrue(eIt.hasNext());
     }
 
@@ -64,9 +65,8 @@ public class EvenIteratorTest {
      */
     @Test
     public void whenHasNextCallThenReturnFalse() {
-        final int n = 2;
-        Iterator eIt = new EvenIterator(n).iterator();
-        eIt.next();
+        final int[] elements = new int[]{1, 2, 5, 7};
+        Iterator eIt = new EvenIterator(elements).iterator();
         eIt.next();
         assertFalse(eIt.hasNext());
     }

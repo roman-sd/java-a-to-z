@@ -25,10 +25,10 @@ public class PrimesIteratorTest {
      */
     @Test
     public void whenNextCallThenIteratePrimeNumber() {
-        final int n = 10;
-        final List<Integer> expected = Arrays.asList(0, 1, 2, 3, 5, 7);
+        final List<Integer> expected = Arrays.asList(3, 7);
         final List<Integer> actual = new ArrayList<>();
-        Iterator pIt = new PrimesIterator(n).iterator();
+        final int[] elements = new int[]{3, 4, 7, 8};
+        final Iterator pIt = new PrimesIterator(elements).iterator();
 
         while (pIt.hasNext()) {
             actual.add((Integer) pIt.next());
@@ -42,10 +42,8 @@ public class PrimesIteratorTest {
      */
     @Test(expected = NoSuchElementException.class)
     public void whenNextCallThenThrowsNoSuchElementException() {
-        final int n = 2;
-        Iterator eIt = new PrimesIterator(n).iterator();
-        eIt.next();
-        eIt.next();
+        final int[] elements = new int[]{4, 7, 8};
+        final Iterator eIt = new PrimesIterator(elements).iterator();
         eIt.next();
         eIt.next();
     }
@@ -55,8 +53,9 @@ public class PrimesIteratorTest {
      */
     @Test
     public void whenHasNextCallThenReturnTrue() {
-        final int n = 2;
-        Iterator eIt = new PrimesIterator(n).iterator();
+        final int[] elements = new int[]{3, 4, 7, 8};
+        final Iterator eIt = new PrimesIterator(elements).iterator();
+        eIt.next();
         assertTrue(eIt.hasNext());
     }
 
@@ -65,10 +64,8 @@ public class PrimesIteratorTest {
      */
     @Test
     public void whenHasNextCallThenReturnFalse() {
-        final int n = 2;
-        Iterator eIt = new PrimesIterator(n).iterator();
-        eIt.next();
-        eIt.next();
+        final int[] elements = new int[]{6, 3, 8};
+        Iterator eIt = new PrimesIterator(elements).iterator();
         eIt.next();
         assertFalse(eIt.hasNext());
     }

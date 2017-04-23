@@ -13,14 +13,16 @@ public class EvenIterator implements Iterable {
     /**
      * Array of values.
      */
-    private int max;
+    private int[] elements;
 
     /**
      * Constructs a new EvenIterator object.
-     * @param max int
+     * @param elements int[]
      */
-    public EvenIterator(int max) {
-        this.max = max;
+    public EvenIterator(int[] elements) {
+        this.elements = elements;
+
+
     }
 
     /**
@@ -33,8 +35,7 @@ public class EvenIterator implements Iterable {
 
         Iterator it = new Iterator() {
 
-            static final int TWO = 2;
-            int current = 0;
+            int index = -1;
 
             /**
              * Returns {@code true} if the iteration has more even elements.
@@ -42,7 +43,7 @@ public class EvenIterator implements Iterable {
              */
             @Override
             public boolean hasNext() {
-                return TWO * current <= max;
+                return index < elements.length;
             }
 
             /**
@@ -51,10 +52,24 @@ public class EvenIterator implements Iterable {
              */
             @Override
             public Object next() {
-                if (hasNext()) {
-                    return TWO * current++;
-                } else {
+                if (index == -1) {
+                    nextIndex();
+                }
+                if (!hasNext()) {
                     throw new NoSuchElementException();
+                }
+                int prev = elements[index];
+                nextIndex();
+                return prev;
+            }
+
+            /**
+             * Increases index to the next even element.
+             */
+            private void nextIndex() {
+                index++;
+                while (index < elements.length && elements[index] % 2 == 1) {
+                    index++;
                 }
             }
         };

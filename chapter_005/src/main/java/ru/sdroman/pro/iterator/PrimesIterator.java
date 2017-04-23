@@ -14,17 +14,17 @@ import static java.lang.Math.sqrt;
 public class PrimesIterator implements Iterable {
 
     /**
-     * max.
+     * element's array.
      */
-    private int max;
+    private int[] elements;
 
     /**
      * Constructs a new PrimeIterator object.
      *
-     * @param max int
+     * @param  elements int[]
      */
-    public PrimesIterator(int max) {
-        this.max = max;
+    public PrimesIterator(int[] elements) {
+        this.elements = elements;
     }
 
     /**
@@ -37,7 +37,7 @@ public class PrimesIterator implements Iterable {
 
         Iterator it = new Iterator() {
 
-            int prime = 0;
+            int index = -1;
 
             /**
              * Returns {@code true} if the iteration has more even elements.
@@ -45,7 +45,7 @@ public class PrimesIterator implements Iterable {
              */
             @Override
             public boolean hasNext() {
-                return prime <= max;
+                return index < elements.length;
             }
 
             /**
@@ -54,29 +54,45 @@ public class PrimesIterator implements Iterable {
              */
             @Override
             public Object next() {
-                int tmp = prime;
-                nextPrime();
-                if (tmp > max) {
+                if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                return tmp;
+                if (index == -1) {
+                    nextIndex();
+                }
+                int prev = elements[index];
+                nextIndex();
+                return prev;
             }
 
             /**
-             * Calculates next prime number.
+             * Increases index to the next prime element.
              */
-            private void nextPrime() {
-                boolean isPrime = false;
-                while (!isPrime) {
-                    isPrime = true;
-                    prime++;
-                    for (int i = 2; i <= sqrt(prime); i++) {
-                        if (prime % i == 0) {
-                            isPrime = false;
-                            break;
-                        }
+            private void nextIndex() {
+                index++;
+                while (index < elements.length && !isPrime(elements[index])) {
+                    index++;
+                }
+            }
+
+            /**
+             * isPrime.
+             * @param element int
+             * @return true if element is prime
+             */
+            private boolean isPrime(int element) {
+                final int t = 4;
+                if (element < t) {
+                    return true;
+                }
+                boolean result = true;
+                for (int i = 2; i <= sqrt(element); i++) {
+                    if (element % i == 0) {
+                        result = false;
+                        break;
                     }
                 }
+                return result;
             }
         };
         return it;
