@@ -3,7 +3,6 @@ package ru.sdroman.pro.list;
 import org.junit.Before;
 import org.junit.Test;
 import ru.sdroman.pro.list.arraylist.ArrayContainer;
-import ru.sdroman.pro.list.arraylist.SimpleContainer;
 
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
@@ -12,7 +11,6 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
-
 /**
  * Test ArrayContainer class.
  *
@@ -24,7 +22,7 @@ public class ArrayContainerTest {
     /**
      * SimpleContainer instance.
      */
-    private SimpleContainer<Integer> container;
+    private ArrayContainer<Integer> container;
 
     /**
      * Setup.

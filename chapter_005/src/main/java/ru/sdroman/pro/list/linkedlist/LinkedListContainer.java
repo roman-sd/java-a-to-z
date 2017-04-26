@@ -53,6 +53,38 @@ public class LinkedListContainer<E> implements SimpleContainer<E> {
     }
 
     /**
+     * Adds an element to the top of the list.
+     * @param value E
+     */
+    public void addFirst(E value) {
+        Node<E> tmp = this.first;
+        Node<E> current = new Node<>(null, tmp, value);
+        this.first = current;
+        if (tmp == null) {
+            last = current;
+        } else {
+            tmp.prev = current;
+        }
+        this.size++;
+        this.modCount++;
+    }
+
+    /**
+     * Remove a first element.
+     * @return E
+     */
+    public E removeFirst() {
+        Node<E> toRemove = first;
+        if (first == null) {
+            throw new NoSuchElementException();
+        }
+        this.first = this.first.next;
+        this.size--;
+        modCount++;
+        return toRemove.value;
+    }
+
+    /**
      * Returns element by index.
      *
      * @param index int
@@ -60,7 +92,7 @@ public class LinkedListContainer<E> implements SimpleContainer<E> {
      */
     @Override
     public E get(int index) {
-        if (index < 0 || index > size) {
+        if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
         }
         Node<E> tmp;
@@ -86,7 +118,6 @@ public class LinkedListContainer<E> implements SimpleContainer<E> {
      *
      * @return int
      */
-    @Override
     public int getSize() {
         return size;
     }

@@ -71,7 +71,7 @@ public class ArrayContainer<E> implements SimpleContainer<E> {
     @Override
     @SuppressWarnings("unchecked")
     public E get(int index) {
-        if (index < 0 || index > size) {
+        if (index < 0 || index >= size) {
             throw new ArrayIndexOutOfBoundsException("size: " + size + ", index: " + index);
         }
         return (E) container[index];
@@ -82,7 +82,6 @@ public class ArrayContainer<E> implements SimpleContainer<E> {
      *
      * @return int
      */
-    @Override
     public int getSize() {
         return size;
     }

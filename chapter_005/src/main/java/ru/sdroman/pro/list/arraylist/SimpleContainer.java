@@ -21,11 +21,4 @@ public interface SimpleContainer<E> extends Iterable<E> {
      * @return E
      */
     E get(int index);
-
-    /**
-     * Returns size.
-     *
-     * @return int
-     */
-    int getSize();
 }

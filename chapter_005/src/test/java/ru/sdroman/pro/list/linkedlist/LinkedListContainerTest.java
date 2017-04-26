@@ -2,7 +2,6 @@ package ru.sdroman.pro.list.linkedlist;
 
 import org.junit.Before;
 import org.junit.Test;
-import ru.sdroman.pro.list.arraylist.SimpleContainer;
 
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
@@ -21,7 +20,7 @@ public class LinkedListContainerTest {
     /**
      * Container.
      */
-    private SimpleContainer<Integer> container;
+    private LinkedListContainer<Integer> container;
 
     /**
      * Setup.
@@ -49,6 +48,16 @@ public class LinkedListContainerTest {
         container.add(0);
         container.add(element);
         assertThat(container.get(1), is(element));
+    }
+
+    /**
+     * Test addFirst method.
+     */
+    @Test
+    public void whenAddFirstCallThenAddsToTheTop() {
+        container.add(0);
+        container.addFirst(1);
+        assertThat(container.get(0), is(1));
     }
 
     /**
@@ -84,6 +93,25 @@ public class LinkedListContainerTest {
     public void whenGetCallByIncorrectIndexThenThrowsException() {
         container.add(0);
         container.get(-1);
+    }
+
+    /**
+     * Test removeFirst method.
+     */
+    @Test
+    public void whenRemoveFirstCallThenRemoveFirstElement() {
+        container.add(0);
+        container.add(1);
+        container.removeFirst();
+        assertThat(container.get(0), is(1));
+    }
+
+    /**
+     * Test removeFirst method.
+     */
+    @Test(expected = NoSuchElementException.class)
+    public void whenRemoveFirstCallInEmptyListThenThrowsException() {
+        container.removeFirst();
     }
 
     /**
