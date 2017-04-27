@@ -34,13 +34,28 @@ public class LoopList {
      * @param <T>
      */
     public static class Node<T> {
+        /**
+         * Value.
+         */
         T value;
+
+        /**
+         * Next.
+         */
         Node<T> next;
 
+        /**
+         * Constructs an new Node object.
+         * @param value T
+         */
         Node(T value) {
             this.value = value;
         }
 
+        /**
+         * Sets next.
+         * @param next Node
+         */
         public void setNext(Node<T> next) {
             this.next = next;
         }
