@@ -1,4 +1,4 @@
-package ru.sdroman.pro.loop;
+package ru.sdroman.pro.list.loop;
 
 /**
  * Class LoopList.
