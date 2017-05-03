@@ -8,28 +8,28 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertThat;
 
 /**
- * Test SimpleSet class.
+ * Test SimpleSetLinkedList class.
  * @author sdroman
  * @since 05.17
  */
-public class SimpleSetTest {
+public class SimpleSetLinkedListTest {
 
     /**
-     * SimpleSet instance.
+     * SimpleSetLinkedList instance.
      */
-    private SimpleSet<Integer> set;
+    private SimpleSetLinkedList<Integer> set;
 
     /**
      * Setup.
      */
     @Before
     public void setUp() {
-        set = new SimpleSet<>();
+        set = new SimpleSetLinkedList<>();
     }
 
     /**
@@ -38,10 +38,9 @@ public class SimpleSetTest {
     @Test
     public void whenAddCallThenAddsUniqueElements() {
         set.add(0);
-        set.add(0);
+        set.add(1);
         set.add(1);
         Iterator it = set.iterator();
-
         assertThat(it.next(), is(0));
         assertThat(it.next(), is(1));
     }
@@ -84,7 +83,7 @@ public class SimpleSetTest {
      */
     @Test(expected = ConcurrentModificationException.class)
     public void whenIteratorCallAndModifyContainerThenReturnException() {
-        final int nextElement = 7;
+        final int nextElement = 5;
         set.add(0);
         set.add(1);
         Iterator it = set.iterator();
