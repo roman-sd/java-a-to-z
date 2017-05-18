@@ -90,4 +90,27 @@ public class TreeTest {
 
         assertThat(actualList, is(expectedList));
     }
+
+    /**
+     * Test isBinary method.
+     */
+    @Test
+    public void testIsBinary() {
+        tree.add(1, 3);
+        tree.add(1, 4);
+
+        assertTrue(tree.isBinary());
+    }
+
+    /**
+     * Test isBinary method.
+     */
+    @Test
+    public void whenIsBinaryCallThenReturnFalse() {
+        tree.add(1, 3);
+        tree.add(1, 4);
+        tree.add(1, 5);
+
+        assertFalse(tree.isBinary());
+    }
 }

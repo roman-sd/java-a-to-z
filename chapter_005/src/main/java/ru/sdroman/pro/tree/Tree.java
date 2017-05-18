@@ -72,6 +72,22 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
     }
 
     /**
+     * isBinary.
+     * @return boolean
+     */
+    public boolean isBinary() {
+        final int childNumber = 2;
+        this.elements.clear();
+        preOrder(this.root);
+        for (Node<E> node : this.elements) {
+            if (node.children.size() > childNumber) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
      * PreOrder.
      *
      * @param node Node
