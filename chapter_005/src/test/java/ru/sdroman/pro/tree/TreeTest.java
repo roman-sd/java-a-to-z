@@ -83,9 +83,10 @@ public class TreeTest {
         expectedList.add(5);
         expectedList.add(6);
 
+        Iterator<Integer> it = tree.iterator();
         List<Integer> actualList = new ArrayList<>();
-        for (Integer e : tree) {
-            actualList.add(e);
+        while(it.hasNext()) {
+            actualList.add(it.next());
         }
 
         assertThat(actualList, is(expectedList));
