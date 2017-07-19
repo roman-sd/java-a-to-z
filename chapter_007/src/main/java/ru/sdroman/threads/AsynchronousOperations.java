@@ -40,6 +40,9 @@ public class AsynchronousOperations {
         public void run() {
             int count = 0;
             for (char symbol : this.line.toCharArray()) {
+                if (Thread.currentThread().isInterrupted()) {
+                    return;
+                }
                 if (symbol == ' ') {
                     count++;
                 }
@@ -80,7 +83,9 @@ public class AsynchronousOperations {
          */
         @Override
         public void run() {
-            System.out.println(String.format("%s%3s", "words: ", this.line.split(" +").length));
+            if (!Thread.currentThread().isInterrupted()) {
+                System.out.println(String.format("%s%3s", "words: ", this.line.split(" +").length));
+            }
         }
     }
 
@@ -90,7 +95,23 @@ public class AsynchronousOperations {
      */
     public static void main(String[] args) {
         final String str = "Now or never";
-        new Thread(new WordCount(str)).start();
-        new Thread(new SpaceCount(str)).start();
+        final int t = 1000;
+        System.out.println("Start");
+        Thread wordCount = new Thread(new WordCount(str));
+        Thread spaceCount = new Thread(new SpaceCount(str));
+        wordCount.start();
+        spaceCount.start();
+
+        try {
+            wordCount.join(t);
+            spaceCount.join(t);
+
+            wordCount.interrupt();
+            spaceCount.interrupt();
+        } catch (InterruptedException ie) {
+            ie.printStackTrace();
+        }
+
+        System.out.println("Finish");
     }
 }
