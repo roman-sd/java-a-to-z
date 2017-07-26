@@ -4,15 +4,23 @@
     <name>chapter_007</name>
     <version>2.0</version>
     <dependencies>
+        <!-- https://mvnrepository.com/artifact/org.openjdk.jcstress/jcstress-core -->
+        <dependency>
+            <groupId>org.openjdk.jcstress</groupId>
+            <artifactId>jcstress-core</artifactId>
+            <version>0.3</version>
+        </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.12</version>
         </dependency>
+
     </dependencies>
     <parent>
         <artifactId>java-a-to-z</artifactId>
         <groupId>ru.sdroman</groupId>
         <version>1.0</version>
     </parent>
+
 </project>
