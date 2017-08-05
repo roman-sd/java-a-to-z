@@ -101,9 +101,9 @@ public class ParallelSearch {
         for (String extension : this.extensions) {
             Thread producer = new Thread(new FileFinder(this.rootDir, extension, this.queue));
             threadProducerList.add(producer);
-            threadList.addAll(threadProducerList);
             producer.start();
         }
+        threadList.addAll(threadProducerList);
     }
 
     /**

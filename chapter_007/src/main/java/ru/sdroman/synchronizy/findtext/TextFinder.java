@@ -58,8 +58,8 @@ public class TextFinder implements Runnable {
     @Override
     public void run() {
         while (!Thread.currentThread().isInterrupted()) {
-            String line = this.queue.poll();
 
+            String line = this.queue.poll();
             if (line == null && !ParallelSearch.isProducersAlive()) {
                 return;
             }
