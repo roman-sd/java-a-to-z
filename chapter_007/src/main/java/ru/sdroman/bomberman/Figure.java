@@ -1,5 +1,7 @@
 package ru.sdroman.bomberman;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * @author sdroman
  * @since 09.2017
@@ -7,14 +9,13 @@ package ru.sdroman.bomberman;
 public class Figure {
 
     /**
-     * Position.
-     */
-    private Position position;
-
-    /**
      * Board.
      */
     private final Board board;
+    /**
+     * Position.
+     */
+    private Position position;
 
     /**
      * Constructs a new Figure object.
@@ -56,15 +57,33 @@ public class Figure {
      * Returns next step.
      *
      * @param pos Position
-     * @return Cell
+     * @return true, if next position is unlock
      */
-    public Cell nextStep(final Position pos) {
+    public boolean nextStep(final Position pos) {
+        boolean isDone = false;
         Cell cell = this.getBoard().getCell(pos);
-        if (cell != null && cell.getLock().tryLock()) {
-            Cell oldCell = this.getBoard().getCell(this.position);
-            this.setPosition(pos);
-            oldCell.getLock().unlock();
+        try {
+            if (cell != null && cell.getLock().tryLock(500, TimeUnit.MILLISECONDS)) {
+                Cell oldCell = this.getBoard().getCell(this.position);
+                this.setPosition(pos);
+                oldCell.getLock().unlock();
+                isDone = true;
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
-        return cell;
+        return isDone;
+    }
+
+    /**
+     * Sets start position.
+     *
+     * @param pos Position
+     */
+    public void setStartPosition(Position pos) {
+        Cell cell = this.getBoard().getCell(pos);
+        if (cell.getLock().tryLock()) {
+            this.setPosition(pos);
+        }
     }
 }

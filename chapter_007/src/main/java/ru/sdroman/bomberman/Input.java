@@ -9,7 +9,9 @@ public interface Input {
     /**
      * Returns new coordinates.
      *
-     * @return Position
+     * @param board    Board
+     * @param position Position
+     * @return next position
      */
-    Position read();
+    Position nextStep(Board board, Position position);
 }

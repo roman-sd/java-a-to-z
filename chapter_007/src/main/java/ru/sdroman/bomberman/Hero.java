@@ -9,7 +9,7 @@ public class Hero extends Figure implements Runnable {
     /**
      * Start position.
      */
-    private final Position STARTPOSITION = new Position(0, 0);
+    private final Position start = new Position(4, 0);
 
     /**
      * Input.
@@ -18,6 +18,7 @@ public class Hero extends Figure implements Runnable {
 
     /**
      * Constructs a new Hero object.
+     *
      * @param board Board
      * @param input Input
      */
@@ -39,28 +40,16 @@ public class Hero extends Figure implements Runnable {
      */
     @Override
     public void run() {
-        setStartPosition(STARTPOSITION);
-
+        setStartPosition(start);
         while (true) {
-            Position pos = this.input.read();
-            Cell cell = nextStep(pos);
-            System.out.println(this.getPosition().getX() + "    " + this.getPosition().getY());
+            Position pos = this.input.nextStep(this.getBoard(), this.getPosition());
+            nextStep(pos);
+            System.out.println("Hero: " + this.getPosition().getX() + "    " + this.getPosition().getY());
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        }
-    }
-
-    /**
-     * Sets start position
-     * @param pos Position
-     */
-    private void setStartPosition(Position pos) {
-        Cell cell = this.getBoard().getCell(pos);
-        if (cell.getLock().tryLock()) {
-            this.setPosition(pos);
         }
     }
 }
