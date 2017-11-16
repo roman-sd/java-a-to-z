@@ -1,4 +1,4 @@
-package ru.sdroman.aquariumtest;
+package ru.sdroman.aquarium;
 
 /**
  * @author sdroman
@@ -17,6 +17,7 @@ public class Position {
 
     /**
      * Constructs a new Position object.
+     *
      * @param x int
      * @param y int
      */
@@ -27,6 +28,7 @@ public class Position {
 
     /**
      * Returns x.
+     *
      * @return int
      */
     public int getX() {
@@ -34,15 +36,8 @@ public class Position {
     }
 
     /**
-     * Returns y.
-     * @return int
-     */
-    public int getY() {
-        return y;
-    }
-
-    /**
      * Sets x.
+     *
      * @param x int
      */
     public void setX(int x) {
@@ -50,22 +45,20 @@ public class Position {
     }
 
     /**
-     * Sets y.
-     * @param y
+     * Returns y.
+     *
+     * @return int
      */
-    public void setY(int y) {
-        this.y = y;
+    public int getY() {
+        return y;
     }
 
     /**
-     * toString.
-     * @return String
+     * Sets y.
+     *
+     * @param y int
      */
-    @Override
-    public String toString() {
-        return "Position{" +
-                "x=" + x +
-                ", y=" + y +
-                '}';
+    public void setY(int y) {
+        this.y = y;
     }
 }
