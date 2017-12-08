@@ -1,0 +1,50 @@
+CREATE TABLE rules (
+	id SERIAL PRIMARY KEY,
+	name VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE roles (
+	id SERIAL PRIMARY KEY,
+	name VARCHAR(20) NOT NULL UNIQUE
+);
+
+CREATE TABLE users (
+	id SERIAL PRIMARY KEY,
+	name VARCHAR(30) NOT NULL,
+	role_id INTEGER REFERENCES roles(id)
+);
+
+CREATE TABLE roles_rules (
+	role_id INTEGER REFERENCES roles(id),
+	rule_id INTEGER REFERENCES rules(id)
+);
+
+CREATE TABLE categories (
+	id SERIAL PRIMARY KEY,
+	name VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE states (
+	id SERIAL PRIMARY KEY,
+	name VARCHAR(20) NOT NULL
+);
+
+CREATE TABLE items (
+	id SERIAL PRIMARY KEY,
+	name VARCHAR(30) NOT NULL,
+	user_id INTEGER REFERENCES users(id),
+	category_id INTEGER REFERENCES categories(id),
+	state_id INTEGER REFERENCES states(id)
+);
+
+CREATE TABLE attach (
+	id SERIAL PRIMARY KEY,
+	name VARCHAR(10),
+	item_id INTEGER REFERENCES items(id)
+);
+
+CREATE TABLE comments (
+	id SERIAL PRIMARY KEY,
+	comment VARCHAR(300),
+	item_id INTEGER REFERENCES items(id)
+);
