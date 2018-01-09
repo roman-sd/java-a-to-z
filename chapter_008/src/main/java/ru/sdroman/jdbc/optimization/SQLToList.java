@@ -36,6 +36,11 @@ public class SQLToList {
     private static final String SELECT_QUERY = "SELECT * FROM %tableName";
 
     /**
+     * Url.
+     */
+    private final String url;
+
+    /**
      * N.
      */
     private final int n;
@@ -46,83 +51,63 @@ public class SQLToList {
     private final String tableName;
 
     /**
-     * Connection to database.
-     */
-    private Connection connection = null;
-
-    /**
      * Constructs a new SQLToList object.
      * @param tableName String
      * @param n int
      */
-    public SQLToList(String tableName, int n) {
+    public SQLToList(String tableName, int n, String url) {
         this.n = n;
         this.tableName = tableName;
+        this.url = url;
         connectToDataBase();
     }
 
     /**
-     * Returns connection.
-     * @return Connection
-     * @throws SQLException exception
-     */
-    private Connection getConnection() throws SQLException {
-        String url = "jdbc:sqlite:C:/sqlite/database.db";
-        System.out.println("Connection to database..");
-        return DriverManager.getConnection(url);
-    }
-
-    /**
      * Creates table.
-     * @throws SQLException exception
      */
-    private void createTable() throws SQLException {
+    private void createTable() {
         System.out.println("Create table..");
-        Statement statement = this.connection.createStatement();
-        statement.execute(CREATE_QUERY.replace("%tableName", this.tableName));
-        statement.close();
+        try (Connection con = DriverManager.getConnection(url);
+             Statement statement = con.createStatement()) {
+            statement.execute(CREATE_QUERY.replace("%tableName", this.tableName));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
      * Fills the table.
-     * @throws SQLException exception
      */
-    private void initTable() throws SQLException {
-        this.connection.setAutoCommit(false);
+    private void initTable() {
         System.out.println("Fills the table..");
         String query = INIT_QUERY.replace("%tableName", this.tableName);
-        PreparedStatement statement = this.connection.prepareStatement(query);
-        for (int i = 1; i <= this.n; i++) {
-            statement.setInt(1, i);
-            statement.addBatch();
+
+        try (Connection con = DriverManager.getConnection(url)) {
+            con.setAutoCommit(false);
+
+            try (PreparedStatement statement = con.prepareStatement(query)) {
+                for (int i = 1; i <= this.n; i++) {
+                    statement.setInt(1, i);
+                    statement.addBatch();
+                }
+                statement.executeBatch();
+            }
+            con.setAutoCommit(true);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        statement.executeBatch();
-        statement.close();
-        this.connection.setAutoCommit(true);
     }
 
     /**
      * Removes the table.
-     * @throws SQLException exception
      */
-    private void dropTable() throws SQLException {
+    private void dropTable() {
         System.out.println("Removes the table..");
-        Statement statement = this.connection.createStatement();
-        statement.execute(DROP_QUERY.replace("%tableName", this.tableName));
-        statement.close();
-    }
-
-    /**
-     * Closes connection.
-     */
-    private void closeConnection() {
-        System.out.println("Close connection.");
-        if (connection != null) {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+        try (Connection con = DriverManager.getConnection(url);
+             Statement statement = con.createStatement()) {
+            statement.execute(DROP_QUERY.replace("%tableName", this.tableName));
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
@@ -134,18 +119,19 @@ public class SQLToList {
         String query = SELECT_QUERY.replace("%tableName", this.tableName);
         Entry entry;
         List<Entry> resultList = new ArrayList<>();
-        try {
-            this.connection = getConnection();
-            ResultSet resultSet = this.connection.createStatement().executeQuery(query);
-            while (resultSet.next()) {
-                entry = new Entry();
-                entry.setField(resultSet.getInt("field"));
-                resultList.add(entry);
+        try (Connection con = DriverManager.getConnection(url)) {
+            con.setAutoCommit(false);
+
+            try (ResultSet resultSet = con.createStatement().executeQuery(query)) {
+                while (resultSet.next()) {
+                    entry = new Entry();
+                    entry.setField(resultSet.getInt("field"));
+                    resultList.add(entry);
+                }
             }
+            con.setAutoCommit(true);
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            closeConnection();
         }
         return resultList;
     }
@@ -154,15 +140,8 @@ public class SQLToList {
      * Main.
      */
     private void connectToDataBase() {
-        try {
-            this.connection = getConnection();
-            dropTable();
-            createTable();
-            initTable();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            closeConnection();
-        }
+        dropTable();
+        createTable();
+        initTable();
     }
 }

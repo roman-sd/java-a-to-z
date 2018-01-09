@@ -15,15 +15,15 @@ public class Start {
      * @param args String
      */
     public static void main(String[] args) {
-        final int n = 1_000_000;
-        String tableName = "TEST";
-
+        final String tableName = "TEST";
         Settings settings = new Settings("app.properties");
         String firstXML = settings.getValue("firstXML");
         String secondXML = settings.getValue("secondXML");
         String stylesheet = settings.getValue("styleXSL");
+        String url = settings.getValue("dbConnection");
+        int n = Integer.parseInt(settings.getValue("n"));
 
-        SQLToList sql = new SQLToList(tableName, n);
+        SQLToList sql = new SQLToList(tableName, n, url);
         List<Entry> list = sql.sqlToList();
 
         ListToXml jaxb = new ListToXml();
