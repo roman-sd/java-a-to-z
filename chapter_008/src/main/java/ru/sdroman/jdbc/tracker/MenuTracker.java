@@ -1,19 +1,21 @@
-package ru.sdroman.start;
+package ru.sdroman.jdbc.tracker;
 
-import ru.sdroman.models.Comment;
-import ru.sdroman.models.Item;
+import ru.sdroman.jdbc.tracker.action.BaseAction;
+import ru.sdroman.jdbc.tracker.action.UserAction;
+import ru.sdroman.jdbc.tracker.input.Input;
+import ru.sdroman.jdbc.tracker.models.Comment;
+import ru.sdroman.jdbc.tracker.models.Item;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
- * class MenuTracker.
+ * Class MenuTracker.
  */
 public class MenuTracker {
 
     /**
-     * input.
+     * Input.
      */
     private Input input;
 
@@ -23,12 +25,12 @@ public class MenuTracker {
     private Tracker tracker;
 
     /**
-     * action's arrayList.
+     * Action's list.
      */
     private List<UserAction> actionsList = new ArrayList<>();
 
     /**
-     * create new MenuTracker object.
+     * Constructs a new MenuTracker object.
      *
      * @param input   Input
      * @param tracker Tracker
@@ -39,20 +41,19 @@ public class MenuTracker {
     }
 
     /**
-     * fill actions array.
+     * Fills actions list.
      */
     public void fillActions() {
-        this.actionsList.add(new AddItem("Add the new item."));
+        this.actionsList.add(new AddItem("Add item."));
         this.actionsList.add(new EditItem("Edit item."));
         this.actionsList.add(new RemoveItem("Remove item."));
-        this.actionsList.add(new FindByName("Find by name."));
         this.actionsList.add(new FindById("Find by id."));
-        this.actionsList.add(new AddCommentIntoItem("Add comment."));
-        this.actionsList.add(new GetAllItems("Get all Items."));
+        this.actionsList.add(new AddComment("Add comment."));
+        this.actionsList.add(new GetItemsList("Get all Items."));
     }
 
     /**
-     * select menu key.
+     * Selects menu key.
      *
      * @param key int
      */
@@ -61,12 +62,27 @@ public class MenuTracker {
     }
 
     /**
-     * show menu.
+     * Prints menu.
      */
-    public void show() {
+    public void printMenu() {
         for (UserAction action : this.actionsList) {
             System.out.println(action.key() + "." + action.info());
         }
+    }
+
+    /**
+     * Checks item for null.
+     *
+     * @param item Item
+     * @return true, if item != null
+     */
+    private boolean checkItem(Item item) {
+        boolean result = true;
+        if (item == null) {
+            System.out.println("id not found");
+            result = false;
+        }
+        return result;
     }
 
     /**
@@ -75,7 +91,7 @@ public class MenuTracker {
     private class AddItem extends BaseAction {
 
         /**
-         * Constructs new AddItem action.
+         * Constructs a new AddItem action.
          *
          * @param name String
          */
@@ -84,7 +100,7 @@ public class MenuTracker {
         }
 
         /**
-         * return 1 in menu.
+         * Returns 1 in menu.
          *
          * @return int
          */
@@ -94,25 +110,25 @@ public class MenuTracker {
         }
 
         /**
-         * add new item.
+         * Adds new item.
          *
          * @param input   Input
          * @param tracker Tracker
          */
         @Override
         public void execute(Input input, Tracker tracker) {
-            Item newItem = new Item(input.ask("Name: "), input.ask("Description: "));
-            tracker.add(newItem);
+            Item item = new Item(input.ask("name: "), input.ask("description: "));
+            tracker.addItem(item);
         }
     }
 
     /**
-     * class EditItem.
+     * Class EditItem.
      */
     private class EditItem extends BaseAction {
 
         /**
-         * Constructs new EditItem action.
+         * Constructs a new EditItem action.
          *
          * @param name String
          */
@@ -121,7 +137,7 @@ public class MenuTracker {
         }
 
         /**
-         * return 2 in menu.
+         * Returns 2 in menu.
          *
          * @return int
          */
@@ -131,31 +147,28 @@ public class MenuTracker {
         }
 
         /**
-         * edit item.
+         * Modifies an element.
          *
          * @param input   Input
          * @param tracker Tracker
-         * @throws ItemNotFoundException Exception
          */
         @Override
         public void execute(Input input, Tracker tracker) {
-            try {
-                Item oldItem = tracker.findByName(input.ask("name to edit : "));
+            Item oldItem = tracker.findById(input.ask("id to edit : "));
+            if (checkItem(oldItem)) {
                 Item newItem = new Item(input.ask("new name : "), input.ask("new description : "));
-                tracker.edit(oldItem.getId(), newItem);
-            } catch (ItemNotFoundException inf) {
-                System.err.println(inf.toString());
+                tracker.updateItem(oldItem, newItem);
             }
         }
     }
 
     /**
-     * class RemoveItem.
+     * Class RemoveItem.
      */
     private class RemoveItem extends BaseAction {
 
         /**
-         * Constructs new RemoveItem action.
+         * Constructs a new RemoveItem action.
          *
          * @param name String
          */
@@ -164,7 +177,7 @@ public class MenuTracker {
         }
 
         /**
-         * return 3 in menu.
+         * Returns 3 in menu.
          *
          * @return int
          */
@@ -174,34 +187,31 @@ public class MenuTracker {
         }
 
         /**
-         * remove item.
+         * Removes item.
          *
          * @param input   Input
          * @param tracker Tracker
-         * @throws ItemNotFoundException Exception
          */
         @Override
         public void execute(Input input, Tracker tracker) {
-            try {
-                Item removeItem = tracker.findByName(input.ask("name to remove : "));
-                tracker.remove(removeItem);
-            } catch (ItemNotFoundException inf) {
-                System.err.println(inf.toString());
+            Item item = tracker.findById(input.ask("id to remove : "));
+            if (checkItem(item)) {
+                tracker.removeItem(item);
             }
         }
     }
 
     /**
-     * class FindByName.
+     * Class FindById.
      */
-    private class FindByName extends BaseAction {
+    private class FindById extends BaseAction {
 
         /**
-         * Constructs new FindByName action.
+         * Constructs a new FindById action.
          *
          * @param name String
          */
-        FindByName(String name) {
+        FindById(String name) {
             super(name);
         }
 
@@ -216,45 +226,36 @@ public class MenuTracker {
         }
 
         /**
-         * find by name.
+         * Finds item by id.
          *
          * @param input   Input
          * @param tracker Tracker
-         * @throws ItemNotFoundException Exception
          */
         @Override
         public void execute(Input input, Tracker tracker) {
-            try {
-                Item nameItem = tracker.findByName(input.ask("name : "));
-                System.out.println(String.format("%s  %s   %s",
-                        nameItem.getName(), nameItem.getDescription(), nameItem.getTimeCreation().format(new Date())));
-                for (Comment comment : nameItem.getComments()) {
-                    if (comment != null) {
-                        System.out.println(comment.getComment());
-                    }
-                }
-            } catch (ItemNotFoundException inf) {
-                System.err.println(inf.toString());
+            Item item = tracker.findById(input.ask("id: "));
+            if (checkItem(item)) {
+                System.out.println(item);
             }
         }
     }
 
     /**
-     * class FindById.
+     * Class AddComment.
      */
-    private class FindById extends BaseAction {
+    private class AddComment extends BaseAction {
 
         /**
-         * Constructs new FindById action.
+         * Constructs a new AddComment action.
          *
          * @param name String
          */
-        FindById(String name) {
+        AddComment(String name) {
             super(name);
         }
 
         /**
-         * return 5 in menu.
+         * ReturnS 5 in menu.
          *
          * @return int
          */
@@ -264,88 +265,37 @@ public class MenuTracker {
         }
 
         /**
-         * find by id.
+         * Adds comment.
          *
          * @param input   Input
          * @param tracker Tracker
-         * @throws ItemNotFoundException Exception
          */
         @Override
         public void execute(Input input, Tracker tracker) {
-            try {
-                Item idItem = tracker.findById(input.ask("id : "));
-                System.out.println(String.format("%s   %s   %s",
-                        idItem.getName(), idItem.getDescription(), idItem.getTimeCreation().format(new Date())));
-                for (Comment comment : idItem.getComments()) {
-                    if (comment != null) {
-                        System.out.println(comment.getComment());
-                    }
-                }
-            } catch (ItemNotFoundException inf) {
-                System.err.println(inf.toString());
-            }
-        }
-    }
-
-    /**
-     * class AddCommentIntoItem.
-     */
-    private class AddCommentIntoItem extends BaseAction {
-
-        /**
-         * Constructs new AddCommentIntoItem action.
-         *
-         * @param name String
-         */
-        AddCommentIntoItem(String name) {
-            super(name);
-        }
-
-        /**
-         * return 6 in menu.
-         *
-         * @return int
-         */
-        @Override
-        public int key() {
-            return actionsList.indexOf(this) + 1;
-        }
-
-        /**
-         * add comment.
-         *
-         * @param input   Input
-         * @param tracker Tracker
-         * @throws ItemNotFoundException Exception
-         */
-        @Override
-        public void execute(Input input, Tracker tracker) {
-            try {
-                Item item = tracker.findByName(input.ask("name: "));
+            Item item = tracker.findById(input.ask("id: "));
+            if (checkItem(item)) {
                 Comment comment = new Comment(input.ask("comment: "));
-                tracker.addComment(comment, item.getId());
-            } catch (ItemNotFoundException inf) {
-                System.err.println(inf.toString());
+                tracker.addComment(comment, item);
             }
         }
     }
 
     /**
-     * class GetAllItem.
+     * Class GetItemList.
      */
-    private class GetAllItems extends BaseAction {
+    private class GetItemsList extends BaseAction {
 
         /**
-         * Constructs new GetAllItems action.
+         * Constructs a new GetItemsList action.
          *
          * @param name String
          */
-        GetAllItems(String name) {
+        GetItemsList(String name) {
             super(name);
         }
 
         /**
-         * return 7 in menu.
+         * Returns 6 in menu.
          *
          * @return int
          */
@@ -355,16 +305,15 @@ public class MenuTracker {
         }
 
         /**
-         * get all items.
+         * Gets all items.
          *
          * @param input   Input
          * @param tracker Tracker
          */
         @Override
         public void execute(Input input, Tracker tracker) {
-            for (Item item : tracker.getAll()) {
-                System.out.println(String.format("%s   %s   %s",
-                        item.getName(), item.getDescription(), item.getTimeCreation().format(new Date())));
+            for (Item item : tracker.itemsList()) {
+                System.out.println(item);
             }
         }
     }

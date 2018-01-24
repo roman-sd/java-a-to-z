@@ -1,4 +1,7 @@
-package ru.sdroman.jdbc.tracker;
+package ru.sdroman.jdbc.tracker.action;
+
+import ru.sdroman.jdbc.tracker.Tracker;
+import ru.sdroman.jdbc.tracker.input.Input;
 
 /**
  * Interface UserAction.
@@ -6,14 +9,14 @@ package ru.sdroman.jdbc.tracker;
 public interface UserAction {
 
     /**
-     * return action key.
+     * Returns action key.
      *
      * @return int
      */
     int key();
 
     /**
-     * execute.
+     * Execute.
      *
      * @param input   Input
      * @param tracker Tracker
@@ -21,7 +24,7 @@ public interface UserAction {
     void execute(Input input, Tracker tracker);
 
     /**
-     * menu info.
+     * Menu info.
      *
      * @return String
      */

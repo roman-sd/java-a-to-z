@@ -1,49 +1,40 @@
-package ru.sdroman.models;
+package ru.sdroman.jdbc.tracker.models;
 
-import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * class Item.
+ * Class Item.
  */
 public class Item {
 
     /**
-     * Default initial capacity.
-     */
-    private static final int DEFAULT_CAPACITY = 10;
-
-    /**
-     * item's name.
+     * Name.
      */
     private String name;
 
     /**
-     * item's description.
+     * Description.
      */
     private String description;
 
     /**
-     * item's id.
+     * Id.
      */
     private String id;
 
     /**
-     * item's creation time.
+     * Creation time.
      */
-    private SimpleDateFormat timeCreation;
+    private String timeCreation;
 
     /**
-     * Empty array used for comments.
+     * Comments list.
      */
-    private Comment[] comments = new Comment[DEFAULT_CAPACITY];
+    private List<Comment> comments = new ArrayList<>();
 
     /**
-     * position in comments array.
-     */
-    private int position = 0;
-
-    /**
-     * Constructs item with name and description.
+     * Constructs item.
      *
      * @param name        String
      * @param description String
@@ -54,7 +45,7 @@ public class Item {
     }
 
     /**
-     * return item's name.
+     * Returns item's name.
      *
      * @return name
      */
@@ -63,7 +54,7 @@ public class Item {
     }
 
     /**
-     * set item's name.
+     * Set item's name.
      *
      * @param name String
      */
@@ -72,7 +63,7 @@ public class Item {
     }
 
     /**
-     * return item's description.
+     * Returns item's description.
      *
      * @return description
      */
@@ -81,7 +72,7 @@ public class Item {
     }
 
     /**
-     * set item's description.
+     * Sets item's description.
      *
      * @param description String
      */
@@ -90,16 +81,16 @@ public class Item {
     }
 
     /**
-     * return item's id.
+     * Returns id.
      *
-     * @return id
+     * @return String
      */
     public String getId() {
         return this.id;
     }
 
     /**
-     * set item's id.
+     * Sets id.
      *
      * @param id String
      */
@@ -108,47 +99,74 @@ public class Item {
     }
 
     /**
-     * return create time of item.
+     * Returns create time of item.
      *
      * @return Date
      */
-    public SimpleDateFormat getTimeCreation() {
+    public String getTimeCreation() {
         return this.timeCreation;
     }
 
     /**
-     * sets creation time.
+     * Sets creation time.
      *
      * @param timeCreation SimpleDateFormat
      */
-    public void setTimeCreation(SimpleDateFormat timeCreation) {
+    public void setTimeCreation(String timeCreation) {
         this.timeCreation = timeCreation;
     }
 
     /**
-     * add a new comment in comments array.
+     * Comments.
+     *
+     * @return String
+     */
+    private String commentsToString() {
+        StringBuilder builder = new StringBuilder();
+        for (Comment com : comments) {
+            if (com != null) {
+                builder.append(System.getProperty("line.separator")).append(com);
+            }
+        }
+        return builder.toString();
+    }
+
+    /**
+     * To string.
+     *
+     * @return String
+     */
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append(id).append("\t").append(name).append("\t").append(timeCreation).append(commentsToString());
+        return builder.toString();
+    }
+
+    /**
+     * Adds a new comment in comments list.
      *
      * @param comment Comment
      */
     public void addComment(Comment comment) {
-        this.comments[position++] = comment;
+        this.comments.add(comment);
     }
 
     /**
-     * add comments array.
+     * Adds comments to list.
      *
-     * @param comments Comment[]
+     * @param commentList List
      */
-    public void addComments(Comment[] comments) {
-        this.comments = comments;
+    public void addComments(List<Comment> commentList) {
+        this.comments.addAll(commentList);
     }
 
     /**
-     * return array comments.
+     * Returns comment list.
      *
-     * @return Comment[]
+     * @return List
      */
-    public Comment[] getComments() {
+    public List<Comment> getComments() {
         return comments;
     }
 }

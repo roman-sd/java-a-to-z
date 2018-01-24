@@ -1,4 +1,4 @@
 /**
  *
  */
-package ru.sdroman.models;
+package ru.sdroman.jdbc.tracker.models;

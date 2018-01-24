@@ -1,4 +1,7 @@
-package ru.sdroman.jdbc.tracker;
+package ru.sdroman.jdbc.tracker.action;
+
+import ru.sdroman.jdbc.tracker.Tracker;
+import ru.sdroman.jdbc.tracker.input.Input;
 
 /**
  * Abstract class BaseAction.
@@ -11,7 +14,7 @@ public abstract class BaseAction implements UserAction {
     private String name;
 
     /**
-     * Constructs new action.
+     * Constructs a new action.
      *
      * @param name String
      */
@@ -35,7 +38,7 @@ public abstract class BaseAction implements UserAction {
     public abstract void execute(Input input, Tracker tracker);
 
     /**
-     * return menu info.
+     * Returns menu info.
      *
      * @return String
      */

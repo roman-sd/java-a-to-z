@@ -1,5 +1,6 @@
 package ru.sdroman.jdbc.tracker;
 
+import org.apache.log4j.Logger;
 import ru.sdroman.jdbc.optimization.Settings;
 import ru.sdroman.jdbc.tracker.models.Comment;
 import ru.sdroman.jdbc.tracker.models.Item;
@@ -22,6 +23,11 @@ import java.util.List;
 public class Tracker {
 
     /**
+     * Logger.
+     */
+    private static final Logger LOG = Logger.getLogger(Tracker.class);
+
+    /**
      * Url.
      */
     private String url;
@@ -32,11 +38,44 @@ public class Tracker {
     private Settings settings;
 
     /**
+     * Connection to db.
+     */
+    private Connection connection;
+
+    /**
      * Constructs a new Tracker object.
      */
     public Tracker() {
         this.settings = new Settings("tracker.properties");
         this.url = this.settings.getValue("dbConnection");
+    }
+
+    /**
+     * Returns connection to db.
+     * @return true if successful
+     */
+    public boolean getConnection() {
+        boolean done = false;
+        try {
+            this.connection = DriverManager.getConnection(this.url);
+            done = true;
+            LOG.info("Connection is opened.");
+        } catch (SQLException e) {
+            LOG.error(e.getMessage(), e);
+        }
+        return done;
+    }
+
+    /**
+     * Close connection.
+     */
+    public void closeConnection() {
+        try {
+            this.connection.close();
+            LOG.info("Connection is closed.");
+        } catch (SQLException e) {
+            LOG.error(e.getMessage(), e);
+        }
     }
 
     /**
@@ -47,12 +86,9 @@ public class Tracker {
     public boolean isEmpty() {
         boolean isEmpty;
         String query = this.settings.getValue("selectAllItems");
-        try (Connection conn = DriverManager.getConnection(url);
-             Statement statement = conn.createStatement()) {
-
+        try (Statement statement = connection.createStatement()) {
             statement.executeQuery(query);
             isEmpty = false;
-
         } catch (SQLException e) {
             isEmpty = true;
         }
@@ -77,11 +113,10 @@ public class Tracker {
      */
     public void dropTable(String name) {
         String dropQuery = this.settings.getValue("dropTable");
-        try (Connection conn = DriverManager.getConnection(url);
-             Statement st = conn.createStatement()) {
+        try (Statement st = this.connection.createStatement()) {
             st.execute(dropQuery.replace("%tableName", name));
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error(e.getMessage(), e);
         }
     }
 
@@ -91,26 +126,24 @@ public class Tracker {
     public void createTable() {
         String items = this.settings.getValue("createItemsTable");
         String comments = this.settings.getValue("createCommentsTable");
-        try (Connection conn = DriverManager.getConnection(url);
-             Statement st = conn.createStatement()) {
+        try (Statement st = connection.createStatement()) {
             st.addBatch(items);
             st.addBatch(comments);
             st.executeBatch();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error(e.getMessage(), e);
         }
     }
 
     /**
      * Gets id from database.
      *
-     * @param connection Connection
+     * @param conn Connection
      * @return String
      * @throws SQLException exception
      */
-    private String getIdFromDb(Connection connection) throws SQLException {
-        Statement statement = connection.createStatement();
-        ResultSet result = statement.getGeneratedKeys();
+    private String getIdFromDb(Connection conn) throws SQLException {
+        ResultSet result = conn.createStatement().getGeneratedKeys();
         return result.getString("last_insert_rowid()");
     }
 
@@ -157,15 +190,15 @@ public class Tracker {
     public void addItem(Item item) {
         String query = this.settings.getValue("insertItems");
         item.setTimeCreation(createDate());
-        try (Connection conn = DriverManager.getConnection(url);
-             PreparedStatement ps = conn.prepareStatement(query)) {
+        try (PreparedStatement ps = this.connection.prepareStatement(query)) {
             ps.setString(1, item.getName());
             ps.setString(2, item.getDescription());
             ps.setString(3, item.getTimeCreation());
             ps.executeUpdate();
-            item.setId(getIdFromDb(conn));
+            item.setId(getIdFromDb(this.connection));
+            LOG.info(String.format("id %s added to db.", item.getId()));
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error(e.getMessage(), e);
         }
     }
 
@@ -180,15 +213,15 @@ public class Tracker {
         boolean done = false;
         comment.setCreateDate(createDate());
         String query = this.settings.getValue("insertComments");
-        try (Connection conn = DriverManager.getConnection(url);
-             PreparedStatement ps = conn.prepareStatement(query)) {
+        try (PreparedStatement ps = this.connection.prepareStatement(query)) {
             ps.setString(1, comment.getComment());
             ps.setString(2, item.getId());
             ps.setString(3, comment.getCreateDate());
             ps.executeUpdate();
             done = true;
+            LOG.info(String.format("id %s added comment", item.getId()));
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error(e.getMessage(), e);
         }
         return done;
     }
@@ -201,14 +234,14 @@ public class Tracker {
      */
     public void updateItem(Item item, Item newItem) {
         String updateQuery = this.settings.getValue("updateItems");
-        try (Connection conn = DriverManager.getConnection(url);
-             PreparedStatement ps = conn.prepareStatement(updateQuery)) {
+        try (PreparedStatement ps = this.connection.prepareStatement(updateQuery)) {
             ps.setString(1, newItem.getName());
             ps.setString(2, newItem.getDescription());
             ps.setString(3, item.getId());
             ps.executeUpdate();
+            LOG.info(String.format("item id %s updated", item.getId()));
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error(e.getMessage(), e);
         }
     }
 
@@ -219,12 +252,11 @@ public class Tracker {
      */
     private void removeAllCommentsFromItem(Item item) {
         String query = this.settings.getValue("removeComments");
-        try (Connection conn = DriverManager.getConnection(url);
-             PreparedStatement ps = conn.prepareStatement(query)) {
+        try (PreparedStatement ps = this.connection.prepareStatement(query)) {
             ps.setString(1, item.getId());
             ps.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error(e.getMessage(), e);
         }
     }
 
@@ -236,12 +268,12 @@ public class Tracker {
     public void removeItem(Item item) {
         String removeItem = this.settings.getValue("removeItem");
         removeAllCommentsFromItem(item);
-        try (Connection conn = DriverManager.getConnection(url);
-             PreparedStatement psItem = conn.prepareStatement(removeItem)) {
+        try (PreparedStatement psItem = this.connection.prepareStatement(removeItem)) {
             psItem.setString(1, item.getId());
             psItem.executeUpdate();
+            LOG.info(String.format("item id %s removed", item.getId()));
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error(e.getMessage(), e);
         }
     }
 
@@ -255,10 +287,8 @@ public class Tracker {
         String query = this.settings.getValue("getComments");
         Comment comment;
         List<Comment> comments = new ArrayList<>();
-        try (Connection conn = DriverManager.getConnection(url);
-             PreparedStatement ps = conn.prepareStatement(query)) {
+        try (PreparedStatement ps = this.connection.prepareStatement(query)) {
             ps.setString(1, id);
-
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
                     comment = new Comment(rs.getString("comment"));
@@ -267,7 +297,7 @@ public class Tracker {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error(e.getMessage(), e);
         }
         return comments;
     }
@@ -281,21 +311,20 @@ public class Tracker {
     public Item findById(String id) {
         String itemQuery = this.settings.getValue("getItem");
         Item item = null;
-        try (Connection conn = DriverManager.getConnection(url);
-             PreparedStatement psItem = conn.prepareStatement(itemQuery)) {
+        try (PreparedStatement psItem = this.connection.prepareStatement(itemQuery)) {
             psItem.setString(1, id);
-
             try (ResultSet rs = psItem.executeQuery()) {
                 if (rs.next()) {
                     item = createItem(rs);
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error(e.getMessage(), e);
         }
         if (item != null) {
             item.addComments(getComments(id));
         }
+        LOG.info("find by id");
         return item;
     }
 
@@ -309,8 +338,7 @@ public class Tracker {
         List<Item> itemList = new ArrayList<>();
         Item item;
         List<Comment> comments;
-        try (Connection conn = DriverManager.getConnection(this.url);
-             Statement stItem = conn.createStatement();
+        try (Statement stItem = this.connection.createStatement();
              ResultSet rs = stItem.executeQuery(itemQuery)) {
             while (rs.next()) {
                 item = createItem(rs);
@@ -319,7 +347,7 @@ public class Tracker {
                 itemList.add(item);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error(e.getMessage(), e);
         }
         return itemList;
     }

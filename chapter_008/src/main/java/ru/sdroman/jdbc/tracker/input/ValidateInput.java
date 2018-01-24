@@ -1,7 +1,9 @@
-package ru.sdroman.jdbc.tracker;
+package ru.sdroman.jdbc.tracker.input;
+
+import ru.sdroman.jdbc.tracker.exception.MenuOutException;
 
 /**
- * class ValidateInput.
+ * Class ValidateInput.
  */
 public class ValidateInput extends ConsoleInput {
 
@@ -11,7 +13,7 @@ public class ValidateInput extends ConsoleInput {
      * @param question String
      * @param range    int[]
      * @return int
-     * @throws MenuOutException
+     * @throws MenuOutException exception
      */
     public int ask(String question, int[] range) {
         boolean invalid = true;
@@ -20,10 +22,10 @@ public class ValidateInput extends ConsoleInput {
             try {
                 value = super.ask(question, range);
                 invalid = false;
-            } catch (MenuOutException moe) {
-                System.out.println("Please select key from menu.");
-            } catch (NumberFormatException nfe) {
-                System.out.println("Please enter validate data again");
+            } catch (MenuOutException ex) {
+                System.out.println("select key from menu");
+            } catch (NumberFormatException e) {
+                System.out.println("enter validate data again");
             }
         } while (invalid);
         return value;

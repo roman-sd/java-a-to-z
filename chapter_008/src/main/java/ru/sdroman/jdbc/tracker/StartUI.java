@@ -1,17 +1,20 @@
-package ru.sdroman.start;
+package ru.sdroman.jdbc.tracker;
+
+import ru.sdroman.jdbc.tracker.input.Input;
+import ru.sdroman.jdbc.tracker.input.ValidateInput;
 
 /**
- * class StartUI. Starts the program.
+ * Class StartUI.
  */
 public class StartUI {
 
     /**
-     * input.
+     * Input.
      */
     private Input input;
 
     /**
-     * Create a new StartUI object.
+     * Constructs a new StartUI object.
      *
      * @param input Input
      */
@@ -20,7 +23,7 @@ public class StartUI {
     }
 
     /**
-     * Start program. method main().
+     * Main.
      *
      * @param args String[]
      */
@@ -31,17 +34,25 @@ public class StartUI {
     }
 
     /**
-     * Work with menu.
+     * Initializes menu.
      *
      * @param tracker Tracker
      */
     public void init(Tracker tracker) {
-        MenuTracker menu = new MenuTracker(this.input, tracker);
-        final int[] range = new int[]{1, 2, 3, 4, 5, 6, 7};
-        menu.fillActions();
-        do {
-            menu.show();
-            menu.select(input.ask("select: ", range));
-        } while (!"y".equals(this.input.ask("Exit? y/n ")));
+        if (tracker.getConnection()) {
+            if (tracker.isEmpty()) {
+                tracker.initDataBase();
+            }
+            MenuTracker menu = new MenuTracker(this.input, tracker);
+            final int[] range = new int[]{1, 2, 3, 4, 5, 6, 7};
+            menu.fillActions();
+            do {
+                menu.printMenu();
+                menu.select(input.ask("select: ", range));
+            } while (!"y".equals(this.input.ask("Exit? y/n ")));
+            tracker.closeConnection();
+        } else {
+            System.out.println("getLogger");
+        }
     }
 }

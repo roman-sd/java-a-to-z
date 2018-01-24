@@ -1,4 +1,6 @@
-package ru.sdroman.jdbc.tracker;
+package ru.sdroman.jdbc.tracker.input;
+
+import ru.sdroman.jdbc.tracker.exception.MenuOutException;
 
 import java.util.Scanner;
 
@@ -8,7 +10,7 @@ import java.util.Scanner;
 public class ConsoleInput implements Input {
 
     /**
-     * new Scanner object.
+     * Scanner.
      */
     private Scanner scanner = new Scanner(System.in);
 
@@ -29,7 +31,7 @@ public class ConsoleInput implements Input {
      * @param question String
      * @param range    int[]
      * @return int
-     * @throws MenuOutException
+     * @throws MenuOutException exception
      */
     public int ask(String question, int[] range) {
         int key = Integer.valueOf(this.ask(question));

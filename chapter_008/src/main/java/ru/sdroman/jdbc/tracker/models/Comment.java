@@ -1,17 +1,22 @@
-package ru.sdroman.models;
+package ru.sdroman.jdbc.tracker.models;
 
 /**
- * class Comment.
+ * Class Comment.
  */
 public class Comment {
 
     /**
-     * comment.
+     * Comment.
      */
     private String comment;
 
     /**
-     * constructs new Comment object.
+     * CreateDate.
+     */
+    private String createDate;
+
+    /**
+     * Constructs a new Comment object.
      *
      * @param comment String
      */
@@ -20,7 +25,34 @@ public class Comment {
     }
 
     /**
-     * set the comment.
+     * Gets create date.
+     *
+     * @return String
+     */
+    public String getCreateDate() {
+        return createDate;
+    }
+
+    /**
+     * Sets a createDate.
+     *
+     * @param createDate String
+     */
+    public void setCreateDate(String createDate) {
+        this.createDate = createDate;
+    }
+
+    /**
+     * Gets the comment.
+     *
+     * @return String
+     */
+    public String getComment() {
+        return this.comment;
+    }
+
+    /**
+     * Sets the comment.
      *
      * @param comment String
      */
@@ -29,11 +61,12 @@ public class Comment {
     }
 
     /**
-     * get the comment.
+     * To string.
      *
      * @return String
      */
-    public String getComment() {
-        return this.comment;
+    @Override
+    public String toString() {
+        return createDate + "\t" + comment;
     }
 }

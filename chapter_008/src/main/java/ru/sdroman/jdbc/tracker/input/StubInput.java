@@ -1,7 +1,9 @@
-package ru.sdroman.jdbc.tracker;
+package ru.sdroman.jdbc.tracker.input;
+
+import ru.sdroman.jdbc.tracker.exception.MenuOutException;
 
 /**
- * Class to input implement Input.
+ * Class StubInput.
  */
 public class StubInput implements Input {
 

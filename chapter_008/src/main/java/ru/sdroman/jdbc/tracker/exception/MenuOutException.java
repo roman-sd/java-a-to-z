@@ -1,12 +1,12 @@
-package ru.sdroman.jdbc.tracker;
+package ru.sdroman.jdbc.tracker.exception;
 
 /**
- * class MenuOutException.
+ * Class MenuOutException.
  */
 public class MenuOutException extends RuntimeException {
 
     /**
-     * Constructs new MenuOutException object.
+     * Constructs a new MenuOutException object.
      *
      * @param msg String
      */

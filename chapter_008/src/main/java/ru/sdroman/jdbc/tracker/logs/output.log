@@ -1,0 +1,6 @@
+(24.01.2018 11:05:07) INFO (main) ru.sdroman.jdbc.tracker.Tracker: (63) (getConnection) - (Connection is opened.)
+(24.01.2018 11:10:04) INFO (main) ru.sdroman.jdbc.tracker.Tracker: (63) (getConnection) - (Connection is opened.)
+(24.01.2018 11:10:15) INFO (main) ru.sdroman.jdbc.tracker.Tracker: (76) (closeConnection) - (Connection is closed.)
+(24.01.2018 11:12:01) INFO (main) ru.sdroman.jdbc.tracker.Tracker: (63) (getConnection) - (Connection is opened.)
+(24.01.2018 11:12:25) INFO (main) ru.sdroman.jdbc.tracker.Tracker: (200) (addItem) - (id 6 added to db.)
+(24.01.2018 11:12:42) INFO (main) ru.sdroman.jdbc.tracker.Tracker: (76) (closeConnection) - (Connection is closed.)

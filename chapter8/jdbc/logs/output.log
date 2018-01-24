@@ -1,0 +1,2 @@
+(24.01.2018 - 12:25:38) INFO (main) ru.sdroman.jdbc.tracker.Tracker: (59) (getConnection) - (Connection is opened.)
+(24.01.2018 - 12:25:45) INFO (main) ru.sdroman.jdbc.tracker.Tracker: (72) (closeConnection) - (Connection is closed.)

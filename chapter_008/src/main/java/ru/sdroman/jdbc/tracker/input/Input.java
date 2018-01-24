@@ -1,4 +1,4 @@
-package ru.sdroman.jdbc.tracker;
+package ru.sdroman.jdbc.tracker.input;
 
 /**
  * Interface Input.
