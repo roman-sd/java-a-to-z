@@ -67,20 +67,16 @@ public class Parser {
      */
     private List<Vacancy> pageParser(Document doc, Timestamp date) {
         List<Vacancy> vacancyList = new ArrayList<>();
-        Elements authorAndDate;
-        Elements desc;
-        Elements close;
-        Timestamp vacancyCreateDate;
-
         Elements topics = doc != null ? doc.select("tr") : null;
+
         if (topics != null) {
             for (Element elem : topics) {
-                authorAndDate = elem.select("td.altCol");
-                close = elem.select("span.closedTopic");
+                Elements authorAndDate = elem.select("td.altCol");
+                Elements close = elem.select("span.closedTopic");
                 if (close.size() == 0 && authorAndDate.size() > 0) {
-                    desc = elem.getElementsByTag("a");
+                    Elements desc = elem.getElementsByTag("a");
                     String str = desc.first().text();
-                    vacancyCreateDate = parseDate(authorAndDate.last().text());
+                    Timestamp vacancyCreateDate = parseDate(authorAndDate.last().text());
                     if (vacancyCreateDate.before(date)) {
                         this.isDone = true;
                         break;
