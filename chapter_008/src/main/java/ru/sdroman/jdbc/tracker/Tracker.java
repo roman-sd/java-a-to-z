@@ -56,7 +56,7 @@ public class Tracker {
      */
     public boolean getConnection() {
         boolean done = false;
-        try {
+        try  {
             this.connection = DriverManager.getConnection(this.url);
             done = true;
             LOG.info("Connection is opened.");
