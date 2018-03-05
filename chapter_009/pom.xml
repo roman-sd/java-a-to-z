@@ -3,13 +3,17 @@
     <artifactId>chapter_009</artifactId>
     <name>chapter_009</name>
     <version>1.0</version>
-    <packaging>war</packaging>
+    <packaging>pom</packaging>
 
     <parent>
         <artifactId>java-a-to-z</artifactId>
         <groupId>ru.sdroman</groupId>
         <version>1.0</version>
     </parent>
+
+    <modules>
+        <module>client_server</module>
+    </modules>
 
     <dependencies>
         <dependency>
@@ -23,13 +27,5 @@
             <artifactId>log4j</artifactId>
             <version>1.2.17</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>3.1.0</version>
-            <scope>provided</scope>
-        </dependency>
-
     </dependencies>
 </project>

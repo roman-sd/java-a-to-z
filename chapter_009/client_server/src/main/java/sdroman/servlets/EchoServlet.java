@@ -1,4 +1,4 @@
-package ru.sdroman.servlets;
+package sdroman.servlets;
 
 import org.apache.log4j.Logger;
 
@@ -13,15 +13,15 @@ import java.io.PrintWriter;
  * @author sdroman
  * @since 03.2018
  */
-public class EchoServlets extends HttpServlet {
+public class EchoServlet extends HttpServlet {
 
     /**
      * Logger.
      */
-    private static final Logger LOG = Logger.getLogger(EchoServlets.class);
+    private static final Logger LOG = Logger.getLogger(EchoServlet.class);
 
     /**
-     *
+     * GET.
      * @param req HttpServletRequest
      * @param resp HttpServletResponse
      * @throws ServletException exception
@@ -33,5 +33,6 @@ public class EchoServlets extends HttpServlet {
         PrintWriter writer = new PrintWriter(resp.getOutputStream());
         writer.append("Hello world");
         writer.flush();
+        LOG.info("logger");
     }
 }
