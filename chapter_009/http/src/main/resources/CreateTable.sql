@@ -1,0 +1,6 @@
+CREATE TABLE users (
+id SERIAL PRIMARY KEY,
+name VARCHAR(20),
+login VARCHAR(20) UNIQUE ,
+email VARCHAR (50) UNIQUE ,
+createDate TIMESTAMP);

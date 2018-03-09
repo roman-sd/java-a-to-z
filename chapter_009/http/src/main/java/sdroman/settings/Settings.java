@@ -1,4 +1,4 @@
-package ru.sdroman.jdbc.optimization;
+package sdroman.settings;
 
 import java.io.IOException;
 import java.io.InputStream;
