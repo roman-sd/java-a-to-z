@@ -14,7 +14,7 @@
 target
 
 # logs
-.log
+*.log
 
 dependency-reduced-pom.xml
 

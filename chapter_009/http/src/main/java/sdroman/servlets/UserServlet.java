@@ -1,6 +1,5 @@
 package sdroman.servlets;
 
-import org.apache.log4j.Logger;
 import sdroman.database.UserStore;
 import sdroman.model.User;
 
