@@ -1,0 +1,31 @@
+<web-app>
+    <servlet>
+        <servlet-name>UpdateServlet</servlet-name>
+        <servlet-class>sdroman.servlets.UpdateUsers</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>AddServlet</servlet-name>
+        <servlet-class>sdroman.servlets.AddUser</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>DeleteServlet</servlet-name>
+        <servlet-class>sdroman.servlets.DeleteUser</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>UpdateServlet</servlet-name>
+        <url-pattern>/update</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>AddServlet</servlet-name>
+        <url-pattern>/create</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>DeleteServlet</servlet-name>
+        <url-pattern>/delete</url-pattern>
+    </servlet-mapping>
+</web-app>
