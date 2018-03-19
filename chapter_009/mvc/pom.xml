@@ -1,7 +1,7 @@
-<project>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>jsp</artifactId>
-    <name>jsp</name>
+    <artifactId>mvc</artifactId>
+    <name>mvc</name>
     <version>1.0</version>
     <packaging>war</packaging>
 
@@ -10,8 +10,8 @@
         <groupId>ru.sdroman</groupId>
         <version>1.0</version>
     </parent>
-    <dependencies>
 
+    <dependencies>
         <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
         <dependency>
             <groupId>org.postgresql</groupId>
@@ -34,5 +34,18 @@
             <version>1.4</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/jstl/jstl -->
+        <dependency>
+            <groupId>jstl</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/taglibs/standard -->
+        <dependency>
+            <groupId>taglibs</groupId>
+            <artifactId>standard</artifactId>
+            <version>1.1.2</version>
+        </dependency>
     </dependencies>
 </project>

@@ -1,0 +1,41 @@
+<web-app>
+    <servlet>
+        <servlet-name>Users controller servlet</servlet-name>
+        <servlet-class>sdroman.controllers.UserController</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>Update Servlet</servlet-name>
+        <servlet-class>sdroman.controllers.UpdateController</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>Add Servlet</servlet-name>
+        <servlet-class>sdroman.controllers.AddController</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>Delete Servlet</servlet-name>
+        <servlet-class>sdroman.controllers.DeleteController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Users controller servlet</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>Update Servlet</servlet-name>
+        <url-pattern>/update</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>Add Servlet</servlet-name>
+        <url-pattern>/create</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>Delete Servlet</servlet-name>
+        <url-pattern>/delete</url-pattern>
+    </servlet-mapping>
+</web-app>
