@@ -1,6 +1,6 @@
 package sdroman.servlets;
 
-import sdroman.database.UserStore;
+import sdroman.database.UserStorage;
 import sdroman.model.User;
 
 import javax.servlet.ServletException;
@@ -33,7 +33,7 @@ public class UserServlet extends HttpServlet {
         out.println("</head>");
         out.println("<body>");
         out.println("<h1>User list</h1>");
-        for (User user : UserStore.getInstance().getUsers()) {
+        for (User user : UserStorage.INSTANCE.getUsers()) {
             out.println(String.format("<tr> <td>%s<td>  <td>%s<td>  <td>%s<td>  <td>%s<td> </tr>",
                     user.getName(), user.getLogin(), user.getEmail(), user.getCreateDate()));
             out.println("<br>");
@@ -91,7 +91,7 @@ public class UserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("actions");
         if ("Add user".equals(action)) {
-            UserStore.getInstance().addUser(new User(
+            UserStorage.INSTANCE.addUser(new User(
                     req.getParameter("name"),
                     req.getParameter("login"),
                     req.getParameter("email"),
@@ -117,7 +117,7 @@ public class UserServlet extends HttpServlet {
      */
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        UserStore.getInstance().editUser(new User(
+        UserStorage.INSTANCE.editUser(new User(
                 req.getParameter("name"),
                 req.getParameter("login"),
                 req.getParameter("email"),
@@ -135,7 +135,7 @@ public class UserServlet extends HttpServlet {
      */
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        UserStore.getInstance().removeUser(new User(
+        UserStorage.INSTANCE.removeUser(new User(
                 req.getParameter("name"),
                 req.getParameter("login"),
                 req.getParameter("email"),

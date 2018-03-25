@@ -1,12 +1,9 @@
 package sdroman.database;
 
 import org.apache.log4j.Logger;
-import org.postgresql.Driver;
 import sdroman.model.User;
-import sdroman.settings.Settings;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,54 +16,18 @@ import java.util.List;
  * @author sdroman
  * @since 03.2018
  */
-public final class UserStore {
+public enum UserStorage {
+    INSTANCE;
 
     /**
      * Logger.
      */
-    private static final Logger LOG = Logger.getLogger(UserStore.class);
-
-    /**
-     * Instance.
-     */
-    private static volatile UserStore instance = null;
+    private static final Logger LOG = Logger.getLogger(UserStorage.class);
 
     /**
      * Connection.
      */
     private Connection connection;
-
-    /**
-     * Private constructor.
-     */
-    private UserStore() {
-        Settings settings = new Settings("app.properties");
-        try {
-            DriverManager.registerDriver(new Driver());
-            this.connection = DriverManager.getConnection(
-                    settings.getValue("url"),
-                    settings.getValue("user"),
-                    settings.getValue("pass"));
-        } catch (SQLException e) {
-            LOG.error(e.getMessage(), e);
-        }
-    }
-
-    /**
-     * Returns instance.
-     *
-     * @return UserStore
-     */
-    public static UserStore getInstance() {
-        if (instance == null) {
-            synchronized (UserStore.class) {
-                if (instance == null) {
-                    instance = new UserStore();
-                }
-            }
-        }
-        return instance;
-    }
 
     /**
      * Returns connection.
