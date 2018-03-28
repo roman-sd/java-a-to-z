@@ -2,13 +2,9 @@ package sdroman.database;
 
 import org.apache.log4j.Logger;
 import sdroman.model.User;
+import sdroman.settings.Settings;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.Timestamp;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,17 +21,23 @@ public enum UserStorage {
     private static final Logger LOG = Logger.getLogger(UserStorage.class);
 
     /**
-     * Connection.
-     */
-    private Connection connection;
-
-    /**
      * Returns connection.
      *
      * @return Connection
      */
     private Connection getConnection() {
-        return this.connection;
+        Settings settings = new Settings("app.properties");
+        Connection connection = null;
+        try {
+            Class.forName("org.postgresql.Driver");
+            connection = DriverManager.getConnection(
+                    settings.getValue("url"),
+                    settings.getValue("user"),
+                    settings.getValue("pass"));
+        } catch (SQLException | ClassNotFoundException e) {
+            LOG.error(e.getMessage(), e);
+        }
+        return connection;
     }
 
     /**
