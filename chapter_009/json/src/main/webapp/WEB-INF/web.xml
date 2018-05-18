@@ -1,0 +1,118 @@
+<web-app>
+    <filter>
+        <filter-name>AuthFilter</filter-name>
+        <filter-class>sdroman.filters.AuthFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AuthFilter</filter-name>
+        <url-pattern>*</url-pattern>
+    </filter-mapping>
+
+    <servlet>
+        <servlet-name>Login Servlet</servlet-name>
+        <servlet-class>sdroman.controllers.Login</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Login Servlet</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>User Controller Servlet</servlet-name>
+        <servlet-class>sdroman.controllers.UserController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>User Controller Servlet</servlet-name>
+        <url-pattern>/items</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Json Controller</servlet-name>
+        <servlet-class>sdroman.controllers.json.JsonController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Json Controller</servlet-name>
+        <url-pattern>/json</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Add Servlet</servlet-name>
+        <servlet-class>sdroman.controllers.AddController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Add Servlet</servlet-name>
+        <url-pattern>/create</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Country Json Servlet</servlet-name>
+        <servlet-class>sdroman.controllers.json.JsonCountryController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Country Json Servlet</servlet-name>
+        <url-pattern>/country</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>City Json Servlet</servlet-name>
+        <servlet-class>sdroman.controllers.json.JsonCitiesController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>City Json Servlet</servlet-name>
+        <url-pattern>/city</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Delete Servlet</servlet-name>
+        <servlet-class>sdroman.controllers.DeleteController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Delete Servlet</servlet-name>
+        <url-pattern>/delete</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Update Servlet</servlet-name>
+        <servlet-class>sdroman.controllers.UpdateController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Update Servlet</servlet-name>
+        <url-pattern>/update</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Json Role Servlet</servlet-name>
+        <servlet-class>sdroman.controllers.json.JsonRoles</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Json Role Servlet</servlet-name>
+        <url-pattern>/roles</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Json Current User</servlet-name>
+        <servlet-class>sdroman.controllers.json.JsonCurrentUser</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Json Current User</servlet-name>
+        <url-pattern>/current</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Json Session Data</servlet-name>
+        <servlet-class>sdroman.controllers.json.JsonSessionData</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Json Session Data</servlet-name>
+        <url-pattern>/sessionData</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Logout Servlet</servlet-name>
+        <servlet-class>sdroman.controllers.Signout</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Logout Servlet</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+</web-app>

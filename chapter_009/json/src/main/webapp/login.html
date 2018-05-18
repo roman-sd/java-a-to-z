@@ -1,0 +1,90 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script>
+        $(function () {
+            var app = {
+                initialize: function () {
+                    this.setListeners();
+                },
+
+                setListeners: function () {
+                    $("form").on("submit", app.submitForm);
+                    $("form").on("keydown", "input", app.removeError);
+                },
+
+                submitForm: function (e) {
+                    var form = $(this),
+                        submitBtn = form.find("button[type='submit']");
+                    if (app.validateForm(form) === false) return false;
+
+                    submitBtn.attr("disabled", "disabled");
+                },
+
+                validateForm: function (form) {
+                    var inputs = form.find("input"),
+                        valid = true;
+                    $.each(inputs, function (index, val) {
+                       var input = $(val),
+                       val = input.val(),
+                           formGroup = input.parents(".form-group"),
+                           label = formGroup.find("label").text().toLowerCase(),
+                           textError = "Enter " + label;
+                       if(val.length === 0){
+                           formGroup.addClass("has-error").removeClass("has-success");
+                           input.tooltip({
+                               trigger: "manual",
+                               placement: "right",
+                               title: textError
+                           }).tooltip("show");
+                           valid = false;
+                       } else {
+                            formGroup.addClass("has-success").removeClass("has-error");
+                       }
+                    });
+                    return valid;
+                },
+
+                removeError: function () {
+                    $(this).tooltip("destroy").parents(".form-group").removeClass("has-error");
+                }
+            };
+            app.initialize();
+        });
+    </script>
+    <title>LogIn</title>
+</head>
+<body>
+    <div class="contanier">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8">
+            <h3 class="header" style="margin-top:100px; text-align:center">Login</h3>
+            <div class="jumbotron">
+                <form class="form-horizontal" action="./login" method="post">
+                    <div class="form-group">
+                        <label for="inputName" class="col-lg-3 control-label">Login</label>
+                        <div class="col-lg-7">
+                            <input type="text" class="form-control" name="login" id="inputName" placeholder="Login" value="root">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword" class="col-lg-3 control-label">Password</label>
+                        <div class="col-lg-7">
+                            <input type="password" class="form-control" name="password" id="inputPassword" placeholder="Password" value="root">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-lg-3">
+                            <button type="submit" class="btn btn-info">Sign in</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
