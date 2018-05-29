@@ -1,6 +1,6 @@
 package sdroman.controllers;
 
-import sdroman.database.DataSource;
+import sdroman.database.EnumDataSource;
 import sdroman.database.UserStore;
 import sdroman.models.User;
 
@@ -28,7 +28,7 @@ public class DeleteController extends HttpServlet {
      */
     @Override
     public void init() throws ServletException {
-        userStore = new UserStore(DataSource.getInstance().getPool());
+        userStore = new UserStore(EnumDataSource.INSTANCE.getPool());
     }
 
     /**

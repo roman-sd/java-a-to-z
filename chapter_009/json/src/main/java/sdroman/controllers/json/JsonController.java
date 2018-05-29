@@ -2,7 +2,7 @@ package sdroman.controllers.json;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import sdroman.database.DataSource;
+import sdroman.database.EnumDataSource;
 import sdroman.database.UserStore;
 
 import javax.servlet.ServletException;
@@ -30,7 +30,7 @@ public class JsonController extends HttpServlet {
      */
     @Override
     public void init() throws ServletException {
-        userStore = new UserStore(DataSource.getInstance().getPool());
+        userStore = new UserStore(EnumDataSource.INSTANCE.getPool());
     }
 
     /**
