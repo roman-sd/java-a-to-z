@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app>
+    <servlet>
+        <servlet-name>Controller</servlet-name>
+        <servlet-class>ru.sdroman.servlets.Controller</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Controller</servlet-name>
+        <url-pattern>/service</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AddController</servlet-name>
+        <servlet-class>ru.sdroman.servlets.AddController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddController</servlet-name>
+        <url-pattern>/create</url-pattern>
+    </servlet-mapping>
+</web-app>

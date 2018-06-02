@@ -2,9 +2,70 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/bootstrap-table.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/bootstrap-table.min.js"></script>
+    <!--<script type="text/javascript" src="js/loadData.js"></script>-->
+    <script>
+        $(function () {
+            $.ajax({
+                url: "./service",
+                method: "get",
+                success: function (data) {
+                    var $table = $("#table"),
+                        grepFunc;
+                    $table.bootstrapTable({data: data});
+                    $("#checkDone").click(function () {
+                        if ($(this).is(":checked")) {
+                            grepFunc = function (item) {
+                                return true;
+                            };
+                        } else {
+                            grepFunc = function (item) {
+                                return item.done == false;
+                            };
+                        }
+                        $table.bootstrapTable("load", $.grep(data, grepFunc));
+                    });
+                }
+            });
+        });
+    </script>
+    <title>Title</title>
 </head>
 <body>
-$END$
+<div class="container">
+    <form>
+        <div class="viewtasks">
+            <form>
+                <input type="checkbox" id="checkDone" name="checkDone" value="1" checked>all task
+            </form>
+        </div>
+        <div class="createtask">
+            <form class="form-horizontal" action="./create" method="post">
+                <label for="desc">description</label>
+                <input type="text" id = "desc" name="desc">
+                <input type="checkbox" id="done" name="done" value="1">done
+                <button type="submit" id="create">Create task</button>
+            </form>
+        </div>
+        <br>
+        <div class="table">
+            <table class="table" id="table">
+                <thead>
+                <tr>
+                    <th data-field="id">id</th>
+                    <th data-field="desc">description</th>
+                    <th data-field="created">create time</th>
+                    <th data-field="done">done</th>
+                </tr>
+                </thead>
+                <tbody id="tbody"></tbody>
+            </table>
+        </div>
+    </form>
+</div>
 </body>
 </html>
