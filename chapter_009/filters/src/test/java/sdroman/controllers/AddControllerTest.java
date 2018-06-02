@@ -60,7 +60,6 @@ public class AddControllerTest {
             }
         }
         userStore.removeUser(actualUser);
-        assert actualUser != null;
         assertThat(actualUser.getLogin(), is("root"));
         assertThat(actualUser.getName(), is("root"));
         assertThat(actualUser.getPassword(), is("root"));
