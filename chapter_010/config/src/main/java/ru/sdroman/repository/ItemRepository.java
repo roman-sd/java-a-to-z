@@ -7,8 +7,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import ru.sdroman.models.Item;
 
-import java.util.Collection;
 import java.util.List;
+import java.util.function.Function;
 
 
 /**
@@ -28,25 +28,38 @@ public class ItemRepository {
     private final SessionFactory factory = HibernateFactory.getFactory();
 
     /**
+     * Transaction.
+     *
+     * @param command hibernate command
+     * @param <T>     Item
+     * @return result
+     */
+    private <T> T tx(final Function<Session, T> command) {
+        final Session session = factory.openSession();
+        final Transaction tr = session.beginTransaction();
+        try {
+            return command.apply(session);
+        } catch (HibernateException e) {
+            if (tr != null) {
+                tr.rollback();
+            }
+            LOG.error(e.getMessage(), e);
+            return null;
+        } finally {
+            if (tr != null) {
+                tr.commit();
+            }
+            session.close();
+        }
+    }
+
+    /**
      * Creates item.
      *
      * @param item Item
      */
-    public void create(final Item item) {
-
-        final Session session = factory.openSession();
-        final Transaction tx = session.beginTransaction();
-        try {
-            session.save(item);
-            tx.commit();
-        } catch (HibernateException e) {
-            if (tx != null) {
-                tx.rollback();
-            }
-            LOG.error(e.getMessage(), e);
-        } finally {
-            session.close();
-        }
+    public void create(Item item) {
+        tx(session -> session.save(item));
     }
 
     /**
@@ -54,21 +67,7 @@ public class ItemRepository {
      *
      * @return Collection
      */
-    public Collection<Item> getItems() {
-        List<Item> items = null;
-        Session session = factory.openSession();
-        Transaction tx = session.beginTransaction();
-        try {
-            items = session.createQuery("from ru.sdroman.models.Item").list();
-            tx.commit();
-        } catch (HibernateException e) {
-            if (tx != null) {
-                tx.rollback();
-            }
-            LOG.error(e.getMessage(), e);
-        } finally {
-            session.close();
-        }
-        return items;
+    public List<Item> getItems() {
+        return tx(session -> session.createQuery("from ru.sdroman.models.Item").list());
     }
 }
