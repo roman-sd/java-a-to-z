@@ -1,0 +1,49 @@
+CREATE TABLE body(
+  id SERIAL PRIMARY KEY NOT NULL,
+  login VARCHAR(20) NOT NULL UNIQUE
+);
+
+CREATE TABLE drivetype(
+  id SERIAL PRIMARY KEY NOT NULL,
+  login VARCHAR(20) NOT NULL UNIQUE
+);
+
+CREATE TABLE engine(
+  id SERIAL PRIMARY KEY NOT NULL,
+  login VARCHAR(20) NOT NULL UNIQUE
+);
+
+CREATE TABLE model(
+  id SERIAL PRIMARY KEY NOT NULL,
+  login VARCHAR(20) NOT NULL UNIQUE
+);
+
+CREATE TABLE transmission(
+  id SERIAL PRIMARY KEY NOT NULL,
+  login VARCHAR(20) NOT NULL UNIQUE
+);
+
+CREATE TABLE car(
+  id SERIAL PRIMARY KEY NOT NULL,
+  login VARCHAR(20) NOT NULL UNIQUE,
+  id_body INTEGER REFERENCES body(id),
+  id_drivetype INTEGER REFERENCES drivetype(id),
+  id_engine INTEGER REFERENCES engine(id),
+  id_model INTEGER REFERENCES model(id),
+  id_transmission INTEGER REFERENCES transmission(id)
+);
+
+CREATE TABLE users(
+  id SERIAL PRIMARY KEY NOT NULL,
+  login VARCHAR(40) NOT NULL UNIQUE,
+  password VARCHAR(20) NOT NULL
+);
+
+CREATE TABLE orders(
+  id SERIAL PRIMARY KEY NOT NULL,
+  sold BOOLEAN,
+  price INTEGER,
+  created TIMESTAMP,
+  id_car INTEGER REFERENCES car(id),
+  id_user INTEGER REFERENCES users(id)
+);
