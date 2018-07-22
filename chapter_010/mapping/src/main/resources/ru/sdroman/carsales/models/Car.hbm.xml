@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hibernate-mapping>
+    <class name="ru.sdroman.carsales.models.Car" table="car">
+        <id name="id" column="id">
+            <generator class="identity"/>
+        </id>
+        <property name="year" column="year"/>
+        <many-to-one name="body" column="id_body" class="ru.sdroman.carsales.models.Body" lazy="false"/>
+        <many-to-one name="driveType" column="id_drivetype" class="ru.sdroman.carsales.models.DriveType" lazy="false"/>
+        <many-to-one name="engine" column="id_engine" class="ru.sdroman.carsales.models.Engine" lazy="false"/>
+        <many-to-one name="model" column="id_model" class="ru.sdroman.carsales.models.Model" lazy="false"/>
+        <many-to-one name="transmission" column="id_transmission" class="ru.sdroman.carsales.models.Transmission" lazy="false"/>
+    </class>
+</hibernate-mapping>

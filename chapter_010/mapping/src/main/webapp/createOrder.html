@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/bootstrap-table.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+    <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/bootstrap-table.min.js"></script>
+    <script type="text/javascript" src="js/createOrder.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.js"></script>
+    <style>
+        .row{
+            margin-top: 30px;
+            margin-bottom: 30px
+        }
+    </style>
+    <title>Title</title>
+</head>
+<body class="bg-light">
+<div class="container">
+    <div class="col-md-8 col-md-offset-2">
+        <h4 class="mb-3">Add order</h4>
+        <form action="./create" method="post">
+            <div class="row">
+                <div class="col-md-12">
+                    <label for="orderDesc">Description</label>
+                    <textarea id="orderDesc" name="orderDesc" cols="100" rows="3"></textarea>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <label for="price">Price</label>
+                    <input type="text" class="form-control" name="price" id="price" placeholder="price" required>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="model">Model</label>
+                    <select class="selectpicker" name="model" id="model" data-width="80%" required>
+                        <option value="">Choose...</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label for="body">Body</label>
+                    <select class="selectpicker" name="body" id="body" data-width="80%" required>
+                        <option value="">Choose...</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label for="transmission">Transmission</label>
+                    <select class="selectpicker" name="transmission" id="transmission" data-width="55%" required>
+                        <option value="">Choose...</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="engine">Engine</label>
+                    <select class="selectpicker" name="engine" id="engine" data-width="75%" required>
+                        <option value="">Choose...</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label for="drivetype">DriveType</label>
+                    <select class="selectpicker" name="drivetype" id="drivetype" data-width="auto" required>
+                        <option value="">Choose...</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label for="year">Year</label>
+                    <input type="text" id="year" name="year">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="mb-4">
+
+                    <div style="position:relative;">
+                        <a class='btn btn-primary' href='javascript:;'>
+                            Choose File...
+                            <input type="file" id="file-image" style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' name="file_source" size="40"  onchange='$("#upload-file-info").html($(this).val());'>
+                        </a>
+                        &nbsp;
+                        <span class='label label-info' id="upload-file-info"></span>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <input class="btn btn-success" type="button" value="Send" id="file-btn-load">
+                </div>
+            </div>
+            <hr class="mb-4">
+            <button class="btn btn-primary btn-lg btn-block" id="continue" type="submit">Continue</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

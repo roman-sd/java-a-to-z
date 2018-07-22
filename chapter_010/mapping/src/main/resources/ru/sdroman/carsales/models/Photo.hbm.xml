@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hibernate-mapping>
+    <class name="ru.sdroman.carsales.models.Photo" table="photos">
+        <id name="id" column="id">
+            <generator class="identity"/>
+        </id>
+        <property name="images" column="photolist"/>
+        <many-to-one name="order" column="id_order" class="ru.sdroman.carsales.models.Order"/>
+    </class>
+</hibernate-mapping>

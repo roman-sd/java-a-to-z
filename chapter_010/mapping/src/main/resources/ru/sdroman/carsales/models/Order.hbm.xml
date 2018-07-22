@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping>
+    <class name="ru.sdroman.carsales.models.Order" table="orders">
+        <id name="id" column="id">
+            <generator class="identity"/>
+        </id>
+        <property name="sold" column="sold"/>
+        <property name="price" column="price"/>
+        <property name="created" column="created"/>
+        <property name="description" column="description"/>
+        <many-to-one name="car" column="id_car" class="ru.sdroman.carsales.models.Car" lazy="false"/>
+        <many-to-one name="user" column="id_user" class="ru.sdroman.carsales.models.User" lazy="false"/>
+        <bag name="photoList" fetch="select" lazy="false" inverse="true">
+            <key column="id_order" not-null="true"/>
+            <one-to-many class="ru.sdroman.carsales.models.Photo"/>
+        </bag>
+    </class>
+</hibernate-mapping>
