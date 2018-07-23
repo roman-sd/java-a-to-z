@@ -21,7 +21,7 @@ public class CarRepo extends Repository {
     }
 
     /**
-     * Adds car to db and returns id
+     * Adds car to db and returns id.
      *
      * @param car Car
      * @return int

@@ -1,9 +1,6 @@
 package ru.sdroman.carsales.repository;
 
-import ru.sdroman.carsales.models.Order;
 import ru.sdroman.carsales.models.User;
-
-import java.util.List;
 
 /**
  * @author sdroman
@@ -13,6 +10,7 @@ public class UserRepository extends Repository {
 
     /**
      * Adds user to db.
+     *
      * @param user User
      */
     public void addUser(User user) {
@@ -21,6 +19,7 @@ public class UserRepository extends Repository {
 
     /**
      * Returns user by login.
+     *
      * @param login String
      * @return User
      */

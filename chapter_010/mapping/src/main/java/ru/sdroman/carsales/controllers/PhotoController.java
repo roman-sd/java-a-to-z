@@ -80,8 +80,8 @@ public class PhotoController extends HttpServlet {
 
             ServletFileUpload upload = new ServletFileUpload(factory);
             HttpSession session = req.getSession();
-            List<Photo> photoList = session.getAttribute("photoList") != null ?
-                    (List<Photo>) session.getAttribute("photoList") : new ArrayList<>();
+            List<Photo> photoList = session.getAttribute("photoList") != null
+                    ? (List<Photo>) session.getAttribute("photoList") : new ArrayList<>();
             try {
                 List<FileItem> items = upload.parseRequest(req);
                 for (FileItem file : items) {

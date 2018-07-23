@@ -12,7 +12,7 @@ public class Photo {
     private int id;
 
     /**
-     * Photo
+     * Photo.
      */
     private byte[] images;
 

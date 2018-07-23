@@ -11,7 +11,7 @@ import java.util.List;
 public class DriveTypeRepository extends Repository {
 
     /**
-     * Returns list of driveType
+     * Returns list of driveType.
      *
      * @return List
      */
