@@ -1,44 +1,69 @@
 package ru.sdroman.carsales.models;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 /**
  * @author sdroman
  * @since 06.2018
  */
+@Entity
+@Table(name = "car")
 public class Car {
 
     /**
      * Id.
      */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false, updatable = false)
     private int id;
 
     /**
      * Name.
      */
+    @Column(name = "year")
     private String year;
 
     /**
      * Body.
      */
+    @ManyToOne
+    @JoinColumn(name = "id_body")
     private Body body;
 
     /**
      * Model.
      */
+    @ManyToOne
+    @JoinColumn(name = "id_model")
     private Model model;
 
     /**
      * Engine.
      */
+    @ManyToOne
+    @JoinColumn(name = "id_engine")
     private Engine engine;
 
     /**
      * DriveType.
      */
+    @ManyToOne
+    @JoinColumn(name = "id_drivetype")
     private DriveType driveType;
 
     /**
      * Transmission.
      */
+    @ManyToOne
+    @JoinColumn(name = "id_transmission")
     private Transmission transmission;
 
     /**

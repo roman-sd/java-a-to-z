@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import ru.sdroman.carsales.models.Order;
+import ru.sdroman.carsales.repository.PhotoRepository;
 
 import java.lang.reflect.Type;
 
@@ -29,7 +30,7 @@ public class OrderSerializer implements JsonSerializer<Order> {
         result.addProperty("price", order.getPrice());
         result.addProperty("created", String.valueOf(order.getCreated()));
         result.addProperty("description", order.getDescription());
-        result.addProperty("photoListSize", order.getPhotoList().size());
+        result.addProperty("photoListSize", new PhotoRepository().photoListSize(order.getId()));
         result.add("car", context.serialize(order.getCar()));
         result.add("user", context.serialize(order.getUser()));
         return result;

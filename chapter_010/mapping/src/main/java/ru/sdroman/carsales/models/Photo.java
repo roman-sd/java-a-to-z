@@ -1,28 +1,52 @@
 package ru.sdroman.carsales.models;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 /**
  * @author sdroman
  * @since 07.2018
  */
+@Entity
+@Table(name = "photos")
 public class Photo {
 
     /**
      * Id.
      */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false, updatable = false)
     private int id;
 
     /**
      * Photo.
      */
+    @Column(name = "photolist")
     private byte[] images;
 
     /**
      * Order.
      */
+    @ManyToOne
+    @JoinColumn(name = "id_order")
     private Order order;
 
     /**
+     * Constructor.
+     */
+    public Photo() {
+    }
+
+    /**
      * Returns id.
+     *
      * @return int
      */
     public int getId() {
@@ -31,6 +55,7 @@ public class Photo {
 
     /**
      * Sets id.
+     *
      * @param id int
      */
     public void setId(int id) {
@@ -39,6 +64,7 @@ public class Photo {
 
     /**
      * Returns photo.
+     *
      * @return array byte[]
      */
     public byte[] getImages() {
@@ -47,6 +73,7 @@ public class Photo {
 
     /**
      * Sets photo.
+     *
      * @param images byte[]
      */
     public void setImages(byte[] images) {
@@ -55,6 +82,7 @@ public class Photo {
 
     /**
      * Returns order.
+     *
      * @return Order.
      */
     public Order getOrder() {
@@ -63,6 +91,7 @@ public class Photo {
 
     /**
      * Sets order.
+     *
      * @param order Order
      */
     public void setOrder(Order order) {

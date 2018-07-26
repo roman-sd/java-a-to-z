@@ -8,9 +8,8 @@ import org.apache.commons.fileupload.servlet.FileCleanerCleanup;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FileCleaningTracker;
 import org.apache.log4j.Logger;
-import ru.sdroman.carsales.models.Order;
 import ru.sdroman.carsales.models.Photo;
-import ru.sdroman.carsales.repository.OrderRepo;
+import ru.sdroman.carsales.repository.PhotoRepository;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -48,8 +47,8 @@ public class PhotoController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("image/jpeg");
         int orderId = Integer.valueOf(req.getParameter("orderId"));
-        Order order = new OrderRepo().getOrderById(orderId);
-        List<Photo> photoList = order.getPhotoList();
+        PhotoRepository repository = new PhotoRepository();
+        List<Photo> photoList = repository.getPhotoByOrderId(orderId);
         JsonArray json = new JsonArray();
         for (Photo photo : photoList) {
             json.add(String.format("data:image/jpeg;base64,%s", DatatypeConverter.printBase64Binary(photo.getImages())));

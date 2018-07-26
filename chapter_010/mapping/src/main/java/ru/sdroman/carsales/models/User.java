@@ -1,31 +1,46 @@
 package ru.sdroman.carsales.models;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.util.Set;
 
 /**
  * @author sdroman
  * @since 06.2018
  */
+@Entity
+@Table(name = "users")
 public class User {
 
     /**
      * Id.
      */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", updatable = false, nullable = false)
     private int id;
 
     /**
      * Login.
      */
+    @Column(name = "login")
     private String login;
 
     /**
      * Password.
      */
+    @Column(name = "password")
     private String password;
 
     /**
      * Orders.
      */
+    @OneToMany
     private Set<Order> orders;
 
     /**
