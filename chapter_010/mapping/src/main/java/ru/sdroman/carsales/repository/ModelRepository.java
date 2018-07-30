@@ -30,4 +30,14 @@ public class ModelRepository extends Repository {
                 .setParameter("name", name)
                 .uniqueResult());
     }
+
+    /**
+     * Adds model to db.
+     *
+     * @param model Model
+     * @return int modelId
+     */
+    public int addModel(Model model) {
+        return (int) super.execute(session -> session.save(model));
+    }
 }

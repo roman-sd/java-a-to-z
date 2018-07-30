@@ -5,11 +5,11 @@ import ru.sdroman.carsales.models.Order;
 import ru.sdroman.carsales.models.Photo;
 import ru.sdroman.carsales.models.User;
 import ru.sdroman.carsales.repository.BodyRepository;
-import ru.sdroman.carsales.repository.CarRepo;
+import ru.sdroman.carsales.repository.CarRepository;
 import ru.sdroman.carsales.repository.DriveTypeRepository;
 import ru.sdroman.carsales.repository.EngineRepository;
 import ru.sdroman.carsales.repository.ModelRepository;
-import ru.sdroman.carsales.repository.OrderRepo;
+import ru.sdroman.carsales.repository.OrderRepository;
 import ru.sdroman.carsales.repository.PhotoRepository;
 import ru.sdroman.carsales.repository.TransmissionRepository;
 import ru.sdroman.carsales.repository.UserRepository;
@@ -74,7 +74,7 @@ public class CreateOrderController extends HttpServlet {
         car.setDriveType(
                 new DriveTypeRepository()
                         .getDriveTypeByName(req.getParameter("drivetype")));
-        new CarRepo().addCar(car);
+        new CarRepository().addCar(car);
 
         Order order = new Order();
         order.setDescription(req.getParameter("orderDesc"));
@@ -87,7 +87,7 @@ public class CreateOrderController extends HttpServlet {
         User sessionUser = (User) session.getAttribute("currentUser");
         User user = new UserRepository().getUserByLogin(sessionUser.getLogin());
         order.setUser(user);
-        int orderId = new OrderRepo().addOrder(order);
+        int orderId = new OrderRepository().addOrder(order);
         order.setId(orderId);
 
         List<Photo> photoList = (List<Photo>) session.getAttribute("photoList");

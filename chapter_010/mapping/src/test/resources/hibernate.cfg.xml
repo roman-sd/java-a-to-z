@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.connection.url">jdbc:hsqldb:mem:carStore;sql.enforce_size=false</property>
+        <property name="hibernate.connection.driver_class">org.hsqldb.jdbcDriver</property>
+        <property name="hibernate.connection.username">sdroman</property>
+        <property name="hibernate.connection.password"></property>
+        <property name="hibernate.connection.dialect">org.hibernate.dialect.HSQLDialect</property>
+        <property name="hibernate.hbm2ddl.auto">create</property>
+        <property name="show_sql">true</property>
+
+        <mapping class="ru.sdroman.carsales.models.Car"/>
+        <mapping class="ru.sdroman.carsales.models.Order"/>
+        <mapping class="ru.sdroman.carsales.models.User"/>
+        <mapping class="ru.sdroman.carsales.models.Body"/>
+        <mapping class="ru.sdroman.carsales.models.DriveType"/>
+        <mapping class="ru.sdroman.carsales.models.Engine"/>
+        <mapping class="ru.sdroman.carsales.models.Model"/>
+        <mapping class="ru.sdroman.carsales.models.Transmission"/>
+        <mapping class="ru.sdroman.carsales.models.Photo"/>
+    </session-factory>
+</hibernate-configuration>

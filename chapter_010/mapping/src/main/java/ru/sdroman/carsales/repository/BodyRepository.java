@@ -16,7 +16,7 @@ public class BodyRepository extends Repository {
      * @return List
      */
     public List<Body> getBodies() {
-        return super.execute(session -> session.createQuery("from ru.sdroman.carsales.models.Body").list());
+        return super.execute(session -> session.createQuery("from Body").list());
     }
 
     /**
@@ -26,8 +26,18 @@ public class BodyRepository extends Repository {
      * @return Body
      */
     public Body getBodyByName(String name) {
-        return (Body) super.execute(session -> session.createQuery("from ru.sdroman.carsales.models.Body where name=:name")
+        return (Body) super.execute(session -> session.createQuery("from Body where name=:name")
                 .setParameter("name", name)
                 .uniqueResult());
+    }
+
+    /**
+     * Adds new body to db.
+     *
+     * @param body Body
+     * @return int bodyId
+     */
+    public int addBody(Body body) {
+        return (int) super.execute(session -> session.save(body));
     }
 }

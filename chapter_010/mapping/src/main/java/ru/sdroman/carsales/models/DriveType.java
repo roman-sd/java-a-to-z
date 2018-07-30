@@ -70,4 +70,34 @@ public class DriveType {
     public void setName(String name) {
         this.name = name;
     }
+
+    /**
+     * Equals.
+     * @param o Object
+     * @return true, if equal
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        DriveType driveType = (DriveType) o;
+
+        return id == driveType.id && (name != null ? name.equals(driveType.name) : driveType.name == null);
+    }
+
+    /**
+     * HashCode.
+     * @return int
+     */
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        return result;
+    }
 }

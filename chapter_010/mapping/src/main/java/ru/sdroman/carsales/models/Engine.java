@@ -70,4 +70,34 @@ public class Engine {
     public void setName(String name) {
         this.name = name;
     }
+
+    /**
+     * Equals.
+     * @param o Object
+     * @return true, if equal
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Engine engine = (Engine) o;
+
+        return id == engine.id && (name != null ? name.equals(engine.name) : engine.name == null);
+    }
+
+    /**
+     * HashCode.
+     * @return int
+     */
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        return result;
+    }
 }

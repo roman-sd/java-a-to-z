@@ -70,4 +70,36 @@ public class Model {
     public void setName(String name) {
         this.name = name;
     }
+
+    /**
+     * Equals.
+     *
+     * @param o Object
+     * @return true if equal
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Model model = (Model) o;
+
+        return id == model.id && (name != null ? name.equals(model.name) : model.name == null);
+    }
+
+    /**
+     * HashCode.
+     *
+     * @return int
+     */
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        return result;
+    }
 }

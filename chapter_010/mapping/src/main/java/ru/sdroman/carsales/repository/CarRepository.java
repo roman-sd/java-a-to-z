@@ -6,7 +6,7 @@ import ru.sdroman.carsales.models.Car;
  * @author sdroman
  * @since 06.2018
  */
-public class CarRepo extends Repository {
+public class CarRepository extends Repository {
 
     /**
      * Returns car by name.

@@ -30,4 +30,14 @@ public class DriveTypeRepository extends Repository {
                 .setParameter("name", name)
                 .uniqueResult());
     }
+
+    /**
+     * Adds driveType to db.
+     *
+     * @param driveType DriveType
+     * @return int driveTypeId
+     */
+    public int addDriveType(DriveType driveType) {
+        return (int) super.execute(session -> session.save(driveType));
+    }
 }

@@ -5,7 +5,7 @@ import com.google.gson.GsonBuilder;
 import ru.sdroman.carsales.models.Car;
 import ru.sdroman.carsales.models.Order;
 import ru.sdroman.carsales.models.User;
-import ru.sdroman.carsales.repository.OrderRepo;
+import ru.sdroman.carsales.repository.OrderRepository;
 import ru.sdroman.carsales.serializers.CarSerializer;
 import ru.sdroman.carsales.serializers.OrderSerializer;
 import ru.sdroman.carsales.serializers.UserSerializer;
@@ -28,7 +28,7 @@ public class JsonOrdersController extends HttpServlet {
     /**
      * Order repository.
      */
-    private OrderRepo repository;
+    private OrderRepository repository;
 
     /**
      * Map of parameters.
@@ -42,7 +42,7 @@ public class JsonOrdersController extends HttpServlet {
      */
     @Override
     public void init() throws ServletException {
-        repository = new OrderRepo();
+        repository = new OrderRepository();
         param = new HashMap<>();
     }
 

@@ -206,4 +206,59 @@ public class Car {
     public void setTransmission(Transmission transmission) {
         this.transmission = transmission;
     }
+
+    /**
+     * Equals.
+     *
+     * @param o Object
+     * @return true if equal
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Car car = (Car) o;
+
+        if (id != car.id) {
+            return false;
+        }
+        if (year != null ? !year.equals(car.year) : car.year != null) {
+            return false;
+        }
+        if (body != null ? !body.equals(car.body) : car.body != null) {
+            return false;
+        }
+        if (model != null ? !model.equals(car.model) : car.model != null) {
+            return false;
+        }
+        if (engine != null ? !engine.equals(car.engine) : car.engine != null) {
+            return false;
+        }
+        if (driveType != null ? !driveType.equals(car.driveType) : car.driveType != null) {
+            return false;
+        }
+        return transmission != null ? transmission.equals(car.transmission) : car.transmission == null;
+    }
+
+    /**
+     * HashCode.
+     *
+     * @return int
+     */
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (year != null ? year.hashCode() : 0);
+        result = 31 * result + (body != null ? body.hashCode() : 0);
+        result = 31 * result + (model != null ? model.hashCode() : 0);
+        result = 31 * result + (engine != null ? engine.hashCode() : 0);
+        result = 31 * result + (driveType != null ? driveType.hashCode() : 0);
+        result = 31 * result + (transmission != null ? transmission.hashCode() : 0);
+        return result;
+    }
 }

@@ -3,7 +3,7 @@ package ru.sdroman.carsales.controllers.json;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import ru.sdroman.carsales.models.Car;
-import ru.sdroman.carsales.repository.CarRepo;
+import ru.sdroman.carsales.repository.CarRepository;
 import ru.sdroman.carsales.serializers.CarSerializer;
 
 import javax.servlet.ServletException;
@@ -34,7 +34,7 @@ public class JsonCarController extends HttpServlet {
                 .setPrettyPrinting()
                 .registerTypeAdapter(Car.class, new CarSerializer())
                 .create();
-        CarRepo repo = new CarRepo();
+        CarRepository repo = new CarRepository();
         Car car = repo.getCarById(1);
         String json = gson.toJson(car);
         PrintWriter writer = new PrintWriter(resp.getOutputStream());

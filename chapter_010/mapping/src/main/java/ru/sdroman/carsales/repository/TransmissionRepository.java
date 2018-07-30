@@ -30,4 +30,14 @@ public class TransmissionRepository extends Repository {
                 .setParameter("name", name)
                 .uniqueResult());
     }
+
+    /**
+     * Adds transmission to db.
+     *
+     * @param transmission Transmission
+     * @return int transmissionId
+     */
+    public int addTransmission(Transmission transmission) {
+        return (int) super.execute(session -> session.save(transmission));
+    }
 }

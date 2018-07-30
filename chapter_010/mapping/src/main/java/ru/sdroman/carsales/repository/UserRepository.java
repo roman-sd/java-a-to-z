@@ -12,9 +12,10 @@ public class UserRepository extends Repository {
      * Adds user to db.
      *
      * @param user User
+     * @return photoId
      */
-    public void addUser(User user) {
-        super.execute(session -> session.save(user));
+    public int addUser(User user) {
+        return (int) super.execute(session -> session.save(user));
     }
 
     /**

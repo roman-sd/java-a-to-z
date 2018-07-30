@@ -14,9 +14,10 @@ public class PhotoRepository extends Repository {
      * Adds photo to db.
      *
      * @param photo Photo
+     * @return photoId
      */
-    public void addPhotos(Photo photo) {
-        super.execute(session -> session.save(photo));
+    public int addPhotos(Photo photo) {
+        return (int) super.execute(session -> session.save(photo));
     }
 
     /**

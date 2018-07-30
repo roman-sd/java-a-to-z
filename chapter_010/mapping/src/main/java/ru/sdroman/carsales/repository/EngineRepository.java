@@ -30,4 +30,14 @@ public class EngineRepository extends Repository {
                 .setParameter("name", name)
                 .uniqueResult());
     }
+
+    /**
+     * Adds engine to db.
+     *
+     * @param engine Engine
+     * @return int engineId
+     */
+    public int addEngine(Engine engine) {
+        return (int) super.execute(session -> session.save(engine));
+    }
 }

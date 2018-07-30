@@ -232,4 +232,55 @@ public class Order {
     public void addPhoto(Photo photo) {
         this.photoList.add(photo);
     }
+
+    /**
+     * Equals.
+     *
+     * @param o Object
+     * @return true if equal
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Order order = (Order) o;
+
+        if (id != order.id) {
+            return false;
+        }
+        if (sold != order.sold) {
+            return false;
+        }
+        if (price != order.price) {
+            return false;
+        }
+        if (description != null ? !description.equals(order.description) : order.description != null) {
+            return false;
+        }
+        if (car != null ? !car.equals(order.car) : order.car != null) {
+            return false;
+        }
+        return user != null ? user.equals(order.user) : order.user == null;
+    }
+
+    /**
+     * HashCode.
+     *
+     * @return int
+     */
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (sold ? 1 : 0);
+        result = 31 * result + price;
+        result = 31 * result + (car != null ? car.hashCode() : 0);
+        result = 31 * result + (user != null ? user.hashCode() : 0);
+        return result;
+    }
 }

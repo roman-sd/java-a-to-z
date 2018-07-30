@@ -120,4 +120,40 @@ public class User {
     public void setOrders(Set<Order> orders) {
         this.orders = orders;
     }
+
+    /**
+     * Equals.
+     *
+     * @param o Object
+     * @return true if equal
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        User user = (User) o;
+
+        if (id != user.id) {
+            return false;
+        }
+        return (login != null ? login.equals(user.login) : user.login == null) && (password != null ? password.equals(user.password) : user.password == null);
+    }
+
+    /**
+     * HachCode.
+     *
+     * @return int
+     */
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (login != null ? login.hashCode() : 0);
+        result = 31 * result + (password != null ? password.hashCode() : 0);
+        return result;
+    }
 }

@@ -1,7 +1,7 @@
 package ru.sdroman.carsales.controllers;
 
 import ru.sdroman.carsales.models.Order;
-import ru.sdroman.carsales.repository.OrderRepo;
+import ru.sdroman.carsales.repository.OrderRepository;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -25,7 +25,7 @@ public class UpdateController extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        OrderRepo repository = new OrderRepo();
+        OrderRepository repository = new OrderRepository();
         Order order = repository.getOrderById(Integer.valueOf(req.getParameter("id")));
         order.setSold(Boolean.valueOf(req.getParameter("sold")));
         repository.updateOrder(order);

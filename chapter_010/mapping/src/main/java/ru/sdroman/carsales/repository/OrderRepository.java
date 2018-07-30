@@ -15,16 +15,7 @@ import java.util.Map;
  * @author sdroman
  * @since 06.2018
  */
-public class OrderRepo extends Repository {
-
-    /**
-     * Returns list of order.
-     *
-     * @return List
-     */
-    public List getOrders() {
-        return super.execute(session -> session.createQuery("from ru.sdroman.carsales.models.Order").list());
-    }
+public class OrderRepository extends Repository {
 
     /**
      * Adds order to db.
@@ -76,7 +67,7 @@ public class OrderRepo extends Repository {
             for (String key : param.keySet()) {
                 if (param.get(key) != null && !param.get(key).equals("")) {
                     if (key.equals("year")) {
-                        conditions = cb.and(conditions, cb.equal(orderCar.get("year"), param.get("year")));
+                        conditions = cb.and(conditions, cb.equal(orderCar.get("year"), param.get(key)));
                     } else {
                         conditions = cb.and(conditions, cb.equal(orderCar.join(key).get("name"), param.get(key)));
                     }
