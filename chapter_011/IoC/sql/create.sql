@@ -1,0 +1,6 @@
+CREATE DATABASE storage;
+
+CREATE TABLE if NOT EXISTS users (
+  user_id SERIAL PRIMARY KEY NOT NULL,
+  name VARCHAR(50)
+);

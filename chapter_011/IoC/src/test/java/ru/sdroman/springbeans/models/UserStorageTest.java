@@ -1,8 +1,11 @@
-package ru.sdroman.springbeans;
+package ru.sdroman.springbeans.models;
 
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import ru.sdroman.springbeans.storages.ImportUser;
+import ru.sdroman.springbeans.storages.MemoryStorage;
+import ru.sdroman.springbeans.storages.Storage;
 
 import static org.junit.Assert.assertNotNull;
 
@@ -18,7 +21,7 @@ public class UserStorageTest {
     @Test
     public void whenAddUserToStorageShouldSafeIt() {
         Storage memory = new MemoryStorage();
-        UserStorage userStorage = new UserStorage(memory);
+        ImportUser userStorage = new ImportUser(memory);
         userStorage.addUser(new User());
     }
 
@@ -28,7 +31,7 @@ public class UserStorageTest {
     @Test
     public void whenLoadContextShouldGetBeans() {
         ApplicationContext context = new ClassPathXmlApplicationContext("spring-context.xml");
-        UserStorage memory = context.getBean(UserStorage.class);
+        ImportUser memory = context.getBean(ImportUser.class);
         memory.addUser(new User());
         assertNotNull(memory);
     }
