@@ -250,14 +250,14 @@ public class Order {
 
     @Override
     public String toString() {
-        return "Order{" +
-                "id=" + id +
-                ", description='" + description + '\'' +
-                ", sold=" + sold +
-                ", price=" + price +
-                ", created=" + created +
-                ", car=" + car +
-                ", user=" + user +
-                '}';
+        return "Order{"
+                + "id=" + id
+                + ", description='" + description + '\''
+                + ", sold=" + sold
+                + ", price=" + price
+                + ", created=" + created
+                + ", car=" + car
+                + ", user=" + user
+                + '}';
     }
 }

@@ -264,14 +264,14 @@ public class Car {
 
     @Override
     public String toString() {
-        return "Car{" +
-                "id=" + id +
-                ", year='" + year + '\'' +
-                ", body=" + body +
-                ", model=" + model +
-                ", engine=" + engine +
-                ", driveType=" + driveType +
-                ", transmission=" + transmission +
-                '}';
+        return "Car{"
+                + "id=" + id
+                + ", year='" + year + '\''
+                + ", body=" + body
+                + ", model=" + model
+                + ", engine=" + engine
+                + ", driveType=" + driveType
+                + ", transmission=" + transmission
+                + '}';
     }
 }

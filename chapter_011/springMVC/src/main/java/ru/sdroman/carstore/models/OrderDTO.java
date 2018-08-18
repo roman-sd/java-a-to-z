@@ -47,7 +47,7 @@ public class OrderDTO {
     private int transmissionId;
 
     /**
-     * Car drivetype id
+     * Car drivetype id.
      */
     private int driveTypeId;
 
@@ -61,7 +61,7 @@ public class OrderDTO {
     }
 
     /**
-     * Sets order id
+     * Sets order id.
      *
      * @param id int
      */
@@ -151,7 +151,7 @@ public class OrderDTO {
     }
 
     /**
-     * Sets car engine id
+     * Sets car engine id.
      *
      * @param engineId int
      */

@@ -18,7 +18,7 @@ public class ModelRepository extends Repository {
      * @return List
      */
     public List<Model> getModels() {
-        return super.execute(session -> session.createQuery("from Model").list());
+        return super.execute(session -> (List) session.createQuery("from Model").list());
     }
 
     /**

@@ -20,6 +20,11 @@ public class TransmissionRepository extends Repository {
         return super.execute(session -> (List) session.createQuery("from Transmission").list());
     }
 
+    /**
+     * Returns transmission type by id from db.
+     * @param id int
+     * @return Transmission
+     */
     public Transmission getTransmissionById(int id) {
         return  super.execute(session -> (Transmission) session
                 .createQuery("from Transmission where id=:id")
