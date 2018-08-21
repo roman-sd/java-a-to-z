@@ -9,6 +9,7 @@
         <module>IoC</module>
         <module>springMVC</module>
         <module>springData</module>
+        <module>security</module>
     </modules>
 
     <parent>
