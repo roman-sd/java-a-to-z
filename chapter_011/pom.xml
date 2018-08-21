@@ -6,7 +6,9 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>IoC</module>
         <module>springMVC</module>
+        <module>springData</module>
     </modules>
 
     <parent>
@@ -77,7 +79,5 @@
             <artifactId>postgresql</artifactId>
             <version>42.2.4</version>
         </dependency>
-
-
     </dependencies>
 </project>

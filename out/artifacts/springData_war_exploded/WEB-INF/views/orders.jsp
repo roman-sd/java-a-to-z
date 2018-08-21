@@ -12,7 +12,7 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>id</th>
+                    <th>#</th>
                     <th>car</th>
                     <th>sold</th>
                     <th>price</th>
