@@ -16,7 +16,7 @@ public interface UserService {
      * @param id int
      * @return User
      */
-    User getUserById(int id);
+    User getUser(int id);
 
     /**
      * Create or update user.
@@ -33,5 +33,12 @@ public interface UserService {
      */
     List<User> getUsers();
 
-
+    /**
+     * Returns user by username.
+     *
+     * @param name String
+     * @return User
+     */
+    User getUserByName(String name);
 }
+

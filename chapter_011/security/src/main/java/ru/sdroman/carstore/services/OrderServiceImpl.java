@@ -12,6 +12,7 @@ import java.util.List;
  * @author sdroman
  * @since 08.2018
  */
+
 @Component
 public class OrderServiceImpl implements OrderService {
 
@@ -22,6 +23,7 @@ public class OrderServiceImpl implements OrderService {
 
     /**
      * Constructor.
+     *
      * @param orderRepo Order repository
      */
     @Autowired

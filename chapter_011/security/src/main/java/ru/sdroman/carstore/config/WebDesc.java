@@ -8,16 +8,31 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
  */
 public class WebDesc extends AbstractAnnotationConfigDispatcherServletInitializer {
 
+    /**
+     * Root config class.
+     *
+     * @return Class[]
+     */
     @Override
     protected Class<?>[] getRootConfigClasses() {
+        return new Class[]{SpringRootConfig.class};
+    }
+
+    /**
+     * Servlet config class.
+     *
+     * @return Class[]
+     */
+    @Override
+    protected Class<?>[] getServletConfigClasses() {
         return new Class[]{SpringWebConfig.class};
     }
 
-    @Override
-    protected Class<?>[] getServletConfigClasses() {
-        return null;
-    }
-
+    /**
+     * Mapping.
+     *
+     * @return String
+     */
     @Override
     protected String[] getServletMappings() {
         return new String[]{"/"};

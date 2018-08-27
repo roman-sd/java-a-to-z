@@ -95,7 +95,7 @@ public interface CarService {
      *
      * @return List
      */
-    List<Car> getAll();
+    List<Car> getCars();
 
     /**
      * Returns car by id.
@@ -103,7 +103,7 @@ public interface CarService {
      * @param id int
      * @return Car
      */
-    Car getById(int id);
+    Car getCar(int id);
 
     /**
      * Adds car to db.
