@@ -98,7 +98,18 @@
 [![https://gyazo.com/4c5f0a768e9d26c1d902da0afacbed96](https://i.gyazo.com/4c5f0a768e9d26c1d902da0afacbed96.png)](https://gyazo.com/4c5f0a768e9d26c1d902da0afacbed96)
 [![https://gyazo.com/be3453ede20cd86ff0c2d314544e1135](https://i.gyazo.com/be3453ede20cd86ff0c2d314544e1135.png)](https://gyazo.com/be3453ede20cd86ff0c2d314544e1135)
 
+### [Hibernate](https://github.com/roman-sd/java-a-to-z/tree/master/chapter_010)
 
+###### 1. Configuration.
+###### 2. Mapping, HQL.
+###### 3. Testing.
+
+### [Spring](https://github.com/roman-sd/java-a-to-z/tree/master/chapter_011)
+
+###### 1. IoC.
+###### 2. MVC.
+###### 3. Spring Data.
+###### 4. Spring Security.
 
 
 
