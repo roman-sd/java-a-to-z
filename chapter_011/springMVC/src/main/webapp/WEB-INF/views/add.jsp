@@ -16,7 +16,7 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="model">Car model:</label>
                 <div class="col-sm-7">
-                    <form:select path="modelId" id="model" cssClass="form-control">
+                    <form:select path="brandId" id="model" cssClass="form-control">
                         <form:options items="${model}" itemLabel="name" itemValue="id"/>
                     </form:select>
                 </div>

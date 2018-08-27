@@ -18,7 +18,7 @@
 
         <div class="row">
             <label class="col-lg-2">Model</label>
-            <div class="col-lg-10">${order.car.model.name}</div>
+            <div class="col-lg-10">${order.car.brand.name}</div>
         </div>
 
         <div class="row">

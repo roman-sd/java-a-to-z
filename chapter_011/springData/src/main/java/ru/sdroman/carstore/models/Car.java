@@ -37,7 +37,7 @@ public class Car {
      */
     @ManyToOne
     @JoinColumn(name = "id_model")
-    private Model model;
+    private Brand brand;
 
     /**
      * Engine.
@@ -134,17 +134,17 @@ public class Car {
      *
      * @return Model model
      */
-    public Model getModel() {
-        return model;
+    public Brand getBrand() {
+        return brand;
     }
 
     /**
      * Sets model.
      *
-     * @param model Model
+     * @param brand Model
      */
-    public void setModel(Model model) {
-        this.model = model;
+    public void setBrand(Brand brand) {
+        this.brand = brand;
     }
 
     /**

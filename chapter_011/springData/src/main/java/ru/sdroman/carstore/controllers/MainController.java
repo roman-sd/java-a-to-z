@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.sdroman.carstore.models.Body;
+import ru.sdroman.carstore.models.Brand;
 import ru.sdroman.carstore.models.Car;
 import ru.sdroman.carstore.models.DriveType;
 import ru.sdroman.carstore.models.Engine;
@@ -99,13 +100,22 @@ public class MainController {
     public String addOrder(@ModelAttribute("newOrder") OrderDTO orderDTO) {
         Car car = new Car();
         car.setYear(orderDTO.getYear());
-        car.setModel(carService.getModelById(orderDTO.getModelId()));
-        car.setEngine(carService.getEngineById(orderDTO.getModelId()));
-        car.setTransmission(carService.getTransmissionById(orderDTO.getTransmissionId()));
-        car.setDriveType(carService.getDriveTypeById(orderDTO.getDriveTypeId()));
-        car.setBody(carService.getBodyById(orderDTO.getBodyId()));
+        Brand brand = new Brand();
+        brand.setId(orderDTO.getModelId());
+        car.setBrand(brand);
+        Engine engine = new Engine();
+        engine.setId(orderDTO.getEngineId());
+        car.setEngine(engine);
+        Transmission transmission = new Transmission();
+        transmission.setId(orderDTO.getTransmissionId());
+        car.setTransmission(transmission);
+        DriveType driveType = new DriveType();
+        driveType.setId(orderDTO.getDriveTypeId());
+        car.setDriveType(driveType);
+        Body body = new Body();
+        body.setId(orderDTO.getBodyId());
+        car.setBody(body);
         Car newCar = carService.add(car);
-
         Order order = new Order();
         order.setSold(false);
         order.setCar(newCar);
@@ -162,7 +172,7 @@ public class MainController {
      * @return List
      */
     @ModelAttribute("model")
-    public List<ru.sdroman.carstore.models.Model> getModels() {
+    public List<Brand> getModels() {
         return this.carService.getModels();
     }
 }

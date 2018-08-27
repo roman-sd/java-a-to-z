@@ -4,13 +4,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * @author sdroman
  * @since 08.2018
  */
-@Entity(name = "model")
-public class Model {
+@Entity
+@Table(name = "model")
+public class Brand {
     /**
      * Id.
      */
@@ -26,7 +28,7 @@ public class Model {
     /**
      * Constructor.
      */
-    public Model() {
+    public Brand() {
     }
 
     /**

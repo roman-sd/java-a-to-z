@@ -15,9 +15,12 @@ import ru.sdroman.carstore.models.Engine;
 import ru.sdroman.carstore.models.Order;
 import ru.sdroman.carstore.models.OrderDTO;
 import ru.sdroman.carstore.models.Transmission;
+import ru.sdroman.carstore.models.User;
 import ru.sdroman.carstore.services.CarService;
 import ru.sdroman.carstore.services.OrderService;
+import ru.sdroman.carstore.services.UserService;
 
+import java.security.Principal;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -38,6 +41,8 @@ public class OrderController {
      */
     private CarService carService;
 
+    private UserService userService;
+
 
     /**
      * Constructor.
@@ -46,9 +51,10 @@ public class OrderController {
      * @param carService   CarService
      */
     @Autowired
-    public OrderController(OrderService orderService, CarService carService) {
+    public OrderController(OrderService orderService, CarService carService, UserService userService) {
         this.orderService = orderService;
         this.carService = carService;
+        this.userService = userService;
     }
 
     /**
@@ -71,7 +77,7 @@ public class OrderController {
      * @return jsp
      */
     @RequestMapping(value = "/order", method = RequestMethod.GET)
-    public String orderInfo(@RequestParam("id") int orderId, Model model) {
+    public String orderInfo(@RequestParam("id") int orderId, Model model, Principal principal) {
         model.addAttribute(this.orderService.getOrder(orderId));
         return "info";
     }
@@ -96,24 +102,30 @@ public class OrderController {
      * @return redirect url
      */
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String addOrder(@ModelAttribute("newOrder") OrderDTO orderDTO) {
-        Car car = new Car();
-        car.setYear(orderDTO.getYear());
-        car.setModel(carService.getModelById(orderDTO.getModelId()));
-        car.setEngine(carService.getEngineById(orderDTO.getModelId()));
-        car.setTransmission(carService.getTransmissionById(orderDTO.getTransmissionId()));
-        car.setDriveType(carService.getDriveTypeById(orderDTO.getDriveTypeId()));
-        car.setBody(carService.getBodyById(orderDTO.getBodyId()));
-        Car newCar = carService.add(car);
-
-        Order order = new Order();
+    public String addOrder(@ModelAttribute("newOrder") OrderDTO orderDTO, Principal principal) {
+        User user = userService.getUserByName(principal.getName());
+        Order order = orderDTO.convertToOrder();
         order.setSold(false);
-        order.setCar(newCar);
         order.setCreated(new Timestamp(System.currentTimeMillis()));
-        order.setPrice(orderDTO.getPrice());
-        order.setDescription(orderDTO.getDescription());
+        order.setUser(user);
+        carService.add(order.getCar());
         orderService.create(order);
         return "redirect:/";
+    }
+
+    /**
+     * Login form.
+     *
+     * @param error login error
+     * @param model Model
+     * @return String
+     */
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login(@RequestParam(value = "error", required = false) String error, Model model) {
+        if (error != null) {
+            model.addAttribute("error", "Invalid username or password");
+        }
+        return "login";
     }
 
     /**

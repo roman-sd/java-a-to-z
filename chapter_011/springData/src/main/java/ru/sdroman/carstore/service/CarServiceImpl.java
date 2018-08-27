@@ -7,7 +7,7 @@ import ru.sdroman.carstore.models.Body;
 import ru.sdroman.carstore.models.Car;
 import ru.sdroman.carstore.models.DriveType;
 import ru.sdroman.carstore.models.Engine;
-import ru.sdroman.carstore.models.Model;
+import ru.sdroman.carstore.models.Brand;
 import ru.sdroman.carstore.models.Transmission;
 import ru.sdroman.carstore.repositories.BodyRepository;
 import ru.sdroman.carstore.repositories.CarRepository;
@@ -132,12 +132,12 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public List<Model> getModels() {
+    public List<Brand> getModels() {
         return Lists.newArrayList(this.modelRepo.findAll());
     }
 
     @Override
-    public Model getModelById(int id) {
+    public Brand getModelById(int id) {
         return this.modelRepo.findById(id).orElse(null);
     }
 

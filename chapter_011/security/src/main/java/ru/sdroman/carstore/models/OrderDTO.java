@@ -211,4 +211,30 @@ public class OrderDTO {
     public void setDriveTypeId(int driveTypeId) {
         this.driveTypeId = driveTypeId;
     }
+
+    public Order convertToOrder() {
+        Car car = new Car();
+        Body body = new Body();
+        body.setId(this.bodyId);
+        Model model = new Model();
+        model.setId(this.modelId);
+        Engine engine = new Engine();
+        engine.setId(this.engineId);
+        Transmission transmission = new Transmission();
+        transmission.setId(this.transmissionId);
+        DriveType driveType = new DriveType();
+        driveType.setId(this.driveTypeId);
+        car.setBody(body);
+        car.setEngine(engine);
+        car.setDriveType(driveType);
+        car.setModel(model);
+        car.setTransmission(transmission);
+        car.setYear(this.year);
+        Order order = new Order();
+        order.setId(this.id);
+        order.setPrice(this.price);
+        order.setDescription(this.description);
+        order.setCar(car);
+        return order;
+    }
 }

@@ -23,7 +23,7 @@
             <c:forEach items="${orders}" var="order">
                 <tr>
                     <td><c:out value="${order.id}"/></td>
-                    <td><c:out value="${order.car.model.name}"/></td>
+                    <td><c:out value="${order.car.brand.name}"/></td>
                     <td><c:out value="${order.sold}"/></td>
                     <td><c:out value="${order.price}"/></td>
                     <td><c:out value="${order.car.year}"/></td>

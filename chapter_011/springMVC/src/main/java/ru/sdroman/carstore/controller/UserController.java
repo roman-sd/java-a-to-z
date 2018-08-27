@@ -83,11 +83,21 @@ public class UserController {
     public String addOrder(@ModelAttribute("newOrder") OrderDTO orderDTO) {
         Car car = new Car();
         car.setYear(orderDTO.getYear());
-        car.setModel(new ModelRepository().getModelById(orderDTO.getModelId()));
-        car.setBody(new BodyRepository().getBodyById(orderDTO.getBodyId()));
-        car.setDriveType(new DriveTypeRepository().getDriveTypeById(orderDTO.getDriveTypeId()));
-        car.setEngine(new EngineRepository().getEngineById(orderDTO.getEngineId()));
-        car.setTransmission(new TransmissionRepository().getTransmissionById(orderDTO.getTransmissionId()));
+        Model model = new Model();
+        model.setId(orderDTO.getModelId());
+        car.setModel(model);
+        Body body = new Body();
+        body.setId(orderDTO.getBodyId());
+        car.setBody(body);
+        DriveType driveType = new DriveType();
+        driveType.setId(orderDTO.getBodyId());
+        car.setDriveType(driveType);
+        Engine engine = new Engine();
+        engine.setId(orderDTO.getEngineId());
+        car.setEngine(engine);
+        Transmission transmission = new Transmission();
+        transmission.setId(orderDTO.getTransmissionId());
+        car.setTransmission(transmission);
         new CarRepository().addCar(car);
         Order order = new Order();
         order.setSold(false);

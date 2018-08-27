@@ -4,7 +4,7 @@ import ru.sdroman.carstore.models.Body;
 import ru.sdroman.carstore.models.Car;
 import ru.sdroman.carstore.models.DriveType;
 import ru.sdroman.carstore.models.Engine;
-import ru.sdroman.carstore.models.Model;
+import ru.sdroman.carstore.models.Brand;
 import ru.sdroman.carstore.models.Transmission;
 
 import java.util.List;
@@ -65,7 +65,7 @@ public interface CarService {
      *
      * @return List
      */
-    List<Model> getModels();
+    List<Brand> getModels();
 
     /**
      * Returns model by id.
@@ -73,7 +73,7 @@ public interface CarService {
      * @param id int
      * @return Model
      */
-    Model getModelById(int id);
+    Brand getModelById(int id);
 
     /**
      * Returns transmission list.
