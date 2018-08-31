@@ -10,6 +10,7 @@
         <module>springMVC</module>
         <module>springData</module>
         <module>security</module>
+        <!--<module>springBoot</module>-->
     </modules>
 
     <parent>

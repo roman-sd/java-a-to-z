@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <title>Header</title>
+</head>
+<body>
+    <nav th:fragment="head" class="navbar navbar-inverse ">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" th:href="@{/index}">Car Store</a>
+            </div>
+            <div id="navbar">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a th:href="@{/add}">Add Order</a></li>
+                </ul>
+            </div>
+            <div id="navbarlogout">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a th:href="@{/logout}">Logout</a></li>
+                </ul>
+            </div>
+            <div id="navbarlogin">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a th:href="@{/login}">Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</body>
+</html>

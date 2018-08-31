@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div th:replace="fragments/header :: head"></div>
+
+<div class="container">
+
+    <form action="#" th:action="@{/add}" th:object="${newOrder}" class="form-horizontal" method="post">
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="modelId">Car model:</label>
+            <div class="col-sm-7">
+                <select th:value="${modelId}" id="modelId" name="modelId" class="form-control">
+                    <option th:each="model : ${model}"
+                             th:value="${model.id}"
+                             th:text="${model.name}">
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="engineId">Car engine:</label>
+            <div class="col-sm-7">
+                <select th:value="${engineId}" id="engineId" name="engineId" class="form-control">
+                    <option th:each="engine : ${engine}"
+                            th:value="${engine.id}"
+                            th:text="${engine.name}">
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="driveTypeId">Car driveType:</label>
+            <div class="col-sm-7">
+                <select th:value="${driveTypeId}" id="driveTypeId" name="driveTypeId" class="form-control">
+                    <option th:each="driveType : ${driveType}"
+                            th:value="${driveType.id}"
+                            th:text="${driveType.name}">
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="bodyId">Car body:</label>
+            <div class="col-sm-7">
+                <select th:value="${bodyId}" id="bodyId" name="bodyId" class="form-control">
+                    <option th:each="body : ${body}"
+                            th:value="${body.id}"
+                            th:text="${body.name}">
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="transmissionId">Car transmission:</label>
+            <div class="col-sm-7">
+                <select th:value="${transmissionId}" id="transmissionId" name="transmissionId" class="form-control">
+                    <option th:each="transmission : ${transmission}"
+                            th:value="${transmission.id}"
+                            th:text="${transmission.name}">
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="year">year</label>
+            <div class="col-sm-7">
+                <input th:value="${year}" type="text" class="form-control" id="year" name="year" placeholder="year"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="price">Car price</label>
+            <div class="col-sm-7">
+                <input th:value="${price}" type="number" class="form-control" id="price" name="price" placeholder="price"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="description">Description</label>
+            <div class="col-sm-7">
+                <textarea th:value="${description}" rows="5" class="form-control" id="description" name="description" placeholder="description"></textarea>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <input type="submit" id="btnAdd" class="btn-lg btn-primary pull-right" value="Add"/>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

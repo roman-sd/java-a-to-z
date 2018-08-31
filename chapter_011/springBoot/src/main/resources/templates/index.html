@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Car store</title>
+</head>
+
+<body>
+
+<div th:replace="fragments/header :: head"></div>
+
+<div class="container">
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>car</th>
+            <th>sold</th>
+            <th>price</th>
+            <th>year</th>
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="order : ${orders}" th:remove="tag">
+            <tr>
+                <td th:text="${order.id}">"></td>
+                <td th:text="${order.car.model.name}"></td>
+                <td th:text="${order.sold}"></td>
+                <td th:text="${order.price}"></td>
+                <td th:text="${order.car.year}"></td>
+                <td><a th:href= "@{/order/(id=${order.id})}" class="btn btn-primary">
+                    <span class="glyphicon-info-sign glyphicon"></span> Details</a>
+                </td>
+            </tr>
+        </th:block>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
