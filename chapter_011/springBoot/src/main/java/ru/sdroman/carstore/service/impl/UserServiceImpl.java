@@ -8,6 +8,7 @@ import ru.sdroman.carstore.repository.UserRepository;
 import ru.sdroman.carstore.service.UserService;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author sdroman
@@ -33,7 +34,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUser(int id) {
-        return this.userRepo.findById(id).orElse(null);
+        Optional<User> optional = this.userRepo.findById(id);
+        return optional.isPresent() ? optional.get() : new User();
     }
 
     @Override

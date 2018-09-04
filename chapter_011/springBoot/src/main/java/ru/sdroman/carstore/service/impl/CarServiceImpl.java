@@ -18,6 +18,7 @@ import ru.sdroman.carstore.repository.TransmissionRepository;
 import ru.sdroman.carstore.service.CarService;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author sdroman
@@ -94,7 +95,8 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public Car getCar(int id) {
-        return this.carRepo.findById(id).orElse(null);
+        Optional<Car> optional = this.carRepo.findById(id);
+        return optional.isPresent() ? optional.get() : new Car();
     }
 
     @Override
@@ -109,7 +111,8 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public Body getBodyById(int id) {
-        return this.bodyRepo.findById(id).orElse(null);
+        Optional<Body> optional = this.bodyRepo.findById(id);
+        return optional.isPresent() ? optional.get() : new Body();
     }
 
     @Override
@@ -119,7 +122,8 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public DriveType getDriveTypeById(int id) {
-        return this.driveTypeRepo.findById(id).orElse(null);
+        Optional<DriveType> optional = this.driveTypeRepo.findById(id);
+        return optional.isPresent() ? optional.get() : new DriveType();
     }
 
     @Override
@@ -129,7 +133,8 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public Engine getEngineById(int id) {
-        return this.engineRepo.findById(id).orElse(null);
+        Optional<Engine> optional = this.engineRepo.findById(id);
+        return optional.isPresent() ? optional.get() : new Engine();
     }
 
     @Override
@@ -139,7 +144,8 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public Model getModelById(int id) {
-        return this.modelRepo.findById(id).orElse(null);
+        Optional<Model> optional = this.modelRepo.findById(id);
+        return optional.isPresent() ? optional.get() : new Model();
     }
 
     @Override
@@ -149,6 +155,7 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public Transmission getTransmissionById(int id) {
-        return this.transmissionRepo.findById(id).orElse(null);
+        Optional<Transmission> optional = this.transmissionRepo.findById(id);
+        return optional.isPresent() ? optional.get() : new Transmission();
     }
 }

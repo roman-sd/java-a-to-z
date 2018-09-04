@@ -2,14 +2,12 @@ package ru.sdroman.carstore;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 /**
  * @author sdroman
  * @since 08.2018
  */
 @SpringBootApplication
-@EnableJpaRepositories("ru.sdroman.carstore.repository")
 public class Application {
     /**
      * Run app.

@@ -8,6 +8,7 @@ import ru.sdroman.carstore.repository.OrderRepository;
 import ru.sdroman.carstore.service.OrderService;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author sdroman
@@ -50,7 +51,8 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order getOrder(int id) {
-        return this.orderRepo.findById(id).orElse(null);
+        Optional<Order> optional = this.orderRepo.findById(id);
+        return optional.isPresent() ? optional.get() : new Order();
     }
 
     @Override
