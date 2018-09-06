@@ -100,16 +100,19 @@
 
 ### [Hibernate](https://github.com/roman-sd/java-a-to-z/tree/master/chapter_010)
 
-###### 1. Configuration.
-###### 2. Mapping, HQL.
-###### 3. Testing.
+###### 1. Configuration
+###### 2. Mapping, HQL
+###### 3. Test
 
 ### [Spring](https://github.com/roman-sd/java-a-to-z/tree/master/chapter_011)
 
-###### 1. IoC.
-###### 2. MVC.
-###### 3. Spring Data.
-###### 4. Spring Security.
+###### 1. IoC
+###### 2. MVC
+###### 3. Spring Data
+###### 4. Spring Security
+###### 5. Spring Boot
+###### 6. Test
+
 
 
 
