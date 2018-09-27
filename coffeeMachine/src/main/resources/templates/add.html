@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>AddProduct</title>
+</head>
+<body>
+<div th:replace="fragments/header :: head"></div>
+    <div class="container">
+        <form action="#" th:action="@{/add}" th:object="${coffee}" class="form-horizontal" method="post">
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="water">water</label>
+                <div class="col-sm-7">
+                    <input th:field="*{water}" type="number" class="form-control" id="water" name="water"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="milk">milk</label>
+                <div class="col-sm-7">
+                    <input th:field="*{milk}" type="number" class="form-control" id="milk" name="milk" value="0"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="beans">beans</label>
+                <div class="col-sm-7">
+                    <input th:field="*{beans}" type="number" class="form-control" id="beans" name="beans" value="0"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <input type="submit" id="btnAdd" class="btn-lg btn-primary pull-right" value="Add"/>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
